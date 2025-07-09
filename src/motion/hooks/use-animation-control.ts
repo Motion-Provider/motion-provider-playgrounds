@@ -24,5 +24,9 @@ export const useAnimationControl = (initial?: UseAnimationControlProps) => {
     }));
   }, []);
 
-  return { control, onReverse, onStop };
+  const reset = useCallback(
+    () => setControl({ stopAnimation: false, reverseAnimation: false }),
+    []
+  );
+  return { control, onReverse, onStop, reset };
 };
