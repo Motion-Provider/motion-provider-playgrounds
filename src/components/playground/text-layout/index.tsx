@@ -1,0 +1,28 @@
+import { MotionPlaygroundProps } from "@/interfaces";
+import MotionText from "@/motion/motion-text";
+import { FC } from "react";
+
+export const TextLayout: FC<Omit<MotionPlaygroundProps, "delayLogic">> = ({
+  animation,
+  controller,
+  children,
+}) => {
+  const currentDuration = (0.15 * String(children).length) / 0.5;
+  return (
+    <MotionText
+      animation={animation}
+      config={{
+        duration: currentDuration,
+        mode: "chars",
+        delayLogic: "sinusoidal",
+        space: 16,
+      }}
+      elementType="h1"
+      wrapperClassName="font-primary -z-10 text-9xl absolute top-[10vh]"
+      className="text-[12rem] font-primary text-clip bg-clip-text text-transparent bg-gradient-to-t from-primary/30 to-secondary dark:from-primary/70 via-blue-400/40 dark:to-transparent font-light font-primary"
+      controller={controller}
+    >
+      {children}
+    </MotionText>
+  );
+};
