@@ -1,28 +1,28 @@
-import { CircleLayout } from "@/components/playground/circle-layout";
-import ControllerLayout from "@/components/playground/controller-layout";
-import { ImageLayout } from "@/components/playground/image-layout";
-import { TextLayout } from "@/components/playground/text-layout";
-import { Button } from "@/components/ui/button";
-import { MotionCircleLayoutProps } from "@/interfaces";
+import { Circle } from "@/components/playground/circle";
+import ControllerLayout from "@/components/playground/controller";
+import { Image } from "@/components/playground/image";
+import schema from "@/components/playground/settings/schema";
+import { Text } from "@/components/playground/text";
+import { MotionCircleLayoutProps, SchemaProps } from "@/interfaces";
 import { interFont } from "@/lib/fonts";
 import { useAnimation } from "@/motion/hooks/use-animation";
 import { useAnimationControl } from "@/motion/hooks/use-animation-control";
-import MotionText from "@/motion/motion-text";
 import getRandomAnimation from "@/utils/getRandomAnimation";
-import {
-  Dice6,
-  Pause,
-  Play,
-  Settings,
-  SkipBack,
-  SkipForward,
-} from "lucide-react";
 import React, { useState } from "react";
 
-type MotionCircleStateProps = Omit<MotionCircleLayoutProps, "controller">;
+type MotionCircleStateProps = Omit<
+  MotionCircleLayoutProps,
+  "controller" | "style"
+>;
 const initialState = {
   animation: {
-    mode: ["scaleZoomIn", "fadeIn"],
+    mode: [
+      "neonGlow",
+      "moveToTopCenter",
+      "filterSaturateIncrease",
+      "filterInvertColors",
+      "filterGrayscaleFade",
+    ],
     transition: "cubicBounce",
     duration: 2.5,
   },
@@ -30,38 +30,47 @@ const initialState = {
 } satisfies MotionCircleStateProps;
 
 export default function Home() {
-  const { control, onReverse, onStop, reset } = useAnimationControl({
-    stopAnimation: false,
-    reverseAnimation: false,
-  });
+  const { control, onReverse, onStop, reset } = useAnimationControl();
 
   const { isAnimationStopped, reverse } = useAnimation(control);
+  const [settings, setSettings] = useState<SchemaProps>(schema);
+
   const [animation, setAnimation] = useState<MotionCircleStateProps>({
     ...initialState,
   });
   const [img, setImg] = useState<string>(
-    "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExbTRoZ3FjYTA2MWlqZXBkMGZlZzlteG93dXltMDF5a2E4eTBoMXhmYSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/FyoaJE2iah7WYeyxWr/giphy.webp"
+    "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExaWt2ZTR1dWNzYWVicWsxbHZyaWgycnFnbng0MmFyb3NtcHhnaXl6aSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Tj4jjaCxXRVSARsUzN/giphy.gif"
   );
 
   const handleRandomAnimation = () => {
     reset();
-    const randomAnimations = getRandomAnimation(5);
+    setTimeout(() => {
+      const randomAnimations = getRandomAnimation(5);
+      setAnimation((prev) => ({
+        ...prev,
+        animation: { ...prev.animation, mode: randomAnimations },
+      }));
+    }, 150);
+  };
 
-    setAnimation((prev) => ({
+  const handleSettings = (key: string, value: string) => {
+    setSettings((prev) => ({
       ...prev,
-      animation: { ...prev.animation, mode: randomAnimations },
+      [key]: value,
     }));
   };
 
-  const handleSetAnim = () => {
-    console.log(animation);
-  };
   return (
     <main
-      className={`w-full h-screen  items-center justify-center flex overflow-hidden relative dark ${interFont.className}  rounded-full  `}
+      className={`w-full h-screen  items-center justify-center flex overflow-hidden relative dark ${interFont.className} rounded-full `}
     >
-      <CircleLayout
+      <Circle
         {...animation}
+        style={{
+          borderBlur: settings.borderBlur,
+          borderColor: settings.borderColor,
+          circleCount: settings.circleCount,
+        }}
         controller={{
           configView: {
             amount: 0.5,
@@ -72,8 +81,8 @@ export default function Home() {
           trigger: true,
         }}
       />
-      <ImageLayout
-        img={img}
+      <Image
+        img={settings.img}
         {...animation}
         controller={{
           isAnimationStopped,
@@ -86,15 +95,18 @@ export default function Home() {
         }}
       />
       <ControllerLayout
+        schema={settings}
         control={{
           isAnimationStopped,
           reverse,
         }}
         onAnimate={onStop}
+        onReset={reset}
+        onSettings={handleSettings}
         onRandomAnimate={handleRandomAnimation}
         onReverse={onReverse}
       />
-      <TextLayout
+      <Text
         {...animation}
         controller={{
           isAnimationStopped,
@@ -107,7 +119,7 @@ export default function Home() {
         }}
       >
         The Circle
-      </TextLayout>
+      </Text>
     </main>
   );
 }

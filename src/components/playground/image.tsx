@@ -1,9 +1,9 @@
-import { ImageLayoutProps, MotionPlaygroundProps } from "@/interfaces";
+import { ImageLayoutProps } from "@/interfaces";
 import MotionImage from "@/motion/motion-image";
 import { FC } from "react";
-import { circles } from "./circle-layout/data";
+import { circles } from "./circle/data";
 
-const ImageLayout: FC<ImageLayoutProps> = ({ controller, animation, img }) => {
+export const Image: FC<ImageLayoutProps> = ({ controller, animation, img }) => {
   return (
     <div className="absolute size-[162px] flex items-center justify-center rounded-full p-6 font-mono overflow-hidden">
       <MotionImage
@@ -21,5 +21,3 @@ const ImageLayout: FC<ImageLayoutProps> = ({ controller, animation, img }) => {
     </div>
   );
 };
-
-export { ImageLayout };

@@ -34,7 +34,7 @@ function animationReducer(
 }
 
 export const useAnimation = ({
-  stopAnimation = false,
+  stopAnimation,
   reverseAnimation = false,
 }: UseAnimationProps): UseAnimationStateProps => {
   const [state, dispatch] = useReducer(animationReducer, initialState);

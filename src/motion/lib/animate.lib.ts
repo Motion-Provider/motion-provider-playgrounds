@@ -387,10 +387,6 @@ const animations: AnimationLibraryProps = {
     initial: { filter: "hue-rotate(0deg)" },
     animate: { filter: "hue-rotate(360deg)" },
   },
-  filterInvertColors: {
-    initial: { filter: "invert(0%)" },
-    animate: { filter: "invert(100%)" },
-  },
   filterSaturateIncrease: {
     initial: { filter: "saturate(50%)" },
     animate: { filter: "saturate(200%)" },
@@ -540,14 +536,6 @@ const animations: AnimationLibraryProps = {
       transform: "translateZ(0px) scale(1)",
     },
   },
-
-  colorShift: {
-    initial: { backgroundColor: "#ff0000" },
-    animate: {
-      backgroundColor: ["#ff0000", "#00ff88", "#0066ff", "#ff0000"],
-    },
-  },
-
   orbitRotation: {
     initial: { x: 0, y: 0, rotate: 0 },
     animate: {
