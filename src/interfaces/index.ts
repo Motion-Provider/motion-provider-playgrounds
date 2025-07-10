@@ -54,11 +54,21 @@ export interface SchemaProps {
   imgMode?: MotionImageProps["config"]["fn"];
   circleCount: number;
 }
+export interface PlaygroundConfigProps {
+  controller: MotionControllerProps;
+  animation: MotionAnimationProps;
+}
+
 export type BorderColors =
   | "border-sky-500"
   | "border-rose-500"
   | "border-emerald-500"
   | "border-purple-500";
-export type BorderBlur = "blur-sm" | "blur-md" | "blur-lg" | "blur-xl";
+export type BorderBlur =
+  | "blur-sm"
+  | "blur-md"
+  | "blur-lg"
+  | "blur-xl"
+  | "blur-none";
 export type ReduxReducerType = CreateSliceOptions["reducers"];
 export type ReduxSelectorType = CreateSliceOptions["selectors"];

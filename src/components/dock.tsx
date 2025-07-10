@@ -169,7 +169,8 @@ function IconContainer({
       </AnimatePresence>
       <motion.div
         style={{ width: widthIcon, height: heightIcon }}
-        className="flex items-center justify-center rounded-full relative"
+        transition={{ duration: 0.2, ease: "easeInOut" }}
+        className="flex items-center justify-center rounded-full absolute hover:scale-150"
       >
         {children}
       </motion.div>

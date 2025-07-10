@@ -1,7 +1,7 @@
 import { Circle } from "@/components/playground/circle";
 import ControllerLayout from "@/components/playground/controller";
 import { Image } from "@/components/playground/image";
-import schema from "@/components/playground/settings/schema";
+import schema from "@/components/playground/schema";
 import { Text } from "@/components/playground/text";
 import { MotionCircleLayoutProps, SchemaProps } from "@/interfaces";
 import { interFont } from "@/lib/fonts";
@@ -16,13 +16,7 @@ type MotionCircleStateProps = Omit<
 >;
 const initialState = {
   animation: {
-    mode: [
-      "neonGlow",
-      "moveToTopCenter",
-      "filterSaturateIncrease",
-      "filterInvertColors",
-      "filterGrayscaleFade",
-    ],
+    mode: ["scaleZoomIn", "fadeIn"],
     transition: "cubicBounce",
     duration: 2.5,
   },
@@ -38,9 +32,6 @@ export default function Home() {
   const [animation, setAnimation] = useState<MotionCircleStateProps>({
     ...initialState,
   });
-  const [img, setImg] = useState<string>(
-    "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExaWt2ZTR1dWNzYWVicWsxbHZyaWgycnFnbng0MmFyb3NtcHhnaXl6aSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Tj4jjaCxXRVSARsUzN/giphy.gif"
-  );
 
   const handleRandomAnimation = () => {
     reset();
@@ -82,6 +73,7 @@ export default function Home() {
         }}
       />
       <Image
+        fn={settings.imgMode}
         img={settings.img}
         {...animation}
         controller={{
@@ -108,6 +100,7 @@ export default function Home() {
       />
       <Text
         {...animation}
+        borderColor={settings.borderColor}
         controller={{
           isAnimationStopped,
           configView: {

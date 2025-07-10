@@ -20,12 +20,17 @@ import {
   SchemaProps,
 } from "@/interfaces";
 import {
+  Boxes,
   Dice6,
+  MousePointerClick,
   Pause,
   Play,
+  RefreshCw,
   Settings,
+  Settings2,
   SkipBack,
   SkipForward,
+  SquareDashedMousePointer,
 } from "lucide-react";
 import { FC, useMemo } from "react";
 
@@ -41,6 +46,7 @@ const ControllerLayout: FC<
   onSettings,
 }) => {
   const { borderBlur, borderColor, circleCount, img, imgMode } = schema;
+
   const components = useMemo(
     () =>
       [
@@ -104,7 +110,7 @@ const ControllerLayout: FC<
               <PopoverContent className="dark">
                 <div className="grid gap-4">
                   <div className="space-y-2">
-                    <h4 className="leading-none font-bold">Settings</h4>
+                    <h4 className="leading-none">Settings</h4>
                     <p className="text-muted-foreground text-sm">
                       Adjust settings for the circle.
                     </p>
@@ -128,10 +134,15 @@ const ControllerLayout: FC<
                     <div className="flex flex-row justify-between gap-4 ">
                       <Label htmlFor="borderColor">Color</Label>
                       <Select
+                        defaultValue={borderColor}
                         onValueChange={(e) => onSettings("borderColor", e)}
                       >
                         <SelectTrigger className="w-3/5" id="borderColor">
-                          <SelectValue placeholder="Select a color" />
+                          <SelectValue
+                            placeholder={`${
+                              borderColor.split("-")[1]
+                            } selected`}
+                          />
                         </SelectTrigger>
                         <SelectContent className="dark">
                           <SelectItem value="border-sky-500">
@@ -154,28 +165,85 @@ const ControllerLayout: FC<
                         </SelectContent>
                       </Select>
                     </div>
-                    <div className="grid grid-cols-3 items-center gap-4">
-                      <Label htmlFor="height">Height</Label>
+                    <div className="flex flex-row justify-between gap-4 ">
+                      <Label htmlFor="imageLink">Image Link</Label>
                       <Input
-                        id="height"
-                        defaultValue="25px"
-                        className="col-span-2 h-8"
+                        id="imageLink"
+                        defaultValue={img}
+                        type="text"
+                        onChange={(e) => onSettings("img", e.target.value)}
+                        placeholder="https://example.com/image.jpg"
+                        className="h-8 w-3/5"
                       />
                     </div>
-                    <div className="grid grid-cols-3 items-center gap-4">
-                      <Label htmlFor="maxHeight">Max. height</Label>
-                      <Input
-                        id="maxHeight"
-                        defaultValue="none"
-                        className="col-span-2 h-8"
-                      />
+                    <div className="flex flex-row justify-between gap-4 ">
+                      <Label htmlFor="borderColor">Image Trigger</Label>
+                      <Select
+                        onValueChange={(e) => onSettings("imgMode", e)}
+                        defaultValue={imgMode}
+                      >
+                        <SelectTrigger className="w-3/5" id="borderColor">
+                          <SelectValue placeholder="Immediately" />
+                        </SelectTrigger>
+                        <SelectContent className="dark">
+                          <SelectItem value="undefined">
+                            <RefreshCw className="size-4" />
+                            Immediately
+                          </SelectItem>
+                          <SelectItem value="hover">
+                            <SquareDashedMousePointer className="size-4" />
+                            On Hover
+                          </SelectItem>
+                          <SelectItem value="click">
+                            <MousePointerClick className="size-4" />
+                            On Click
+                          </SelectItem>
+                        </SelectContent>
+                      </Select>
                     </div>
+                    <div className="flex flex-row justify-between gap-4 ">
+                      <Label htmlFor="borderBlur">Border Blur</Label>
+                      <Select
+                        onValueChange={(e) => onSettings("borderBlur", e)}
+                        defaultValue={borderBlur}
+                      >
+                        <SelectTrigger className="w-3/5" id="borderBlur">
+                          <SelectValue placeholder="Select blur rate" />
+                        </SelectTrigger>
+                        <SelectContent className="dark">
+                          <SelectItem value="blur-sm">Small</SelectItem>
+                          <SelectItem value="blur-md">Medium</SelectItem>
+                          <SelectItem value="blur-lg">Large</SelectItem>
+                          <SelectItem value="blur-xl">X-Large</SelectItem>
+                          <SelectItem value="blur-none">None</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <p className="text-muted-foreground text-xs pt-2">
+                      *Interact with image frame to see the effect!
+                    </p>
                   </div>
                 </div>
               </PopoverContent>
             </Popover>
           ),
           text: "Settings",
+        },
+        {
+          children: (
+            <Button variant="ghost" className="cursor-pointer ">
+              <Settings2 className="size-5" />
+            </Button>
+          ),
+          text: "Configuration",
+        },
+        {
+          children: (
+            <Button variant="ghost" className="cursor-pointer ">
+              <Boxes className="size-5" />
+            </Button>
+          ),
+          text: "Change Playground",
         },
       ] as DockItem[],
     [control]
