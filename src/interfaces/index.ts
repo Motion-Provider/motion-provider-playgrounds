@@ -1,4 +1,5 @@
 import {
+  AnimationKeys,
   MotionAnimationProps,
   MotionChainProps,
   MotionControllerProps,
@@ -35,6 +36,7 @@ export interface PlaygroundControllerLayoutProps {
   onAnimate: () => void;
   onRandomAnimate: () => void;
   onReset: () => void;
+  onModalOpen: () => void;
   onSettings: (key: keyof SchemaProps, value: string) => void;
   control: Omit<MotionControllerProps, "configView" | "trigger">;
 }
@@ -53,12 +55,47 @@ export interface SchemaProps {
   img: string;
   imgMode?: MotionImageProps["config"]["fn"];
   circleCount: number;
+  complexity: number;
 }
-export interface PlaygroundConfigProps {
+export interface SchemaLayoutProps {
+  schema: SchemaProps;
+  onSettings: (key: keyof SchemaProps, value: string) => void;
+}
+export interface PlaygroundConfigProps extends PlaygroundPlayerProps {
   controller: MotionControllerProps;
   animation: MotionAnimationProps;
+  isModalOpen: boolean;
+  setIsMobileOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+export interface PlayerControllerProps {
+  animation: MotionAnimationProps;
+  onAnimationChange: (key: keyof MotionAnimationProps, value: string) => void;
+  className?: string;
+}
+export interface PlayerViewerProps {
+  animation: MotionAnimationProps;
+  className?: string;
+}
+export interface CopyCodeButtonProps {
+  className?: string;
+  onClick: () => void;
+}
+export interface Option {
+  label: string;
+  value: string;
+}
+
+export interface MultiSelectProps {
+  options: AnimationKeys[];
+  selected: AnimationKeys[];
+  onChange: (selected: AnimationKeys[]) => void;
+  placeholder?: string;
+}
+export type PlaygroundPlayerProps = Omit<
+  PlayerControllerProps & PlayerViewerProps,
+  "className"
+>;
 export type BorderColors =
   | "border-sky-500"
   | "border-rose-500"

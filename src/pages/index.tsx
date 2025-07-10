@@ -2,8 +2,13 @@ import { Circle } from "@/components/playground/circle";
 import ControllerLayout from "@/components/playground/controller";
 import { Image } from "@/components/playground/image";
 import schema from "@/components/playground/schema";
+import PlaygroundConfig from "@/components/playground/settings/config";
 import { Text } from "@/components/playground/text";
-import { MotionCircleLayoutProps, SchemaProps } from "@/interfaces";
+import {
+  MotionCircleLayoutProps,
+  PlayerControllerProps,
+  SchemaProps,
+} from "@/interfaces";
 import { interFont } from "@/lib/fonts";
 import { useAnimation } from "@/motion/hooks/use-animation";
 import { useAnimationControl } from "@/motion/hooks/use-animation-control";
@@ -14,6 +19,7 @@ type MotionCircleStateProps = Omit<
   MotionCircleLayoutProps,
   "controller" | "style"
 >;
+
 const initialState = {
   animation: {
     mode: ["scaleZoomIn", "fadeIn"],
@@ -28,7 +34,7 @@ export default function Home() {
 
   const { isAnimationStopped, reverse } = useAnimation(control);
   const [settings, setSettings] = useState<SchemaProps>(schema);
-
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [animation, setAnimation] = useState<MotionCircleStateProps>({
     ...initialState,
   });
@@ -36,7 +42,7 @@ export default function Home() {
   const handleRandomAnimation = () => {
     reset();
     setTimeout(() => {
-      const randomAnimations = getRandomAnimation(5);
+      const randomAnimations = getRandomAnimation(schema.complexity);
       setAnimation((prev) => ({
         ...prev,
         animation: { ...prev.animation, mode: randomAnimations },
@@ -48,6 +54,18 @@ export default function Home() {
     setSettings((prev) => ({
       ...prev,
       [key]: value,
+    }));
+  };
+
+  const handleOpenModal = () => setIsModalOpen((prev) => !prev);
+
+  const handleChangeAnimation: PlayerControllerProps["onAnimationChange"] = (
+    key,
+    value
+  ) => {
+    setAnimation((prev) => ({
+      ...prev,
+      animation: { ...prev.animation, [key]: value },
     }));
   };
 
@@ -87,6 +105,7 @@ export default function Home() {
         }}
       />
       <ControllerLayout
+        onModalOpen={handleOpenModal}
         schema={settings}
         control={{
           isAnimationStopped,
@@ -113,6 +132,21 @@ export default function Home() {
       >
         The Circle
       </Text>
+      <PlaygroundConfig
+        onAnimationChange={handleChangeAnimation}
+        setIsMobileOpen={setIsModalOpen}
+        animation={animation.animation}
+        controller={{
+          isAnimationStopped,
+          configView: {
+            once: false,
+            amount: 0.5,
+          },
+          reverse,
+          trigger: true,
+        }}
+        isModalOpen={isModalOpen}
+      />
     </main>
   );
 }

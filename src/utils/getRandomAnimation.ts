@@ -6,7 +6,7 @@ export default function getRandomAnimation(count: number): AnimationKeys[] {
 
   let animationArr = [] as AnimationKeys[];
 
-  for (let i = 0; i < count; i++) {
+  for (let i = 0; i <= count; i++) {
     const randomIndex = Math.floor(
       Math.random() * Object.keys(animations).length
     );

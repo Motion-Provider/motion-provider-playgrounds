@@ -11,7 +11,6 @@ export const Text: FC<
     [borderColor]
   );
 
-  console.log(textColor);
   const currentDuration = (0.15 * String(children).length) / 0.5;
   return (
     <MotionText
