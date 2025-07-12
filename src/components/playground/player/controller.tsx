@@ -1,22 +1,19 @@
 import {
   Card,
-  CardAction,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { PlayerControllerProps } from "@/interfaces";
 import { cn } from "@/lib/utils";
 import MotionContainer from "@/motion/motion-container";
-import { FC, useState } from "react";
+import { FC, useMemo, useState } from "react";
 import { MultiSelect } from "../multi-select";
 import { AnimationKeys } from "@/motion/types";
 import animations from "@/motion/lib/animate.lib";
+import { SelectedMotion } from "./selected-motion";
+import { useDebounce } from "@uidotdev/usehooks";
 
 export const Controller: FC<PlayerControllerProps> = ({
   animation,
@@ -26,6 +23,11 @@ export const Controller: FC<PlayerControllerProps> = ({
   const [selected, setSelected] = useState<AnimationKeys[]>(
     animation.mode as AnimationKeys[]
   );
+  const debouncedSelected = useDebounce(selected, 500);
+
+  useMemo(() => {
+    onAnimationChange("mode", selected as any);
+  }, [debouncedSelected]);
 
   return (
     <Card
@@ -37,16 +39,18 @@ export const Controller: FC<PlayerControllerProps> = ({
           Configure your animation in seconds and use it anywhere.
         </CardDescription>
       </CardHeader>
-      <CardContent className="size-full">
-        <ScrollArea className="h-[250px] w-full">
-          <MultiSelect
-            onChange={setSelected}
-            placeholder="Select Animation"
-            options={Object.keys(animations) as AnimationKeys[]}
-            selected={selected}
-          />
-          <ScrollBar orientation="vertical" />
-        </ScrollArea>
+      <CardContent className="w-full h-[250px]">
+        <MultiSelect
+          onChange={(val) => setSelected(val)}
+          placeholder="Select Animation"
+          items={Object.keys(animations) as AnimationKeys[]}
+          selected={selected}
+        />
+        <SelectedMotion
+          selected={selected}
+          onSelected={setSelected}
+          className="mt-4"
+        />
       </CardContent>
       <MotionContainer
         animation={{

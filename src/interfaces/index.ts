@@ -67,7 +67,10 @@ export interface PlaygroundConfigProps extends PlaygroundPlayerProps {
   isModalOpen: boolean;
   setIsMobileOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
-
+export interface PlaygroundMiniViewerProps {
+  animationMode: MotionAnimationProps["mode"];
+  className?: string;
+}
 export interface PlayerControllerProps {
   animation: MotionAnimationProps;
   onAnimationChange: (key: keyof MotionAnimationProps, value: string) => void;
@@ -87,10 +90,15 @@ export interface Option {
 }
 
 export interface MultiSelectProps {
-  options: AnimationKeys[];
+  items: AnimationKeys[];
   selected: AnimationKeys[];
   onChange: (selected: AnimationKeys[]) => void;
   placeholder?: string;
+}
+export interface PlaygroundSelectedMotionProps {
+  selected: AnimationKeys[];
+  onSelected: (selected: AnimationKeys[]) => void;
+  className?: string;
 }
 export type PlaygroundPlayerProps = Omit<
   PlayerControllerProps & PlayerViewerProps,

@@ -64,7 +64,7 @@ const ControllerLayout: FC<
               )}
             </Button>
           ),
-          text: control.reverse ? "Forwrd" : "Reverse",
+          text: control.reverse ? "Forward" : "Reverse",
         },
         {
           children: (

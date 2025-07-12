@@ -1,11 +1,21 @@
 import { MultiSelectProps } from "@/interfaces";
 import { Button } from "../ui/button";
-import { Checkbox } from "../ui/checkbox";
-import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { AnimationKeys } from "@/motion/types";
+import { interFont } from "@/lib/fonts";
+import { MiniViewer } from "./player/mini-viewer";
+import { Select, SelectContent, SelectItem, SelectTrigger } from "../ui/select";
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "../ui/hover-card";
+import { Badge } from "../ui/badge";
+import { Box } from "lucide-react";
+import { SquareBackgroundPattern } from "./player/square-background-pattern";
+import { useMemo } from "react";
 
 export const MultiSelect: React.FC<MultiSelectProps> = ({
-  options,
+  items,
   selected,
   onChange,
   placeholder = "Select options",
@@ -18,33 +28,44 @@ export const MultiSelect: React.FC<MultiSelectProps> = ({
     }
   };
 
-  const selectedLabels = options.filter((opt) => selected.includes(opt));
+  useMemo(() => {
+    console.log(selected);
+  }, [selected]);
 
   return (
-    <Popover>
-      <PopoverTrigger asChild>
-        <Button variant="outline" className="w-full justify-start text-left">
-          {selected.length === 0 ? (
-            <span className="text-muted-foreground">{placeholder}</span>
-          ) : (
-            selectedLabels.join(", ")
-          )}
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent className="w-64 max-h-60 overflow-y-auto p-2 dark">
-        {options.map((option) => (
-          <label
-            key={option}
-            className="flex items-center gap-2 px-2 py-1 rounded hover:bg-muted cursor-pointer"
+    <Select onValueChange={toggleValue}>
+      <SelectTrigger>Select an animation to add</SelectTrigger>
+      <SelectContent
+        className={`w-full relative h-60 p-2 dark ${interFont.className} w-full`}
+      >
+        {items.map((item) => (
+          <SelectItem
+            value={item}
+            title="Add an animation"
+            key={item}
+            className="flex items-center gap-2 px-2 py-1 rounded hover:bg-muted cursor-pointer w-full relative"
           >
-            <Checkbox
-              checked={selected.includes(option)}
-              onCheckedChange={() => toggleValue(option)}
-            />
-            <span>{option}</span>
-          </label>
+            <HoverCard openDelay={250}>
+              <HoverCardTrigger className="flex flex-row items-center gap-1 w-full ">
+                <Box className="size-4" />
+                <span className="tracking-tight">{item}</span>
+              </HoverCardTrigger>
+              <HoverCardContent className="w-full dark backdrop-blur-2xl  bg-none p-12 relative overflow-hidden">
+                <MiniViewer animationMode={item} className="size-16 z-10" />
+                <SquareBackgroundPattern
+                  squareSize={2}
+                  gap={8}
+                  color="#fff00"
+                  className="absolute inset-0 -z-10 size-full"
+                />
+                <Badge variant={"default"} className="absolute top-2 right-2">
+                  <pre>{item}</pre>
+                </Badge>
+              </HoverCardContent>
+            </HoverCard>
+          </SelectItem>
         ))}
-      </PopoverContent>
-    </Popover>
+      </SelectContent>
+    </Select>
   );
 };

@@ -42,7 +42,7 @@ export default function Home() {
   const handleRandomAnimation = () => {
     reset();
     setTimeout(() => {
-      const randomAnimations = getRandomAnimation(schema.complexity);
+      const randomAnimations = getRandomAnimation(settings.complexity);
       setAnimation((prev) => ({
         ...prev,
         animation: { ...prev.animation, mode: randomAnimations },
