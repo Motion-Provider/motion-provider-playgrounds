@@ -1,5 +1,6 @@
 import {
   AnimationKeys,
+  DelayLogic,
   MotionAnimationProps,
   MotionChainProps,
   MotionControllerProps,
@@ -61,7 +62,9 @@ export interface SchemaLayoutProps {
   schema: SchemaProps;
   onSettings: (key: keyof SchemaProps, value: string) => void;
 }
-export interface PlaygroundConfigProps extends PlaygroundPlayerProps {
+export interface PlaygroundConfigProps
+  extends PlaygroundPlayerProps,
+    Omit<PlaygroundConfigurationProps, "className"> {
   controller: MotionControllerProps;
   animation: MotionAnimationProps;
   isModalOpen: boolean;
@@ -98,6 +101,13 @@ export interface MultiSelectProps {
 export interface PlaygroundSelectedMotionProps {
   selected: AnimationKeys[];
   onSelected: (selected: AnimationKeys[]) => void;
+  className?: string;
+}
+export interface PlaygroundConfigurationProps {
+  animation: MotionAnimationProps;
+  delayLogic: DelayLogic;
+  onDelayLogicChange: (delayLogic: DelayLogic) => void;
+  onAnimationChange: (key: keyof MotionAnimationProps, value: string) => void;
   className?: string;
 }
 export type PlaygroundPlayerProps = Omit<

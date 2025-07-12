@@ -38,7 +38,7 @@ export const useAnimation = ({
   reverseAnimation = false,
 }: UseAnimationProps): UseAnimationStateProps => {
   const [state, dispatch] = useReducer(animationReducer, initialState);
-  const recallDuration = 500;
+  const recallDuration = 50;
 
   useEffect(() => {
     let timeout: ReturnType<typeof setTimeout>;

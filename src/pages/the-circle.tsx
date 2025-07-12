@@ -18,7 +18,7 @@ import {
   TransitionKeys,
 } from "@/motion/types";
 import getRandomAnimation from "@/utils/getRandomAnimation";
-import React, { useMemo, useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 
 type MotionCircleStateProps = Omit<
   MotionCircleLayoutProps,
@@ -34,7 +34,7 @@ const initialState = {
   delayLogic: "linear",
 } satisfies MotionCircleStateProps;
 
-export default function Home() {
+export default function TheCircle() {
   const { control, onReverse, onStop, reset } = useAnimationControl();
 
   const { isAnimationStopped, reverse } = useAnimation(control);
@@ -91,14 +91,72 @@ export default function Home() {
     }));
   };
 
-  const textColor = useMemo(
-    () => settings.borderColor.replace("border-", "via-"),
-    [settings.borderColor]
-  );
-
   return (
     <main
       className={`w-full h-screen  items-center justify-center flex overflow-hidden relative dark ${interFont.className} rounded-full `}
-    ></main>
+    >
+      <Circle
+        {...animation}
+        style={{
+          borderBlur: settings.borderBlur,
+          borderColor: settings.borderColor,
+          circleCount: settings.circleCount,
+        }}
+        controller={{
+          configView: {
+            amount: 0.5,
+            once: false,
+          },
+          isAnimationStopped,
+          reverse,
+          trigger: true,
+        }}
+      />
+      <ControllerLayout
+        onModalOpen={handleOpenModal}
+        schema={settings}
+        control={{
+          isAnimationStopped,
+          reverse,
+        }}
+        onAnimate={onStop}
+        onReset={reset}
+        onSettings={handleSettings}
+        onRandomAnimate={handleRandomAnimation}
+        onReverse={onReverse}
+      />
+      <Text
+        {...animation}
+        controller={{
+          isAnimationStopped,
+          configView: {
+            once: false,
+            amount: 0.5,
+          },
+          reverse,
+          trigger: true,
+        }}
+        className={`text-[10rem]`}
+      >
+        The Circle
+      </Text>
+      <PlaygroundConfig
+        delayLogic={animation.delayLogic!}
+        onDelayLogicChange={handleDelayLogicChange}
+        onAnimationChange={handleChangeAnimation}
+        setIsMobileOpen={setIsModalOpen}
+        animation={animation.animation}
+        controller={{
+          isAnimationStopped,
+          configView: {
+            once: false,
+            amount: 0.5,
+          },
+          reverse,
+          trigger: true,
+        }}
+        isModalOpen={isModalOpen}
+      />
+    </main>
   );
 }

@@ -14,6 +14,7 @@ import { AnimationKeys } from "@/motion/types";
 import animations from "@/motion/lib/animate.lib";
 import { SelectedMotion } from "./selected-motion";
 import { useDebounce } from "@uidotdev/usehooks";
+import { Separator } from "@/components/ui/separator";
 
 export const Controller: FC<PlayerControllerProps> = ({
   animation,
@@ -34,23 +35,21 @@ export const Controller: FC<PlayerControllerProps> = ({
       className={cn("dark relative bg-transparent overflow-hidden", className)}
     >
       <CardHeader>
-        <CardTitle>Motion Configuration</CardTitle>
+        <CardTitle>Motion Animation</CardTitle>
         <CardDescription>
-          Configure your animation in seconds and use it anywhere.
+          Add animation to your motion container, hover animation to see it in
+          action.
         </CardDescription>
       </CardHeader>
-      <CardContent className="w-full h-[250px]">
+      <CardContent className="w-full h-auto">
         <MultiSelect
           onChange={(val) => setSelected(val)}
           placeholder="Select Animation"
           items={Object.keys(animations) as AnimationKeys[]}
           selected={selected}
         />
-        <SelectedMotion
-          selected={selected}
-          onSelected={setSelected}
-          className="mt-4"
-        />
+        <Separator className="my-2" />
+        <SelectedMotion selected={selected} onSelected={setSelected} />
       </CardContent>
       <MotionContainer
         animation={{

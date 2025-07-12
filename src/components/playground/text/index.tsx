@@ -1,17 +1,15 @@
-import { BorderColors, MotionPlaygroundProps } from "@/interfaces";
+import { MotionPlaygroundProps } from "@/interfaces";
 import { cn } from "@/lib/utils";
 import MotionText from "@/motion/motion-text";
-import { FC, useMemo } from "react";
+import { FC } from "react";
 
 export const Text: FC<
-  Omit<MotionPlaygroundProps, "delayLogic"> & { borderColor: BorderColors }
-> = ({ animation, controller, children, borderColor }) => {
-  const textColor = useMemo(
-    () => borderColor.replace("border-", "via-"),
-    [borderColor]
-  );
-
+  Omit<MotionPlaygroundProps, "delayLogic"> & {
+    className?: string;
+  }
+> = ({ animation, controller, children, className }) => {
   const currentDuration = (0.15 * String(children).length) / 0.5;
+
   return (
     <MotionText
       animation={animation}
@@ -22,11 +20,12 @@ export const Text: FC<
         space: 16,
       }}
       elementType="h1"
-      wrapperClassName="font-primary -z-10 text-9xl absolute top-[10vh]"
+      wrapperClassName="font-primary text-9xl absolute top-[10vh]"
       className={cn(
-        "text-[12rem] font-primary text-clip bg-clip-text text-transparent bg-gradient-to-t from-primary/30 to-secondary dark:from-primary/70  dark:to-white/20 font-light font-primary",
-        textColor
+        "font-primary text-clip bg-clip-text text-transparent bg-gradient-to-t  from-primary/50  to-white/20 font-light font-primary",
+        className
       )}
+      key={children?.toString()}
       controller={controller}
     >
       {children}

@@ -1,10 +1,4 @@
-import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogFooter,
-} from "@/components/ui/dialog";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { PlaygroundConfigProps } from "@/interfaces";
 import { FC } from "react";
 import Player from "../../player";
@@ -14,10 +8,10 @@ const PlaygroundConfig: FC<PlaygroundConfigProps> = ({
   controller,
   isModalOpen,
   setIsMobileOpen,
+  delayLogic,
+  onDelayLogicChange,
   onAnimationChange,
 }) => {
-  const { configView, isAnimationStopped, reverse, trigger } = controller;
-
   if (!animation || !controller) {
     console.warn(
       "PLAYGROUND ERROR: No animation or controller provided, returning null"
@@ -25,12 +19,15 @@ const PlaygroundConfig: FC<PlaygroundConfigProps> = ({
     return null;
   }
 
-  const { mode, transition, delay, duration } = animation;
-
   return (
     <Dialog modal onOpenChange={setIsMobileOpen} open={isModalOpen}>
       <DialogContent className="sm:max-w-4xl dark">
-        <Player animation={animation} onAnimationChange={onAnimationChange} />
+        <Player
+          animation={animation}
+          onAnimationChange={onAnimationChange}
+          onDelayLogicChange={onDelayLogicChange}
+          delayLogic={delayLogic}
+        />
       </DialogContent>
     </Dialog>
   );

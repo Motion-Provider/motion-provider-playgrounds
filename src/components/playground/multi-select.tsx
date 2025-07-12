@@ -18,7 +18,6 @@ export const MultiSelect: React.FC<MultiSelectProps> = ({
   items,
   selected,
   onChange,
-  placeholder = "Select options",
 }) => {
   const toggleValue = (value: AnimationKeys) => {
     if (selected.includes(value)) {
@@ -34,9 +33,9 @@ export const MultiSelect: React.FC<MultiSelectProps> = ({
 
   return (
     <Select onValueChange={toggleValue}>
-      <SelectTrigger>Select an animation to add</SelectTrigger>
+      <SelectTrigger className="w-full">Select an animation </SelectTrigger>
       <SelectContent
-        className={`w-full relative h-60 p-2 dark ${interFont.className} w-full`}
+        className={`w-full relative h-auto p-2 dark ${interFont.className} w-full`}
       >
         {items.map((item) => (
           <SelectItem
@@ -45,12 +44,12 @@ export const MultiSelect: React.FC<MultiSelectProps> = ({
             key={item}
             className="flex items-center gap-2 px-2 py-1 rounded hover:bg-muted cursor-pointer w-full relative"
           >
-            <HoverCard openDelay={250}>
-              <HoverCardTrigger className="flex flex-row items-center gap-1 w-full ">
+            <HoverCard openDelay={250} closeDelay={100}>
+              <HoverCardTrigger className="flex flex-row items-center gap-2 w-full ">
                 <Box className="size-4" />
                 <span className="tracking-tight">{item}</span>
               </HoverCardTrigger>
-              <HoverCardContent className="w-full dark backdrop-blur-2xl  bg-none p-12 relative overflow-hidden">
+              <HoverCardContent className="w-full dark p-16 relative overflow-hidden">
                 <MiniViewer animationMode={item} className="size-16 z-10" />
                 <SquareBackgroundPattern
                   squareSize={2}
@@ -58,7 +57,7 @@ export const MultiSelect: React.FC<MultiSelectProps> = ({
                   color="#fff00"
                   className="absolute inset-0 -z-10 size-full"
                 />
-                <Badge variant={"default"} className="absolute top-2 right-2">
+                <Badge variant={"outline"} className="absolute top-2 right-2">
                   <pre>{item}</pre>
                 </Badge>
               </HoverCardContent>
