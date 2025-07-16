@@ -27,10 +27,6 @@ export const MultiSelect: React.FC<MultiSelectProps> = ({
     }
   };
 
-  useMemo(() => {
-    console.log(selected);
-  }, [selected]);
-
   return (
     <Select onValueChange={toggleValue}>
       <SelectTrigger className="w-full">Select an animation </SelectTrigger>

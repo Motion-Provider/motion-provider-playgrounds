@@ -9,13 +9,11 @@ export const CopyCode: FC<CopyCodeButtonProps> = ({ className, onClick }) => {
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const handleClick = () => {
-    // Avoid setting again if already copied (optional)
     if (copied) return;
 
-    onClick(); // e.g., copy to clipboard
+    onClick();
     setCopied(true);
 
-    // Clear previous timeout if it exists
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
     }
@@ -25,7 +23,6 @@ export const CopyCode: FC<CopyCodeButtonProps> = ({ className, onClick }) => {
     }, 1000);
   };
 
-  // Clean up on unmount
   useEffect(() => {
     return () => {
       if (timeoutRef.current) {
