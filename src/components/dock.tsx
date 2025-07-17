@@ -1,6 +1,5 @@
 import { DockItem, DockProps } from "@/interfaces";
 import { cn } from "@/lib/utils";
-import { ListCollapse } from "lucide-react";
 import {
   AnimatePresence,
   MotionValue,
@@ -12,66 +11,8 @@ import {
 
 import { FC, useRef, useState } from "react";
 
-export const Dock: FC<DockProps> = ({
-  items,
-  desktopClassName,
-  mobileClassName,
-}) => {
-  return (
-    <>
-      <FloatingDockDesktop items={items} className={desktopClassName} />
-      <FloatingDockMobile items={items} className={mobileClassName} />
-    </>
-  );
-};
-
-const FloatingDockMobile = ({
-  items,
-  className,
-}: {
-  items: DockItem[];
-  className?: string;
-}) => {
-  const [open, setOpen] = useState(false);
-  return (
-    <div className={cn("relative block md:hidden", className)}>
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            layoutId="nav"
-            className="absolute inset-x-0 bottom-full mb-2 flex flex-col gap-2"
-          >
-            {items.map((item, idx) => (
-              <motion.div
-                key={item.text}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{
-                  opacity: 1,
-                  y: 0,
-                }}
-                exit={{
-                  opacity: 0,
-                  y: 10,
-                  transition: {
-                    delay: idx * 0.05,
-                  },
-                }}
-                transition={{ delay: (items.length - 1 - idx) * 0.05 }}
-              >
-                {item.children}
-              </motion.div>
-            ))}
-          </motion.div>
-        )}
-      </AnimatePresence>
-      <button
-        onClick={() => setOpen(!open)}
-        className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-50 dark:bg-neutral-800"
-      >
-        <ListCollapse className="h-5 w-5 text-neutral-500 dark:text-neutral-400" />
-      </button>
-    </div>
-  );
+export const Dock: FC<DockProps> = ({ items, desktopClassName }) => {
+  return <FloatingDockDesktop items={items} className={desktopClassName} />;
 };
 
 const FloatingDockDesktop = ({

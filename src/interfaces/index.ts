@@ -48,7 +48,6 @@ export interface DockItem {
 export interface DockProps {
   items: DockItem[];
   desktopClassName?: string;
-  mobileClassName?: string;
 }
 export interface SchemaProps {
   borderColor: BorderColors;
@@ -110,6 +109,7 @@ export interface PlaygroundConfigurationProps {
   onAnimationChange: (key: keyof MotionAnimationProps, value: string) => void;
   className?: string;
 }
+
 export type PlaygroundPlayerProps = Omit<
   PlayerControllerProps & PlayerViewerProps,
   "className"

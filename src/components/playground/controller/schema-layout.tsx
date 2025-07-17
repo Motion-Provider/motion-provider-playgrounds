@@ -98,7 +98,8 @@ export const SchemaLayout: FC<SchemaLayoutProps> = ({ onSettings, schema }) => {
                 className="h-8 w-3/5"
               />
             </div>
-            <div className="flex flex-row justify-between gap-4 ">
+            {/** Image controllers will move to a separate component */}
+            {/* <div className="flex flex-row justify-between gap-4 ">
               <Label htmlFor="imageLink">Image Link</Label>
               <Input
                 id="imageLink"
@@ -133,7 +134,7 @@ export const SchemaLayout: FC<SchemaLayoutProps> = ({ onSettings, schema }) => {
                   </SelectItem>
                 </SelectContent>
               </Select>
-            </div>
+            </div> */}
             <div className="flex flex-row justify-between gap-4 ">
               <Label htmlFor="borderBlur">Border Blur</Label>
               <Select

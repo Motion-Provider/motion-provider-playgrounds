@@ -1,7 +1,6 @@
 import { ImageLayoutProps } from "@/interfaces";
 import MotionImage from "@/motion/motion-image";
 import { FC } from "react";
-import { circles } from "./circle/data";
 import { MotionImageProps } from "@/motion/types";
 
 export const Image: FC<
@@ -15,7 +14,8 @@ export const Image: FC<
   img,
   fn,
   config = {
-    duration: 0.15 * circles.length,
+    /** 30 circles assigned but normally it has to be dynamic and synced by props from the parent */
+    duration: 0.15 * 30,
     pieces: 64,
     delayLogic: "pendulum",
     img: img,

@@ -1,5 +1,4 @@
 import { MultiSelectProps } from "@/interfaces";
-import { Button } from "../ui/button";
 import { AnimationKeys } from "@/motion/types";
 import { interFont } from "@/lib/fonts";
 import { MiniViewer } from "./player/mini-viewer";
@@ -12,7 +11,6 @@ import {
 import { Badge } from "../ui/badge";
 import { Box } from "lucide-react";
 import { SquareBackgroundPattern } from "./player/square-background-pattern";
-import { useMemo } from "react";
 
 export const MultiSelect: React.FC<MultiSelectProps> = ({
   items,

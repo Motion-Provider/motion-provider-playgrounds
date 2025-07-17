@@ -1,6 +1,5 @@
 import { Circle } from "@/components/playground/circle";
 import ControllerLayout from "@/components/playground/controller";
-import { Image } from "@/components/playground/image";
 import schema from "@/components/playground/schema";
 import PlaygroundConfig from "@/components/playground/settings/config";
 import { Text } from "@/components/playground/text";
@@ -18,7 +17,7 @@ import {
   TransitionKeys,
 } from "@/motion/types";
 import getRandomAnimation from "@/utils/getRandomAnimation";
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useState } from "react";
 
 type MotionCircleStateProps = Omit<
   MotionCircleLayoutProps,

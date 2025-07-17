@@ -43,7 +43,7 @@ const animations: AnimationLibraryProps = {
     },
   },
   staggeredOut: {
-    initial: { x: "-50%" },
+    initial: { x: "50%" },
     animate: {
       x: 0,
     },

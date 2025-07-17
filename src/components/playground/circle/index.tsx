@@ -1,5 +1,5 @@
 import MotionChain from "@/motion/motion-chain";
-import { FC, useMemo } from "react";
+import { FC } from "react";
 import { cn } from "@/lib/utils";
 import { MotionCircleLayoutProps } from "@/interfaces";
 import { useDebounce } from "@uidotdev/usehooks";
@@ -13,16 +13,13 @@ export const Circle: FC<MotionCircleLayoutProps> = ({
   const { circleCount } = style;
   const count = useDebounce(circleCount, 500);
 
-  const circles = useMemo(
-    () => Array.from({ length: circleCount }).map((_, i) => 184 + i * 32),
-    [count]
-  );
+  const circles = Array.from({ length: count }).map((_, i) => 184 + i * 32);
+
   return (
     <MotionChain
       animations={circles.map((_) => animation)}
       config={{
         duration: 0.15,
-        isDynamicallyQueued: true,
         delayLogic,
       }}
       elementType="div"
@@ -33,8 +30,9 @@ export const Circle: FC<MotionCircleLayoutProps> = ({
       {circles.map((_, idx) => (
         <div
           className={cn(
+            "border rounded-full bg-transparent",
             circles[idx] % 12 === 0 &&
-              `border ${style.borderColor} rounded-full bg-transparent ${style.borderBlur}`
+              `${style.borderColor} ${style.borderBlur}`
           )}
           style={{
             height: `${circles[idx]}px`,

@@ -22,7 +22,7 @@ export const Text: FC<
       elementType="h1"
       wrapperClassName="font-primary text-9xl absolute top-[10vh]"
       className={cn(
-        "font-primary text-clip bg-clip-text text-transparent bg-gradient-to-t  from-primary/50  to-white/20 font-light font-primary",
+        "font-primary text-clip bg-clip-text text-transparent bg-gradient-to-t from-primary/50 to-white/20 font-light",
         className
       )}
       key={children?.toString()}
