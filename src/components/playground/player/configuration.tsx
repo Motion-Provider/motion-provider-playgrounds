@@ -14,6 +14,7 @@ import {
   SelectItem,
   SelectTrigger,
 } from "@/components/ui/select";
+import { Separator } from "@/components/ui/separator";
 import { Slider } from "@/components/ui/slider";
 import { PlaygroundConfigurationProps } from "@/interfaces";
 import { cn } from "@/lib/utils";
@@ -75,12 +76,17 @@ export const Configuration: FC<PlaygroundConfigurationProps> = ({
     onAnimationChange("transition", value);
   return (
     <Card className={cn("dark relative bg-transparent size-full", className)}>
-      <CardContent className="flex flex-col gap-2">
-        <div className="w-full flex flex-row gap-2 px-2">
-          <Label className="w-1/2 tracking-tight">Delay logic:</Label>
+      <CardContent className="flex flex-col gap-2 absolute size-full top-0 rounded-2xl p-4">
+        <div className="w-full flex flex-row  px-2">
+          <Badge
+            className="w-1/4 tracking-tight border-r-0 rounded-r-none"
+            variant="outline"
+          >
+            Delay
+          </Badge>
           <Select value={delayLogic} onValueChange={onDelayLogicChange}>
-            <SelectTrigger className="w-full text-xs">
-              Change animation sequence
+            <SelectTrigger className="w-full text-xs border-l-0 rounded-l-none">
+              Change sequence{`(${delayLogic})`}
             </SelectTrigger>
             <SelectContent className="w-full relative h-60 p-2 dark">
               {delayItems.map((item) => (
@@ -96,14 +102,19 @@ export const Configuration: FC<PlaygroundConfigurationProps> = ({
             </SelectContent>
           </Select>
         </div>
-        <div className="w-full flex flex-row gap-2 px-2 justify-between">
-          <Label className="w-1/2 tracking-tight">Animation Transition</Label>
+        <div className="w-full flex flex-row  px-2 justify-between">
+          <Badge
+            className="w-1/4 tracking-tight border-r-0 rounded-r-none "
+            variant={"outline"}
+          >
+            Animation Transition
+          </Badge>
           <Select
             value={animation.transition!}
             onValueChange={handleTransitionChange}
           >
-            <SelectTrigger className="w-full text-xs">
-              Change animation transition
+            <SelectTrigger className="w-full text-xs border-l-0 rounded-l-none">
+              Change transition{`(${animation.transition})`}
             </SelectTrigger>
             <SelectContent className="w-full relative h-60 p-2 dark">
               {transitionItems.map((item) => (
@@ -120,8 +131,7 @@ export const Configuration: FC<PlaygroundConfigurationProps> = ({
           </Select>
         </div>
         <div className="w-full flex flex-row gap-2 px-2 justify-between">
-          <Label className="w-auto tracking-tight">Animation Duration</Label>
-          <div className="w-2/3  flex flex-row gap-2">
+          <div className="w-full  flex flex-row ">
             <Slider
               defaultValue={[animation.duration!]}
               max={15}
@@ -130,10 +140,13 @@ export const Configuration: FC<PlaygroundConfigurationProps> = ({
               onValueChange={(value) =>
                 onAnimationChange("duration", value[0] as never)
               }
-              className="dark"
+              className="dark border  rounded-l-md border-r-0 p-2 "
             />
-            <Badge variant={"outline"}>
-              {animation.duration}
+            <Badge
+              variant={"secondary"}
+              className="dark border-l-0 rounded-l-none"
+            >
+              Duration {animation.duration}
               {"(s)"}
             </Badge>
           </div>

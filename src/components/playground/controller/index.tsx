@@ -106,7 +106,7 @@ const ControllerLayout: FC<
   ] as DockItem[];
 
   return (
-    <div className="fixed bottom-8 min-w-96 max-w-min h-14 justify-between flex items-center px-8 rounded-2xl z-50  transition-all duration-300">
+    <div className="fixed bottom-8 min-w-96 max-w-min h-14 justify-between flex items-center px-8 rounded-2xl z-50  transition-all duration-300 ">
       <Dock items={components} />
     </div>
   );
