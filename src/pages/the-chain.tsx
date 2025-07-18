@@ -11,11 +11,7 @@ import {
 import { interFont } from "@/lib/fonts";
 import { useAnimation } from "@/motion/hooks/use-animation";
 import { useAnimationControl } from "@/motion/hooks/use-animation-control";
-import {
-  DelayLogic,
-  MotionAnimationProps,
-  TransitionKeys,
-} from "@/motion/types";
+import { DelayLogic, TransitionKeys } from "@/motion/types";
 import getRandomAnimation from "@/utils/getRandomAnimation";
 import React, { useState } from "react";
 
