@@ -20,7 +20,11 @@ const Player: FC<
           className="w-2/5 h-full"
         />
         <div className="w-3/5 h-full flex flex-col gap-2">
-          <Viewer animation={animation} className="h-2/3 w-full" />
+          <Viewer
+            animation={animation}
+            className="h-2/3 w-full"
+            delayLogic={delayLogic}
+          />
           <Configuration
             animation={animation}
             delayLogic={delayLogic}

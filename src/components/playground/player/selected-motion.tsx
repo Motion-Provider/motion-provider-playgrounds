@@ -3,7 +3,7 @@ import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { PlaygroundSelectedMotionProps } from "@/interfaces";
 import MotionChain from "@/motion/motion-chain";
 import { AnimationKeys, MotionAnimationProps } from "@/motion/types";
-import { FC, useCallback, useMemo, useState } from "react";
+import { FC, useCallback } from "react";
 import { MotionChainProps } from "@/motion/types";
 import { cn } from "@/lib/utils";
 import { Ban, Trash } from "lucide-react";
@@ -13,10 +13,8 @@ export const SelectedMotion: FC<PlaygroundSelectedMotionProps> = ({
   selected,
   className,
 }) => {
-  const handleSelect = (val: AnimationKeys) => {
-    const filteredItems = selected.filter((item) => item !== val);
-    onSelected(filteredItems);
-  };
+  const handleSelect = (val: AnimationKeys) =>
+    onSelected(selected.filter((item) => item !== val));
 
   const itemsAnimation = useCallback(
     () =>

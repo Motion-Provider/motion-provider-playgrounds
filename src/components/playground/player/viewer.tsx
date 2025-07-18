@@ -16,11 +16,19 @@ import { FC, useState } from "react";
 import { CopyCode } from "../copy-code";
 import { useCopyToClipboard } from "@uidotdev/usehooks";
 
-export const Viewer: FC<PlayerViewerProps> = ({ animation, className }) => {
+export const Viewer: FC<PlayerViewerProps> = ({
+  animation,
+  className,
+  delayLogic,
+}) => {
   const [animationKey, setAnimationKey] = useState<number>(0);
   const [copiedText, copyToClipboard] = useCopyToClipboard();
   const handleRestartAnimation = () => setAnimationKey((prev) => prev + 1);
 
+  const copyData = {
+    ...animation,
+    delayLogic,
+  };
   return (
     <Card
       className={cn("dark relative bg-transparent overflow-hidden ", className)}
@@ -80,7 +88,7 @@ export const Viewer: FC<PlayerViewerProps> = ({ animation, className }) => {
             </MotionContainer>
           </Button>
           <CopyCode
-            onClick={() => copyToClipboard(JSON.stringify(animation))}
+            onClick={() => copyToClipboard(JSON.stringify(copyData, null, 2))}
             className="text-white"
           />
         </div>

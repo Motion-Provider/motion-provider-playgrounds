@@ -29,13 +29,14 @@ const ControllerLayout: FC<
   onModalOpen,
   onSettings,
 }) => {
-  const handlePlayStop = () =>
-    !control.isAnimationStopped
-      ? onAnimate
-      : () => {
-          onReset();
-          onReverse();
-        };
+  const handlePlayStop = () => {
+    if (!control.isAnimationStopped) {
+      onAnimate();
+    } else {
+      onReset();
+      onReverse();
+    }
+  };
 
   const components = [
     {

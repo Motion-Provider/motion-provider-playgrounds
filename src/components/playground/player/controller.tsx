@@ -5,15 +5,18 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { PlayerControllerProps } from "@/interfaces";
+import {
+  MultiSelectProps,
+  PlayerControllerProps,
+  PlaygroundPlayerProps,
+} from "@/interfaces";
 import { cn } from "@/lib/utils";
 import MotionContainer from "@/motion/motion-container";
-import { FC, useMemo, useState } from "react";
+import { FC } from "react";
 import { MultiSelect } from "../multi-select";
 import { AnimationKeys } from "@/motion/types";
 import animations from "@/motion/lib/animate.lib";
 import { SelectedMotion } from "./selected-motion";
-import { useDebounce } from "@uidotdev/usehooks";
 import { Separator } from "@/components/ui/separator";
 
 export const Controller: FC<PlayerControllerProps> = ({
@@ -21,15 +24,8 @@ export const Controller: FC<PlayerControllerProps> = ({
   onAnimationChange,
   className,
 }) => {
-  const [selected, setSelected] = useState<AnimationKeys[]>(
-    animation.mode as AnimationKeys[]
-  );
-  const debouncedSelected = useDebounce(selected, 500);
-
-  useMemo(() => {
-    onAnimationChange("mode", selected as any);
-  }, [debouncedSelected]);
-
+  const handleOnSelect = (val: AnimationKeys) =>
+    onAnimationChange("mode", val as unknown as AnimationKeys);
   return (
     <Card
       className={cn("dark relative bg-transparent overflow-hidden", className)}
@@ -43,13 +39,16 @@ export const Controller: FC<PlayerControllerProps> = ({
       </CardHeader>
       <CardContent className="w-full h-auto">
         <MultiSelect
-          onChange={(val) => setSelected(val)}
+          onChange={handleOnSelect as unknown as MultiSelectProps["onChange"]}
           placeholder="Select Animation"
           items={Object.keys(animations) as AnimationKeys[]}
-          selected={selected}
+          selected={animation.mode as AnimationKeys[]}
         />
         <Separator className="my-2" />
-        <SelectedMotion selected={selected} onSelected={setSelected} />
+        <SelectedMotion
+          selected={animation.mode as AnimationKeys[]}
+          onSelected={handleOnSelect as unknown as MultiSelectProps["onChange"]}
+        />
       </CardContent>
       <MotionContainer
         animation={{

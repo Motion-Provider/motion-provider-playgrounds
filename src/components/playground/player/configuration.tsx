@@ -17,6 +17,7 @@ import {
 import { Slider } from "@/components/ui/slider";
 import { PlaygroundConfigurationProps } from "@/interfaces";
 import { cn } from "@/lib/utils";
+import { TransitionKeys } from "@/motion/types";
 import { FC } from "react";
 
 const delayItems = [
@@ -39,6 +40,30 @@ const delayItems = [
   "quantum",
 ];
 
+const transitionItems = [
+  "default",
+  "smooth",
+  "easeIn",
+  "easeOut",
+  "linear",
+  "cubicSmooth",
+  "cubicFastStart",
+  "cubicFastEnd",
+  "cubicBounce",
+  "cubicElastic",
+  "slowSmooth",
+  "slowCubic",
+  "slowElastic",
+  "quickEaseInOut",
+  "quickBounce",
+  "delayedSmooth",
+  "delayedCubic",
+  "delayedElastic",
+  "fadeSlide",
+  "fadeScale",
+  "fadeRotate",
+] as const as TransitionKeys[];
+
 export const Configuration: FC<PlaygroundConfigurationProps> = ({
   delayLogic,
   animation,
@@ -46,6 +71,8 @@ export const Configuration: FC<PlaygroundConfigurationProps> = ({
   onDelayLogicChange,
   className,
 }) => {
+  const handleTransitionChange = (value: TransitionKeys) =>
+    onAnimationChange("transition", value);
   return (
     <Card className={cn("dark relative bg-transparent size-full", className)}>
       <CardContent className="flex flex-col gap-2">
@@ -71,12 +98,15 @@ export const Configuration: FC<PlaygroundConfigurationProps> = ({
         </div>
         <div className="w-full flex flex-row gap-2 px-2 justify-between">
           <Label className="w-1/2 tracking-tight">Animation Transition</Label>
-          <Select value={delayLogic} onValueChange={onDelayLogicChange}>
+          <Select
+            value={animation.transition!}
+            onValueChange={handleTransitionChange}
+          >
             <SelectTrigger className="w-full text-xs">
               Change animation transition
             </SelectTrigger>
             <SelectContent className="w-full relative h-60 p-2 dark">
-              {delayItems.map((item) => (
+              {transitionItems.map((item) => (
                 <SelectItem
                   value={item}
                   title="Add an animation"
@@ -98,7 +128,7 @@ export const Configuration: FC<PlaygroundConfigurationProps> = ({
               step={0.25}
               value={[animation.duration!]}
               onValueChange={(value) =>
-                onAnimationChange("duration", value[0].toString())
+                onAnimationChange("duration", value[0] as never)
               }
               className="dark"
             />

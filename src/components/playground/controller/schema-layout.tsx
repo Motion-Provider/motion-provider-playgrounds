@@ -154,7 +154,8 @@ export const SchemaLayout: FC<SchemaLayoutProps> = ({ onSettings, schema }) => {
               </Select>
             </div>
             <p className="text-muted-foreground text-xs pt-2">
-              *Interact with image frame to see the effect!
+              *Complexity is standing for the next random animation request's
+              total animation amount per call.
             </p>
           </div>
         </div>

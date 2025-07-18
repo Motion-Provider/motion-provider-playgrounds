@@ -529,7 +529,6 @@ const animations: AnimationLibraryProps = {
       transition: { duration: 0.8 },
     },
   },
-
   depthPush: {
     initial: { transform: "translateZ(-200px) scale(0.6)" },
     animate: {
@@ -546,46 +545,6 @@ const animations: AnimationLibraryProps = {
   },
 
   /* ------------------- Add Your Custom Animation(s) Here ------------------ */
-
-  moveToRightBottom: {
-    initial: { x: 0, y: 0 },
-    animate: {
-      x: "calc(100vw - 96px)",
-      y: "calc(100vh - 96px)",
-    },
-  },
-
-  moveToRightTop: {
-    initial: { x: 0, y: 0 },
-    animate: {
-      x: "calc(100vw - 96px)",
-      y: "0px",
-    },
-  },
-
-  moveToLeftBottom: {
-    initial: { x: 0, y: 0 },
-    animate: {
-      x: 0,
-      y: "calc(100vh - 96px)",
-    },
-  },
-
-  moveToLeftTop: {
-    initial: { x: 0, y: 0 },
-    animate: {
-      x: -120,
-      y: -120,
-    },
-  },
-
-  moveToTopCenter: {
-    initial: { x: 0, y: 0 },
-    animate: {
-      x: "calc(50vw - 96px)",
-      y: -120,
-    },
-  },
 };
 
 export default animations;

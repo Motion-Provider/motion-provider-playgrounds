@@ -73,13 +73,10 @@ export default function TheCircle() {
     }));
   };
 
-  const handleAnimationConfigChange = (
-    key: keyof MotionAnimationProps,
-    value: number | TransitionKeys
-  ) => {
+  const handleAnimationTransitionChange = (value: TransitionKeys) => {
     setAnimation((prev) => ({
       ...prev,
-      animation: { ...prev.animation, [key]: value },
+      animation: { ...prev.animation, transition: value },
     }));
   };
 
@@ -101,6 +98,7 @@ export default function TheCircle() {
           borderColor: settings.borderColor,
           circleCount: settings.circleCount,
         }}
+        delayLogic={animation.delayLogic!}
         controller={{
           configView: {
             amount: 0.5,

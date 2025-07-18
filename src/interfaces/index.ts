@@ -79,6 +79,7 @@ export interface PlayerControllerProps {
   className?: string;
 }
 export interface PlayerViewerProps {
+  delayLogic: DelayLogic;
   animation: MotionAnimationProps;
   className?: string;
 }
