@@ -110,6 +110,12 @@ export interface PlaygroundConfigurationProps {
   onAnimationChange: (key: keyof MotionAnimationProps, value: string) => void;
   className?: string;
 }
+export interface MotionCardItem {
+  id: number;
+  title: string;
+  desc: string;
+  img: string;
+}
 
 export type PlaygroundPlayerProps = Omit<
   PlayerControllerProps & PlayerViewerProps,

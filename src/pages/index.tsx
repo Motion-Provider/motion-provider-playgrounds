@@ -1,66 +1,41 @@
+import { CardItem } from "@/components/showcase/card-item";
 import { interFont } from "@/lib/fonts";
+import motionsLib from "@/lib/motions.lib";
+import MotionContainer from "@/motion/motion-container";
+import MotionImage from "@/motion/motion-image";
+import MotionText from "@/motion/motion-text";
 
 export default function Home() {
   return (
     <main
-      className={`w-full h-screen items-center justify-center flex  relative dark ${interFont.className}`}
+      className={`w-full h-screen relative dark ${interFont.className} flex flex-row `}
     >
-      <section className="max-w-7xl h-full">
-        <CarouselDemo />
-      </section>
+      <div className="w-1/2 h-full relative ">
+        <div className="relative size-full flex p-16">
+          <MotionText
+            elementType={"h1"}
+            animation={{
+              mode: ["filterBlurIn", "fadeDown"],
+              transition: "smooth",
+              delay: 0.5,
+              duration: 1,
+            }}
+            config={{
+              duration: 0.12,
+              mode: "chars",
+              delayLogic: "linear",
+            }}
+            wrapperClassName=" text-2xl absolute top-[10vh] font-primary text-clip bg-clip-text text-transparent bg-gradient-to-t from-primary/50 to-white/20 font-light"
+          >
+            Motion Provider
+          </MotionText>
+        </div>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-1/2 h-full gap-2">
+        {motionsLib.map((item) => (
+          <CardItem {...item} key={item.id} />
+        ))}
+      </div>
     </main>
   );
 }
-
-import * as React from "react";
-
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
-import { Badge } from "@/components/ui/badge";
-
-function CarouselDemo() {
-  return (
-    <Carousel className="size-full items-center flex">
-      <CarouselContent className="size-full">
-        {Array.from({ length: 5 }).map((_, index) => (
-          <CarouselItem key={index} className="size-full px-8     ">
-            <Feature />
-          </CarouselItem>
-        ))}
-      </CarouselContent>
-      <CarouselPrevious />
-      <CarouselNext />
-    </Carousel>
-  );
-}
-
-const Feature = () => (
-  <div className="size-full grid place-items-center-safe ">
-    <div className="container mx-auto items-center">
-      <div className="flex flex-col lg:flex-row gap-5 lg:items-center">
-        <div className="flex gap-4 flex-col flex-1">
-          <div>
-            <Badge>Platform</Badge>
-          </div>
-          <div className="flex gap-2 flex-col">
-            <h2 className="text-xl md:text-6xl tracking-tighter lg:max-w-xl font-regular text-left">
-              This is the start of something new
-            </h2>
-            <p className="text-md tracking-tighter max-w-xl lg:max-w-sm leading-relaxed text-muted-foreground text-left">
-              Managing a small business today is already tough. Avoid further
-              complications by ditching outdated, tedious trade methods. Our
-              goal is to streamline SMB trade, making it easier and faster than
-              ever.
-            </p>
-          </div>
-        </div>
-        <div className="bg-muted rounded-md w-full aspect-video h-full flex-1"></div>
-      </div>
-    </div>
-  </div>
-);
