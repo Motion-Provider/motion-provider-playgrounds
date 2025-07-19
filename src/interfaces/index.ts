@@ -116,6 +116,9 @@ export interface MotionCardItem {
   desc: string;
   img: string;
 }
+export interface MotionCardItemProps extends MotionCardItem {
+  onHover: (id: number) => void;
+}
 
 export type PlaygroundPlayerProps = Omit<
   PlayerControllerProps & PlayerViewerProps,

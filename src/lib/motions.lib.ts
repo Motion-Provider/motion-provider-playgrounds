@@ -35,6 +35,6 @@ export default [
     id: 6,
     title: "Motion Link",
     desc: "Create single thread level or component level layout exit animations with Motion Link.",
-    img: "/assets/motion-movie.webp",
+    img: "/assets/motion-link.webp",
   },
 ] satisfies MotionCardItem[];
