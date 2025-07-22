@@ -117,7 +117,13 @@ export interface MotionCardItem {
   img: string;
 }
 export interface MotionCardItemProps extends MotionCardItem {
-  onHover: (id: number) => void;
+  isHovered: boolean;
+}
+export interface HomeCardsProps extends Pick<MotionCardItemProps, "isHovered"> {
+  className?: string;
+  onHover: (id: number | undefined) => void;
+  hoveredItemID?: MotionCardItemProps["id"];
+  items: MotionCardItem[];
 }
 
 export type PlaygroundPlayerProps = Omit<

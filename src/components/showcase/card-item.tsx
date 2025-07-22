@@ -1,25 +1,22 @@
-import { MotionCardItem, MotionCardItemProps } from "@/interfaces";
+import { MotionCardItemProps } from "@/interfaces";
 import MotionContainer from "@/motion/motion-container";
 import MotionImage from "@/motion/motion-image";
-import { useHover } from "@uidotdev/usehooks";
-import { FC, useEffect } from "react";
+import { FC, memo, useCallback, useEffect, useRef, useState } from "react";
 import { Button } from "../ui/button";
 import { MotionControllerProps } from "@/motion/types";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 
-export const CardItem: FC<MotionCardItemProps> = (props) => {
-  const { id, title, desc, img, onHover } = props;
-
-  const [ref, hovering] = useHover();
+export const CardItem: FC<MotionCardItemProps> = memo((props) => {
+  const { title, desc, img, isHovered } = props;
 
   const controller = {
     configView: {
       once: false,
       amount: 0.5,
     },
-    trigger: hovering,
+    trigger: isHovered,
   } as MotionControllerProps;
 
   const btnTitle = title
@@ -28,10 +25,7 @@ export const CardItem: FC<MotionCardItemProps> = (props) => {
     .replace("motion", "the");
 
   return (
-    <div
-      className="h-full text-center items-center flex justify-center relative overflow-hidden group "
-      ref={ref}
-    >
+    <div className="h-full text-center items-center flex justify-center relative overflow-hidden group ">
       <MotionImage
         animation={{
           mode: ["filterBlurIn"],
@@ -66,14 +60,14 @@ export const CardItem: FC<MotionCardItemProps> = (props) => {
           <p
             className={cn(
               "text-sm tracking-tighter text-start",
-              hovering ? "text-ellipsis" : "truncate"
+              isHovered ? "text-ellipsis" : "truncate"
             )}
           >
             {desc}
           </p>
         </div>
         <Button
-          variant={hovering ? "default" : "outline"}
+          variant={isHovered ? "default" : "outline"}
           className="mb-4 w-full shrink-0 z-50 border-none scale-90 text-xs"
           asChild
         >
@@ -84,4 +78,4 @@ export const CardItem: FC<MotionCardItemProps> = (props) => {
       </div>
     </div>
   );
-};
+});
