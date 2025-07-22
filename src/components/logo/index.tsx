@@ -1,4 +1,3 @@
-import { primaryFont } from "@/lib/fonts";
 import MotionContainer from "@/motion/motion-container";
 
 export const Logo = () => (
@@ -11,13 +10,9 @@ export const Logo = () => (
         duration: 1,
       }}
       elementType="div"
-      className="blur-3xl size-24 bg-cyan-400 absolute -z-20"
+      className="blur-3xl size-24 bg-yellow-200 absolute -z-20"
     />
-    <div
-      className={`size-auto shrink-0 rounded-lg bg-gradient-to-br from-white/80 to-transparent text-black backdrop-blur-2xl   items-center text-center flex justify-center-safe   ${primaryFont.className} text-4xl  px-1 scale-105`}
-    >
-      m.
-    </div>
+
     <div
       style={{
         imageRendering: "pixelated",

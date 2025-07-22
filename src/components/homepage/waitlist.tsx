@@ -3,7 +3,7 @@ import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 
 export const Waitlist = () => (
-  <div className="flex flex-row ">
+  <div className="flex flex-row mt-2">
     <Input
       about="email"
       type="email"
