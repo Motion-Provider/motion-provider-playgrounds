@@ -68,17 +68,21 @@ const MotionChain: FC<MotionChainProps> = ({
     return null;
   }
 
-  return compute.map((animation, index) => (
-    <MotionContainer
-      key={index}
-      animation={animation}
-      controller={controller}
-      elementType={elementType}
-      className={cn(className)}
-    >
-      {childItem[index]}
-    </MotionContainer>
-  ));
+  return (
+    <>
+      {compute.map((animation, index) => (
+        <MotionContainer
+          key={index}
+          animation={animation}
+          controller={controller}
+          elementType={elementType}
+          className={cn(className)}
+        >
+          {childItem[index]}
+        </MotionContainer>
+      ))}
+    </>
+  );
 };
 
 export default MotionChain;

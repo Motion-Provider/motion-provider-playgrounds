@@ -12,44 +12,33 @@ const MotionLink: FC<MotionLinkProps> = ({
   className,
 }) => {
   const router = useRouter();
-  const [clicked, setClicked] = useState(false);
+  const [isClicked, setIsClicked] = useState(false);
 
   const handleClick = useCallback(
     (e: React.MouseEvent) => {
       e.preventDefault();
+      if (isClicked) return;
 
-      if (clicked) return;
-
-      setClicked(true);
-
+      setIsClicked(true);
       onReverse?.();
 
       setTimeout(() => {
         router.push(href);
       }, timer);
     },
-    [href, onReverse, router, timer]
+    [isClicked, href, onReverse, router, timer]
   );
-  if (clicked) {
-    return (
-      <div
-        className={cn("cursor-pointer", className)}
-        style={{ display: "contents" }}
-      >
-        {children}
-      </div>
-    );
-  }
-  return (
-    <Link
-      href={href}
-      passHref
-      onClick={!clicked ? handleClick : undefined}
-      className={cn("cursor-pointer", className)}
-      style={{ display: "contents" }}
-    >
-      {children}
-    </Link>
+
+  const commonProps = {
+    className: cn("cursor-pointer", className),
+    style: { display: "contents" },
+    children,
+  };
+
+  return isClicked ? (
+    <div {...commonProps} />
+  ) : (
+    <Link href={href} onClick={handleClick} passHref {...commonProps} />
   );
 };
 

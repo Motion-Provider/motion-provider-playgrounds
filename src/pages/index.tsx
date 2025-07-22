@@ -5,11 +5,17 @@ import { useCallback, useState } from "react";
 import Cards from "@/components/homepage/cards";
 import { Hero } from "@/components/homepage/hero";
 import { MainPageBackground } from "@/components/backgrounds/main-page-background";
+import { useAnimationControl } from "@/motion/hooks/use-animation-control";
+import { useAnimation } from "@/motion/hooks/use-animation";
+import { Button } from "@/components/ui/button";
+import MotionLink from "@/motion/motion-link";
 
 export default function Home() {
   const [selectedItem, setSelectedItem] = useState<MotionCardItem | undefined>(
     undefined
   );
+  const { control, onReverse } = useAnimationControl();
+  const controller = useAnimation(control);
 
   const handleHover = useCallback((id?: number) => {
     setSelectedItem(motionsLib.find((item) => item.id === id));
@@ -23,11 +29,12 @@ export default function Home() {
     >
       <div className="md:w-1/2 w-full h-full relative border-r overflow-hidden">
         <MainPageBackground selectedItemID={selectedItem?.id} />
-        <Hero />
+        <Hero controller={controller} />
       </div>
       <Cards
+        onClick={onReverse}
         items={motionsLib}
-        className=""
+        controller={controller}
         isHovered={isItemHovered}
         hoveredItemID={selectedItem?.id}
         onHover={handleHover}

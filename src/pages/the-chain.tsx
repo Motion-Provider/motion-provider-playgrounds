@@ -69,13 +69,6 @@ export default function TheCircle() {
     }));
   };
 
-  const handleAnimationTransitionChange = (value: TransitionKeys) => {
-    setAnimation((prev) => ({
-      ...prev,
-      animation: { ...prev.animation, transition: value },
-    }));
-  };
-
   const handleDelayLogicChange = (value: DelayLogic) => {
     setAnimation((prev) => ({
       ...prev,
@@ -131,7 +124,7 @@ export default function TheCircle() {
         }}
         className={`text-[10rem]`}
       >
-        The Circle
+        Motion Chain
       </Text>
       <PlaygroundConfig
         delayLogic={animation.delayLogic!}

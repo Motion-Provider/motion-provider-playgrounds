@@ -118,14 +118,19 @@ export interface MotionCardItem {
 }
 export interface MotionCardItemProps extends MotionCardItem {
   isHovered: boolean;
+  onClick: () => void;
 }
-export interface HomeCardsProps extends Pick<MotionCardItemProps, "isHovered"> {
+export interface HomeCardsProps
+  extends Pick<MotionCardItemProps, "isHovered" | "onClick">,
+    HomepageTransitionSection {
   className?: string;
   onHover: (id: number | undefined) => void;
   hoveredItemID?: MotionCardItemProps["id"];
   items: MotionCardItem[];
 }
-
+export interface HomepageTransitionSection {
+  controller: MotionControllerProps;
+}
 export type PlaygroundPlayerProps = Omit<
   PlayerControllerProps & PlayerViewerProps,
   "className"

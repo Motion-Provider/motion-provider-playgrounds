@@ -1,15 +1,15 @@
 import { MotionCardItemProps } from "@/interfaces";
 import MotionContainer from "@/motion/motion-container";
 import MotionImage from "@/motion/motion-image";
-import { FC, memo, useCallback, useEffect, useRef, useState } from "react";
+import { FC, memo } from "react";
 import { Button } from "../ui/button";
 import { MotionControllerProps } from "@/motion/types";
 import { ArrowRight } from "lucide-react";
-import Link from "next/link";
 import { cn } from "@/lib/utils";
+import MotionLink from "@/motion/motion-link";
 
 export const CardItem: FC<MotionCardItemProps> = memo((props) => {
-  const { title, desc, img, isHovered } = props;
+  const { title, desc, img, isHovered, onClick } = props;
 
   const controller = {
     configView: {
@@ -69,11 +69,15 @@ export const CardItem: FC<MotionCardItemProps> = memo((props) => {
         <Button
           variant={isHovered ? "default" : "outline"}
           className="mb-4 w-full shrink-0 z-50 border-none scale-90 text-xs"
-          asChild
         >
-          <Link href={`/${btnTitle}`}>
+          <MotionLink
+            onReverse={() => onClick()}
+            href={`/${btnTitle}`}
+            timer={3000}
+            className="flex flex-row gap-2 size-full items-center justify-center"
+          >
             Create {btnTitle} animation <ArrowRight className="size-4" />
-          </Link>
+          </MotionLink>
         </Button>
       </div>
     </div>
