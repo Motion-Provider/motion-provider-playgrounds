@@ -7,7 +7,6 @@ import { Viewer } from "./viewer";
 import { FC } from "react";
 import { interFont } from "@/lib/fonts";
 import { Configuration } from "./configuration";
-import MotionContainer from "@/motion/motion-container";
 
 const Player: FC<
   PlaygroundPlayerProps & Omit<PlaygroundConfigurationProps, "className">
@@ -16,16 +15,6 @@ const Player: FC<
     <div
       className={`w-full ${interFont.className} max-h-[500px] rounded-2xl p-6 bg-transparent`}
     >
-      <MotionContainer
-        animation={{
-          mode: ["typingEffect"],
-          transition: "smooth",
-          delay: 0.25,
-          duration: 2,
-        }}
-        elementType={"div"}
-        className="absolute bottom-0  -z-10 size-12 rounded-full bg-blue-500/20 blur-3xl"
-      />
       <div className="size-full flex flex-row gap-2">
         <Controller
           animation={animation}

@@ -22,7 +22,7 @@ const PlaygroundConfig: FC<PlaygroundConfigProps> = ({
 
   return (
     <Dialog modal onOpenChange={setIsMobileOpen} open={isModalOpen}>
-      <DialogContent className="sm:max-w-5xl  border-none bg-gradient-to-br from-slate-900/50 via-cyan-400/10  to-slate-800/50 backdrop-blur-sm   ">
+      <DialogContent className="sm:max-w-5xl border-none bg-transparent backdrop-blur-lg">
         <Player
           animation={animation}
           onAnimationChange={onAnimationChange}

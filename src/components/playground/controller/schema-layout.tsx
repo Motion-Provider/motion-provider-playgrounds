@@ -1,5 +1,3 @@
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import {
   Popover,
   PopoverContent,
@@ -12,17 +10,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { SchemaLayoutProps } from "@/interfaces";
-import {
-  MousePointerClick,
-  RefreshCw,
-  Settings,
-  SquareDashedMousePointer,
-} from "lucide-react";
+import { Settings } from "lucide-react";
 import { FC } from "react";
 
 export const SchemaLayout: FC<SchemaLayoutProps> = ({ onSettings, schema }) => {
-  const { borderBlur, borderColor, circleCount, img, imgMode } = schema;
+  const { borderBlur, borderColor, circleCount } = schema;
 
   return (
     <Popover modal>
@@ -89,7 +84,7 @@ export const SchemaLayout: FC<SchemaLayoutProps> = ({ onSettings, schema }) => {
               <Label htmlFor="complexity">Complexity</Label>
               <Input
                 id="complexity"
-                defaultValue={img}
+                defaultValue={schema.complexity}
                 min={1}
                 max={10}
                 type="number"
@@ -154,8 +149,8 @@ export const SchemaLayout: FC<SchemaLayoutProps> = ({ onSettings, schema }) => {
               </Select>
             </div>
             <p className="text-muted-foreground text-xs pt-2">
-              *Complexity is standing for the next random animation request's
-              total animation amount per call.
+              *Complexity is standing for the next random animation's array
+              size.
             </p>
           </div>
         </div>

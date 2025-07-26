@@ -1,69 +1,17 @@
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { Card, CardContent } from "@/components/ui/card";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
 } from "@/components/ui/select";
-import { Separator } from "@/components/ui/separator";
 import { Slider } from "@/components/ui/slider";
 import { PlaygroundConfigurationProps } from "@/interfaces";
+import { delayItems, transitionItems } from "@/lib/motion-types.lib";
 import { cn } from "@/lib/utils";
 import { TransitionKeys } from "@/motion/types";
 import { FC } from "react";
-
-const delayItems = [
-  "linear",
-  "exponential",
-  "sinusoidal",
-  "custom",
-  "square",
-  "triangle",
-  "sawtooth",
-  "cosine",
-  "fibonacci",
-  "chaos",
-  "pendulum",
-  "perlin",
-  "chaotic",
-  "cumulative",
-  "bounce",
-  "spiral",
-  "quantum",
-];
-
-const transitionItems = [
-  "default",
-  "smooth",
-  "easeIn",
-  "easeOut",
-  "linear",
-  "cubicSmooth",
-  "cubicFastStart",
-  "cubicFastEnd",
-  "cubicBounce",
-  "cubicElastic",
-  "slowSmooth",
-  "slowCubic",
-  "slowElastic",
-  "quickEaseInOut",
-  "quickBounce",
-  "delayedSmooth",
-  "delayedCubic",
-  "delayedElastic",
-  "fadeSlide",
-  "fadeScale",
-  "fadeRotate",
-] as const as TransitionKeys[];
 
 export const Configuration: FC<PlaygroundConfigurationProps> = ({
   delayLogic,

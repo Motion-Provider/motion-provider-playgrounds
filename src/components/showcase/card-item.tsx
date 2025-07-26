@@ -19,7 +19,8 @@ export const CardItem: FC<MotionCardItemProps> = memo((props) => {
     trigger: isHovered,
   } as MotionControllerProps;
 
-  const btnTitle = title
+  const btnTitle = title.toLowerCase().replace("motion", "the");
+  const btnLink = title
     .toLowerCase()
     .replace(" ", "-")
     .replace("motion", "the");
@@ -72,7 +73,7 @@ export const CardItem: FC<MotionCardItemProps> = memo((props) => {
         >
           <MotionLink
             onReverse={() => onClick()}
-            href={`/${btnTitle}`}
+            href={`/${btnLink}`}
             timer={3000}
             className="flex flex-row gap-2 size-full items-center justify-center"
           >

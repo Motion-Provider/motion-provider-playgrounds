@@ -12,7 +12,6 @@ export const Circle: FC<MotionCircleLayoutProps> = ({
 }) => {
   const { circleCount } = style;
   const count = useDebounce(circleCount, 500);
-
   const circles = Array.from({ length: count }).map((_, i) => 184 + i * 32);
 
   return (

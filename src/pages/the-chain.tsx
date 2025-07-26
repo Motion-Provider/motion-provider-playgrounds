@@ -1,19 +1,20 @@
-import { Circle } from "@/components/playground/circle";
-import ControllerLayout from "@/components/playground/controller";
-import schema from "@/components/playground/schema";
-import PlaygroundConfig from "@/components/playground/settings/config";
-import { Text } from "@/components/playground/text";
 import {
   MotionCircleLayoutProps,
   PlayerControllerProps,
   SchemaProps,
 } from "@/interfaces";
-import { interFont } from "@/lib/fonts";
+import { Circle } from "@/components/playground/circle";
+import ControllerLayout from "@/components/playground/controller";
+import schema from "@/components/playground/schema";
+import PlaygroundConfig from "@/components/playground/settings/config";
+import { Text } from "@/components/playground/text";
+import PlaygroundLayout from "@/layouts/playground-layout";
 import { useAnimation } from "@/motion/hooks/use-animation";
 import { useAnimationControl } from "@/motion/hooks/use-animation-control";
-import { DelayLogic, TransitionKeys } from "@/motion/types";
+import { DelayLogic } from "@/motion/types";
 import getRandomAnimation from "@/utils/getRandomAnimation";
 import React, { useState } from "react";
+import Head from "next/head";
 
 type MotionCircleStateProps = Omit<
   MotionCircleLayoutProps,
@@ -29,7 +30,7 @@ const initialState = {
   delayLogic: "linear",
 } satisfies MotionCircleStateProps;
 
-export default function TheCircle() {
+export default function TheChain() {
   const { control, onReverse, onStop, reset } = useAnimationControl();
 
   const { isAnimationStopped, reverse } = useAnimation(control);
@@ -77,9 +78,10 @@ export default function TheCircle() {
   };
 
   return (
-    <main
-      className={`w-full h-screen  items-center justify-center flex overflow-hidden relative dark ${interFont.className} rounded-full `}
-    >
+    <PlaygroundLayout>
+      <Head>
+        <title>Motion Chain</title>
+      </Head>
       <Circle
         {...animation}
         style={{
@@ -122,7 +124,7 @@ export default function TheCircle() {
           reverse,
           trigger: true,
         }}
-        className={`text-[10rem]`}
+        className={`text-8xl`}
       >
         Motion Chain
       </Text>
@@ -143,6 +145,6 @@ export default function TheCircle() {
         }}
         isModalOpen={isModalOpen}
       />
-    </main>
+    </PlaygroundLayout>
   );
 }

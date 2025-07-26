@@ -52,8 +52,6 @@ export interface DockProps {
 export interface SchemaProps {
   borderColor: BorderColors;
   borderBlur: BorderBlur;
-  img: string;
-  imgMode?: MotionImageProps["config"]["fn"];
   circleCount: number;
   complexity: number;
 }
@@ -130,6 +128,13 @@ export interface HomeCardsProps
 }
 export interface HomepageTransitionSection {
   controller: MotionControllerProps;
+}
+export interface PageLayoutProps {
+  children: React.ReactNode;
+}
+export interface PlaygroundLayoutProps {
+  className?: string;
+  children: React.ReactNode;
 }
 export type PlaygroundPlayerProps = Omit<
   PlayerControllerProps & PlayerViewerProps,
