@@ -1,6 +1,7 @@
 import {
-  MotionCircleLayoutProps,
+  MotionCircleStateProps,
   PlayerControllerProps,
+  ReduxLibMotionChainProps,
   SchemaProps,
 } from "@/interfaces";
 import { Circle } from "@/components/playground/circle";
@@ -15,32 +16,23 @@ import { DelayLogic } from "@/motion/types";
 import getRandomAnimation from "@/utils/getRandomAnimation";
 import React, { useState } from "react";
 import Head from "next/head";
-
-type MotionCircleStateProps = Omit<
-  MotionCircleLayoutProps,
-  "controller" | "style"
->;
-
-const initialState = {
-  animation: {
-    mode: ["scaleZoomIn", "fadeIn"],
-    transition: "cubicBounce",
-    duration: 2.5,
-  },
-  delayLogic: "linear",
-} satisfies MotionCircleStateProps;
+import { ReduxLibMotionChainInitialState } from "@/lib/redux.lib";
+import { useDispatch } from "react-redux";
+import { setDelayLogic, setMotion } from "@/redux/slices/motion";
 
 export default function TheChain() {
   const { control, onReverse, onStop, reset } = useAnimationControl();
+  const dispatch = useDispatch();
 
   const { isAnimationStopped, reverse } = useAnimation(control);
   const [settings, setSettings] = useState<SchemaProps>(schema);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [animation, setAnimation] = useState<MotionCircleStateProps>({
-    ...initialState,
+  const [animation, setAnimation] = useState<ReduxLibMotionChainProps>({
+    ...(ReduxLibMotionChainInitialState as ReduxLibMotionChainProps),
   });
 
   const handleRandomAnimation = () => {
+    console.time("handleRandomAnimation");
     reset();
     setTimeout(() => {
       const randomAnimations = getRandomAnimation(settings.complexity);
@@ -49,6 +41,7 @@ export default function TheChain() {
         animation: { ...prev.animation, mode: randomAnimations },
       }));
     }, 150);
+    console.timeEnd("handleRandomAnimation");
   };
 
   const handleSettings = (key: string, value: string) => {
@@ -68,9 +61,11 @@ export default function TheChain() {
       ...prev,
       animation: { ...prev.animation, [key]: value },
     }));
+    dispatch(setMotion({ [key]: value }));
   };
 
   const handleDelayLogicChange = (value: DelayLogic) => {
+    dispatch(setDelayLogic(value));
     setAnimation((prev) => ({
       ...prev,
       delayLogic: value,
@@ -83,11 +78,9 @@ export default function TheChain() {
         <title>Motion Chain</title>
       </Head>
       <Circle
-        {...animation}
+        {...(animation as MotionCircleStateProps)}
         style={{
-          borderBlur: settings.borderBlur,
-          borderColor: settings.borderColor,
-          circleCount: settings.circleCount,
+          ...settings,
         }}
         delayLogic={animation.delayLogic!}
         controller={{
@@ -114,7 +107,7 @@ export default function TheChain() {
         onReverse={onReverse}
       />
       <Text
-        {...animation}
+        {...(animation as MotionCircleStateProps)}
         controller={{
           isAnimationStopped,
           configView: {

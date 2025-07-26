@@ -3,6 +3,7 @@ import {
   DelayLogic,
   MotionAnimationProps,
   MotionChainProps,
+  MotionContainerProps,
   MotionControllerProps,
   MotionImageProps,
 } from "@/motion/types";
@@ -136,6 +137,29 @@ export interface PlaygroundLayoutProps {
   className?: string;
   children: React.ReactNode;
 }
+export interface InfoBoxLayoutProps {
+  className?: string;
+  children: React.ReactNode;
+}
+export interface SyntaxViewerProps {
+  className?: string;
+  currentMotion: Pick<MotionChainProps, "config" | "animations">;
+}
+export interface ReduxLibMotionChainProps {
+  animation: MotionContainerProps["animation"];
+  delayLogic: MotionChainProps["config"]["delayLogic"];
+}
+export interface ReduxProviderProps {
+  children: React.ReactNode;
+}
+/** ---------------------------------------------------------------------- */
+export type InfoBoxRoutesProps = Record<string, React.ReactNode>;
+export type MotionCircleStateProps = Omit<
+  MotionCircleLayoutProps,
+  "controller" | "style"
+>;
+
+export type SyntaxViewerOptions = Record<string, string>;
 export type PlaygroundPlayerProps = Omit<
   PlayerControllerProps & PlayerViewerProps,
   "className"

@@ -120,6 +120,7 @@ function DialogDescription({
 }: React.ComponentProps<typeof DialogPrimitive.Description>) {
   return (
     <DialogPrimitive.Description
+      aria-describedby="dialog-description"
       data-slot="dialog-description"
       className={cn("text-muted-foreground text-sm", className)}
       {...props}

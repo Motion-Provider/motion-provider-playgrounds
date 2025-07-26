@@ -1,4 +1,5 @@
 import GridBg from "@/components/backgrounds/grid-bg";
+import InfoBox from "@/components/info-box";
 import { PlaygroundLayoutProps } from "@/interfaces";
 import { interFont } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
@@ -17,6 +18,7 @@ const PlaygroundLayout: FC<PlaygroundLayoutProps> = ({
   >
     {children}
     <GridBg className={"absolute top-0 left-0 w-full h-full"} />
+    <InfoBox />
   </main>
 );
 

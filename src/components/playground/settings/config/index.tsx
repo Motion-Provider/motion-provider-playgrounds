@@ -1,4 +1,9 @@
-import { Dialog, DialogContent, DialogFooter } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { PlaygroundConfigProps } from "@/interfaces";
 import { FC } from "react";
 import Player from "../../player";
@@ -22,7 +27,11 @@ const PlaygroundConfig: FC<PlaygroundConfigProps> = ({
 
   return (
     <Dialog modal onOpenChange={setIsMobileOpen} open={isModalOpen}>
-      <DialogContent className="sm:max-w-5xl border-none bg-transparent backdrop-blur-lg">
+      <DialogContent
+        className="sm:max-w-5xl border-none bg-transparent backdrop-blur-lg"
+        aria-describedby="modal-content"
+      >
+        <DialogTitle className="sr-only">Configure your animation</DialogTitle>
         <Player
           animation={animation}
           onAnimationChange={onAnimationChange}
