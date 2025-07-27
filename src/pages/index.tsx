@@ -7,6 +7,7 @@ import { MainPageBackground } from "@/components/backgrounds/main-page-backgroun
 import { useAnimationControl } from "@/motion/hooks/use-animation-control";
 import { useAnimation } from "@/motion/hooks/use-animation";
 import PageLayout from "@/layouts/page-layout";
+import Head from "next/head";
 
 export default function Home() {
   const [selectedItem, setSelectedItem] = useState<MotionCardItem | undefined>(
@@ -23,6 +24,9 @@ export default function Home() {
 
   return (
     <PageLayout>
+      <Head>
+        <title>Motion Provider — Playground</title>
+      </Head>
       <div className="md:w-1/2 w-full h-full relative border-r overflow-hidden">
         <MainPageBackground selectedItemID={selectedItem?.id} />
         <Hero controller={controller} />

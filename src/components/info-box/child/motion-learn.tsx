@@ -1,9 +1,11 @@
-﻿const LearnMotion = () => {
-    return (
-        <div>
-            <h1>Learn Motion</h1>
-        </div>
-    );
-}
+﻿import InfoBoxScrollLayout from "@/layouts/infobox-scroll-layout";
 
-export default LearnMotion;
+const MotionLearn = () => {
+  return (
+    <InfoBoxScrollLayout className="p-4">
+      <h1>Learn Motion</h1>
+    </InfoBoxScrollLayout>
+  );
+};
+
+export default MotionLearn;

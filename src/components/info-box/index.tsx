@@ -1,21 +1,38 @@
-﻿import InfoBoxLayout from "@/layouts/info-box-layout";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
-import { SyntaxViewer } from "./child/syntax-viewer";
+﻿import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
+import routes from "./routes";
+import MotionContainer from "@/motion/motion-container";
+import InfoBoxPortal from "./portal";
 
 export default function InfoBox() {
+  const defaultValue = Object.keys(routes)[0];
+
   return (
-    <InfoBoxLayout className="h-72 w-88 border absolute top-4 right-4 backdrop-blur-md rounded-2xl">
-      <Tabs defaultValue="account" className="size-full">
-        <TabsList className="w-full bg-transparent border-b rounded-none">
-          <TabsTrigger value="view">View</TabsTrigger>
-          <TabsTrigger value="learn">Learn</TabsTrigger>
-          <TabsTrigger value="hints">Hints</TabsTrigger>
+    <InfoBoxPortal className="h-72 w-88 border absolute top-4 right-4 backdrop-blur-md rounded-2xl">
+      <Tabs defaultValue={defaultValue} className="size-full relative">
+        <TabsList className="w-full bg-transparent border-b rounded-none h-8">
+          {Object.keys(routes).map((route) => (
+            <TabsTrigger key={route} value={route} className="capitalize">
+              {route}
+            </TabsTrigger>
+          ))}
         </TabsList>
-        <TabsContent value="view">
-          <SyntaxViewer />
-        </TabsContent>
-        <TabsContent value="learn">Change your password here.</TabsContent>
+        {Object.entries(routes).map(([key, Component]) => (
+          <TabsContent key={key} value={key} className="relative">
+            <MotionContainer
+              animation={{
+                mode: ["filterBlurIn", "fadeIn"],
+                transition: "smooth",
+                duration: 0.88,
+              }}
+              elementType={"div"}
+              key={key}
+              className="size-full"
+            >
+              <Component />
+            </MotionContainer>
+          </TabsContent>
+        ))}
       </Tabs>
-    </InfoBoxLayout>
+    </InfoBoxPortal>
   );
 }

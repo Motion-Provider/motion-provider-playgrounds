@@ -152,8 +152,17 @@ export interface ReduxLibMotionChainProps {
 export interface ReduxProviderProps {
   children: React.ReactNode;
 }
+export interface ReduxMetadataProps {
+  currentMotion: Motions | undefined;
+}
+export interface HintItemProps {
+  text: string;
+  motion?: string;
+  backgroundImage?: string;
+}
 /** ---------------------------------------------------------------------- */
-export type InfoBoxRoutesProps = Record<string, React.ReactNode>;
+export type MotionChainLibProps = string[];
+export type InfoBoxRoutesProps = Record<string, React.ComponentType>;
 export type MotionCircleStateProps = Omit<
   MotionCircleLayoutProps,
   "controller" | "style"
@@ -177,3 +186,10 @@ export type BorderBlur =
   | "blur-none";
 export type ReduxReducerType = CreateSliceOptions["reducers"];
 export type ReduxSelectorType = CreateSliceOptions["selectors"];
+export type Motions =
+  | "MotionContainer"
+  | "MotionChain"
+  | "MotionText"
+  | "MotionLink"
+  | "MotionImage"
+  | "MotionMovie";

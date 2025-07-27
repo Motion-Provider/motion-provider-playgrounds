@@ -1,4 +1,4 @@
-﻿import { ReduxLibMotionChainProps } from "@/interfaces";
+﻿import { ReduxLibMotionChainProps, ReduxMetadataProps } from "@/interfaces";
 
 const ReduxLibMotionChainInitialState = {
   animation: {
@@ -9,4 +9,8 @@ const ReduxLibMotionChainInitialState = {
   delayLogic: "linear",
 } as ReduxLibMotionChainProps;
 
-export { ReduxLibMotionChainInitialState };
+const ReduxLibMetadataInitialState = {
+  currentMotion: undefined,
+} as ReduxMetadataProps;
+
+export { ReduxLibMotionChainInitialState, ReduxLibMetadataInitialState };
