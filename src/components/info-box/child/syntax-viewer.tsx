@@ -7,17 +7,19 @@ import { useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 import { ReduxRootState } from "@/redux";
 import InfoBoxScrollLayout from "@/layouts/infobox-scroll-layout";
+import getCodeView from "@/utils/getCodeView";
+import { Motions } from "@/interfaces";
 
 SyntaxHighlighter?.registerLanguage("javascript", js);
 
 const SyntaxViewer = () => {
   const [copiedText, copyToClipboard] = useCopyToClipboard();
-  const [detailed, setDetailed] = useState<boolean>(false);
+  // const [detailed, setDetailed] = useState<boolean>(false);
   const currentCodeID = crypto.randomUUID().slice(0, 6);
 
   const currentMotion = useSelector(
     (state: ReduxRootState) => state.metadata.currentMotion
-  );
+  ) as ReduxRootState["metadata"]["currentMotion"];
 
   const { animation, delayLogic } = useSelector(
     (state: ReduxRootState) => state.motion
@@ -67,7 +69,6 @@ export function ${currentMotion}_${currentCodeID}() {
       delayLogic,
     ]
   );
-
   return (
     <InfoBoxScrollLayout className="w-full">
       <SyntaxHighlighter

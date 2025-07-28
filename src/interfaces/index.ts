@@ -8,6 +8,7 @@ import {
   MotionControllerProps,
   MotionImageProps,
 } from "@/motion/types";
+import { ReduxRootState } from "@/redux";
 import { CreateSliceOptions } from "@reduxjs/toolkit";
 import { VariantProps } from "class-variance-authority";
 
@@ -93,7 +94,6 @@ export interface Option {
   label: string;
   value: string;
 }
-
 export interface MultiSelectProps {
   items: AnimationKeys[];
   selected: AnimationKeys[];
@@ -162,6 +162,11 @@ export interface HintItemProps {
   text: string;
   motion?: string;
   backgroundImage?: string;
+}
+export interface GetCodeViewProps extends ReduxRootState {
+  id: string;
+  comment?: string;
+  commentIncluded?: boolean;
 }
 /** ---------------------------------------------------------------------- */
 export type InfoboxHintLibProps = string[];
