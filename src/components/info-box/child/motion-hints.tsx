@@ -20,15 +20,20 @@ import { useSelector } from "react-redux";
 import Autoplay from "embla-carousel-autoplay";
 import MotionContainer from "@/motion/motion-container";
 import { HintItemProps } from "@/interfaces";
-import motionChainLib from "@/lib/infobox/motion-chain.lib";
+import motionChainLib from "@/lib/infobox/hints/motion-chain.lib";
 import motionsLib from "@/lib/motions.lib";
-import { Quote } from "lucide-react";
+import { CheckCheck, Quote } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import MotionText from "@/motion/motion-text";
+import shuffleArrays from "@/utils/shuffleArrays";
+import playgroundLib from "@/lib/playground.lib";
 
 const MotionContext = createContext<Omit<HintItemProps, "text">>({
   motion: undefined,
   backgroundImage: undefined,
 });
+
+const hints = shuffleArrays(motionChainLib, playgroundLib, true);
 
 const MotionHints = () => {
   const { currentMotion } = useSelector(
@@ -77,10 +82,10 @@ const CarouselOrientation: FC = () => {
         onMouseEnter={plugin.current.stop}
         onMouseLeave={plugin.current.reset}
         orientation="vertical"
-        className="w-full relative"
+        className="w-full relative "
       >
-        <CarouselContent className=" h-60">
-          {motionChainLib.map((val, index) => (
+        <CarouselContent className=" h-60 ">
+          {hints.map((val, index) => (
             <CarouselItem key={index} className="pt-1 md:basis-1/2">
               <MotionContainer
                 animation={{
@@ -110,37 +115,75 @@ const CarouselOrientation: FC = () => {
           <CarouselPrevious />
         </div>
       </Carousel>
-      <Badge
-        variant={"outline"}
-        className="text-muted-foreground py-2 text-center text-sm absolute top-0 right-4"
-      >
-        {current === count
-          ? "Looks like you gettin'it "
-          : `Slide ${current} of ${count}`}
-      </Badge>
+      {count === current ? (
+        <MotionContainer
+          animation={{
+            mode: ["filterBlurIn", "fadeIn"],
+            transition: "cubicBounce",
+            duration: 1.5,
+          }}
+          className="absolute top-0 right-2 rounded-md size-auto flex flex-row gap-1 bg-white text-muted items-center px-2 py-1"
+          elementType={"div"}
+        >
+          <CheckCheck className="w-4 h-4" />
+          <MotionText
+            animation={{
+              mode: ["fadeUp", "filterBlurIn"],
+              transition: "smooth",
+              duration: 1,
+            }}
+            elementType={"p"}
+            config={{
+              duration: 0.08,
+              mode: "chars",
+              delayLogic: "linear",
+            }}
+            wrapperClassName="text-xs tracking-tight"
+          >
+            All seen!
+          </MotionText>
+        </MotionContainer>
+      ) : (
+        <Badge
+          variant={"outline"}
+          className="text-muted-foreground py-2 text-center text-xs absolute top-0 right-2"
+        >
+          Slide {current} of {count}
+        </Badge>
+      )}
     </>
   );
 };
 
 const HintItem: FC<Pick<HintItemProps, "text">> = ({ text }) => {
-  const { backgroundImage } = useContext(MotionContext);
+  const { motion } = useContext(MotionContext);
+  const cardFooter = `@${motion?.replace(" ", "")}`;
 
   return (
-    <Card
-      style={{
-        backgroundImage: `url(${backgroundImage || "/m.png"})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundBlendMode: "overlay",
-      }}
-    >
+    <Card>
       <CardHeader className="grid place-items-center text-center px-6 relative">
         <CardDescription className="tracking-tight relative">
-          <Quote className="size-4 rotate-180 " />
+          <Quote className="size-4 rotate-180 mb-2" />
           {text}
-          <Quote className="size-4 -rotate-0 self-end justify-self-end" />
+          <Quote className="size-4 -rotate-0 self-end justify-self-end mt-2" />
         </CardDescription>
       </CardHeader>
+      <MotionText
+        animation={{
+          mode: ["filterBlurIn", "fadeUp"],
+          transition: "smooth",
+          duration: 1,
+        }}
+        elementType={"span"}
+        config={{
+          duration: 0.08,
+          mode: "chars",
+          delayLogic: "linear",
+        }}
+        wrapperClassName="absolute bottom-6 left-6 text-muted-foreground text-xs tracking-tighter"
+      >
+        {cardFooter}
+      </MotionText>
     </Card>
   );
 };

@@ -4,6 +4,8 @@ import {
   ReduxLibMotionChainProps,
   SchemaProps,
 } from "@/interfaces";
+import React, { useState } from "react";
+import Head from "next/head";
 import { Circle } from "@/components/playground/circle";
 import ControllerLayout from "@/components/playground/controller";
 import schema from "@/components/playground/schema";
@@ -14,8 +16,6 @@ import { useAnimation } from "@/motion/hooks/use-animation";
 import { useAnimationControl } from "@/motion/hooks/use-animation-control";
 import { DelayLogic } from "@/motion/types";
 import getRandomAnimation from "@/utils/getRandomAnimation";
-import React, { useState } from "react";
-import Head from "next/head";
 import { ReduxLibMotionChainInitialState } from "@/lib/redux.lib";
 import { useDispatch } from "react-redux";
 import { setDelayLogic, setMotion } from "@/redux/slices/motion";
@@ -32,16 +32,15 @@ export default function TheChain() {
   });
 
   const handleRandomAnimation = () => {
-    console.time("handleRandomAnimation");
     reset();
     setTimeout(() => {
       const randomAnimations = getRandomAnimation(settings.complexity);
+      dispatch(setMotion({ mode: randomAnimations }));
       setAnimation((prev) => ({
         ...prev,
         animation: { ...prev.animation, mode: randomAnimations },
       }));
     }, 150);
-    console.timeEnd("handleRandomAnimation");
   };
 
   const handleSettings = (key: string, value: string) => {

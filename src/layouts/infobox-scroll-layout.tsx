@@ -7,7 +7,7 @@ export default function InfoBoxScrollLayout({
   className,
 }: InfoBoxLayoutProps) {
   return (
-    <ScrollArea className={cn("w-full h-66 overflow-y-scroll", className)}>
+    <ScrollArea className={cn("w-full h-66", className)}>
       {children}
       <ScrollBar orientation="vertical" />
     </ScrollArea>

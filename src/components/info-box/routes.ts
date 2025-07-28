@@ -1,5 +1,5 @@
 ﻿import { InfoBoxRoutesProps } from "@/interfaces";
-import { SyntaxViewer } from "./child/syntax-viewer";
+import SyntaxViewer from "./child/syntax-viewer";
 import MotionLearn from "./child/motion-learn";
 import MotionHints from "./child/motion-hints";
 

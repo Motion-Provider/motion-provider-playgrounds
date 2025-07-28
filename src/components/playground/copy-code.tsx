@@ -4,7 +4,11 @@ import { Check, Copy } from "lucide-react";
 import MotionContainer from "@/motion/motion-container";
 import { CopyCodeButtonProps } from "@/interfaces";
 
-export const CopyCode: FC<CopyCodeButtonProps> = ({ className, onClick }) => {
+export const CopyCode: FC<CopyCodeButtonProps> = ({
+  className,
+  onClick,
+  variant,
+}) => {
   const [copied, setCopied] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -32,7 +36,7 @@ export const CopyCode: FC<CopyCodeButtonProps> = ({ className, onClick }) => {
   }, []);
 
   return (
-    <Button variant="ghost" onClick={handleClick}>
+    <Button onClick={handleClick} className={className} variant={variant}>
       <MotionContainer
         animation={{
           mode: ["fadeIn", "filterBlurIn"],
@@ -44,7 +48,6 @@ export const CopyCode: FC<CopyCodeButtonProps> = ({ className, onClick }) => {
           trigger: !copied,
         }}
         elementType="div"
-        className={className}
       >
         {copied ? (
           <Check className="text-white size-5" />

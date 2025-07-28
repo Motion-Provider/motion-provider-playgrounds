@@ -1,3 +1,4 @@
+import { buttonVariants } from "@/components/ui/button";
 import {
   AnimationKeys,
   DelayLogic,
@@ -8,6 +9,7 @@ import {
   MotionImageProps,
 } from "@/motion/types";
 import { CreateSliceOptions } from "@reduxjs/toolkit";
+import { VariantProps } from "class-variance-authority";
 
 export interface MotionCircleAnimationProps {
   mode: MotionAnimationProps["mode"];
@@ -85,6 +87,7 @@ export interface PlayerViewerProps {
 export interface CopyCodeButtonProps {
   className?: string;
   onClick: () => void;
+  variant?: VariantProps<typeof buttonVariants>["variant"];
 }
 export interface Option {
   label: string;
@@ -161,7 +164,7 @@ export interface HintItemProps {
   backgroundImage?: string;
 }
 /** ---------------------------------------------------------------------- */
-export type MotionChainLibProps = string[];
+export type InfoboxHintLibProps = string[];
 export type InfoBoxRoutesProps = Record<string, React.ComponentType>;
 export type MotionCircleStateProps = Omit<
   MotionCircleLayoutProps,

@@ -22,7 +22,7 @@ export const Viewer: FC<PlayerViewerProps> = ({
   delayLogic,
 }) => {
   const [animationKey, setAnimationKey] = useState<number>(0);
-  const [copiedText, copyToClipboard] = useCopyToClipboard();
+  const [_, copyToClipboard] = useCopyToClipboard();
   const handleRestartAnimation = () => setAnimationKey((prev) => prev + 1);
 
   const copyData = {
@@ -88,6 +88,7 @@ export const Viewer: FC<PlayerViewerProps> = ({
             </MotionContainer>
           </Button>
           <CopyCode
+            variant={"ghost"}
             onClick={() => copyToClipboard(JSON.stringify(copyData, null, 2))}
             className="text-white"
           />
