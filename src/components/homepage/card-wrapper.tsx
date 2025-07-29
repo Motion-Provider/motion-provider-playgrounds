@@ -1,12 +1,8 @@
 import { cn } from "@/lib/utils";
-import { FC, memo, ReactNode } from "react";
+import { FC, memo } from "react";
+import { CardWrapperProps } from "@/interfaces/@types-components";
 
-const CardWrapper: FC<{
-  id: number;
-  isHovered: boolean;
-  onHover: (id?: number) => void;
-  children: ReactNode;
-}> = memo(({ id, onHover, children }) => (
+const CardWrapper: FC<CardWrapperProps> = memo(({ id, onHover, children }) => (
   <div
     data-id={id}
     onMouseEnter={() => onHover(id)}

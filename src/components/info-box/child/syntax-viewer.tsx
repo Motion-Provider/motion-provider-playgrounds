@@ -3,12 +3,10 @@ import js from "react-syntax-highlighter/dist/cjs/languages/prism/javascript";
 import tomorrow from "react-syntax-highlighter/dist/cjs/styles/prism/tomorrow";
 import { CopyCode } from "@/components/playground/copy-code";
 import { useCopyToClipboard } from "@uidotdev/usehooks";
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { ReduxRootState } from "@/redux";
 import InfoBoxScrollLayout from "@/layouts/infobox-scroll-layout";
-import getCodeView from "@/utils/getCodeView";
-import { Motions } from "@/interfaces";
 
 SyntaxHighlighter?.registerLanguage("javascript", js);
 

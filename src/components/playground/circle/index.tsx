@@ -1,8 +1,8 @@
-import MotionChain from "@/motion/motion-chain";
 import { FC } from "react";
 import { cn } from "@/lib/utils";
-import { MotionCircleLayoutProps } from "@/interfaces";
+import MotionChain from "@/motion/motion-chain";
 import { useDebounce } from "@uidotdev/usehooks";
+import { MotionCircleLayoutProps } from "@/interfaces/@types-components";
 
 export const Circle: FC<MotionCircleLayoutProps> = ({
   animation,

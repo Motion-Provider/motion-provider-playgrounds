@@ -1,9 +1,9 @@
-import { HomeCardsProps } from "@/interfaces";
 import { FC } from "react";
-import { CardItem } from "../showcase/card-item";
 import { cn } from "@/lib/utils";
 import CardWrapper from "./card-wrapper";
+import { CardItem } from "../showcase/card-item";
 import MotionChain from "@/motion/motion-chain";
+import { HomeCardsProps } from "@/interfaces/@types-components";
 
 const Cards: FC<HomeCardsProps> = ({
   items,

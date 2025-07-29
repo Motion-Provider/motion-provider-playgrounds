@@ -1,5 +1,5 @@
 ﻿import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
-import routes from "./routes";
+import routes from "../../lib/routes";
 import MotionContainer from "@/motion/motion-container";
 import InfoBoxPortal from "./portal";
 

@@ -11,8 +11,8 @@ import {
 
 import { FC, useRef, useState } from "react";
 
-export const Dock: FC<DockProps> = ({ items, desktopClassName }) => {
-  return <FloatingDockDesktop items={items} className={desktopClassName} />;
+export const Dock: FC<DockProps> = ({ items, className }) => {
+  return <FloatingDockDesktop items={items} className={className} />;
 };
 
 const FloatingDockDesktop = ({

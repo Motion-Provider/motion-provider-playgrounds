@@ -1,5 +1,5 @@
 ﻿import { Skeleton } from "@/components/ui/skeleton";
-import { InfoBoxLayoutProps } from "@/interfaces";
+import { InfoBoxLayoutProps } from "@/interfaces/@types-layout";
 import InfoBoxLayout from "@/layouts/info-box-layout";
 import { useIsClient } from "@uidotdev/usehooks";
 import { createPortal } from "react-dom";

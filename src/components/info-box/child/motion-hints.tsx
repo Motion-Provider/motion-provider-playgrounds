@@ -1,4 +1,5 @@
-﻿import { Card, CardDescription, CardHeader } from "@/components/ui/card";
+﻿import { ReduxRootState } from "@/redux";
+import { Card, CardDescription, CardHeader } from "@/components/ui/card";
 import {
   Carousel,
   CarouselApi,
@@ -7,7 +8,6 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { ReduxRootState } from "@/redux";
 import {
   FC,
   useRef,
@@ -19,7 +19,6 @@ import {
 import { useSelector } from "react-redux";
 import Autoplay from "embla-carousel-autoplay";
 import MotionContainer from "@/motion/motion-container";
-import { HintItemProps } from "@/interfaces";
 import motionChainLib from "@/lib/infobox/hints/motion-chain.lib";
 import motionsLib from "@/lib/motions.lib";
 import { CheckCheck, Quote } from "lucide-react";
@@ -27,25 +26,26 @@ import { Badge } from "@/components/ui/badge";
 import MotionText from "@/motion/motion-text";
 import shuffleArrays from "@/utils/shuffleArrays";
 import playgroundLib from "@/lib/playground.lib";
+import { HintItemProps } from "@/interfaces/@types-components";
 
 const MotionContext = createContext<Omit<HintItemProps, "text">>({
   motion: undefined,
   backgroundImage: undefined,
 });
 
-const hints = shuffleArrays(motionChainLib, playgroundLib, true);
+const hints = shuffleArrays(motionChainLib, playgroundLib, true) as string[];
 
 const MotionHints = () => {
   const { currentMotion } = useSelector(
     (state: ReduxRootState) => state.metadata
   );
-  const pureMotion = currentMotion?.replace(/(Motion)/g, "$1 ");
-  const findBgImage = motionsLib.find((item) => item.title === pureMotion);
+  const clearName = currentMotion?.replace(/(Motion)/g, "$1 ");
+  const findBgImage = motionsLib.find((item) => item.title === clearName);
 
   return (
     <MotionContext.Provider
       value={{
-        motion: pureMotion,
+        motion: clearName,
         backgroundImage: findBgImage?.img,
       }}
     >

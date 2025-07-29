@@ -1,12 +1,13 @@
-import MotionContainer from "@/motion/motion-container";
-import { FC, useEffect, useRef } from "react";
 import GridBg from "./grid-bg";
 import { cn } from "@/lib/utils";
+import { FC, useEffect, useRef } from "react";
+import MotionContainer from "@/motion/motion-container";
+import { MainPageBackgroundProps } from "@/interfaces/@types-components";
 
-export const MainPageBackground: FC<{
-  selectedItemID: number | undefined;
-  className?: string;
-}> = ({ selectedItemID, className }) => {
+export const MainPageBackground: FC<MainPageBackgroundProps> = ({
+  selectedItemID,
+  className,
+}) => {
   const video = useRef<HTMLVideoElement | null>(null);
 
   useEffect(() => {

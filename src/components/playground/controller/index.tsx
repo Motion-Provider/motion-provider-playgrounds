@@ -1,11 +1,6 @@
 import { Dock } from "@/components/dock";
 import { Button } from "@/components/ui/button";
 import {
-  DockItem,
-  PlaygroundControllerLayoutProps,
-  SchemaProps,
-} from "@/interfaces";
-import {
   Boxes,
   Dice6,
   Pause,
@@ -16,6 +11,8 @@ import {
 } from "lucide-react";
 import { FC } from "react";
 import { SchemaLayout } from "./schema-layout";
+import { PlaygroundControllerLayoutProps } from "@/interfaces/@types-layout";
+import { DockItem, SchemaProps } from "@/interfaces/@types-components";
 
 const ControllerLayout: FC<
   PlaygroundControllerLayoutProps & { schema: SchemaProps }
