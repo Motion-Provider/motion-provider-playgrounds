@@ -1,5 +1,5 @@
-﻿import data from "@/components/info-box/data";
-import { InfoBoxLayoutProps } from "@/interfaces";
+﻿import { InfoBoxLayoutProps } from "@/interfaces/@types-layout";
+import data from "@/lib/data";
 import { interFont } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
 import { setCurrentMotion } from "@/redux/slices/metadata";

@@ -1,7 +1,7 @@
-import { PlaygroundMiniViewerProps } from "@/interfaces";
 import { FC } from "react";
 import MotionContainer from "@/motion/motion-container";
 import { cn } from "@/lib/utils";
+import { PlaygroundMiniViewerProps } from "@/interfaces/@types-components";
 
 export const MiniViewer: FC<PlaygroundMiniViewerProps> = ({
   animationMode,

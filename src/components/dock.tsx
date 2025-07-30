@@ -1,4 +1,4 @@
-import { DockItem, DockProps } from "@/interfaces";
+import { DockItem, DockProps } from "@/interfaces/@types-components";
 import { cn } from "@/lib/utils";
 import {
   AnimatePresence,

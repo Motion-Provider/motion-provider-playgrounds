@@ -1,7 +1,7 @@
-import { ImageLayoutProps } from "@/interfaces";
 import MotionImage from "@/motion/motion-image";
 import { FC } from "react";
 import { MotionImageProps } from "@/motion/types";
+import { ImageLayoutProps } from "@/interfaces/@types-layout";
 
 export const Image: FC<
   ImageLayoutProps & {

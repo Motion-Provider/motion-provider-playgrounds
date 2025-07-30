@@ -1,12 +1,12 @@
-import {
-  PlaygroundConfigurationProps,
-  PlaygroundPlayerProps,
-} from "@/interfaces";
 import { Controller } from "./controller";
 import { Viewer } from "./viewer";
 import { FC } from "react";
 import { interFont } from "@/lib/fonts";
 import { Configuration } from "./configuration";
+import {
+  PlaygroundConfigurationProps,
+  PlaygroundPlayerProps,
+} from "@/interfaces/@types-components";
 
 const Player: FC<
   PlaygroundPlayerProps & Omit<PlaygroundConfigurationProps, "className">

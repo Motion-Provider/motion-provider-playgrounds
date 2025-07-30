@@ -1,4 +1,4 @@
-import { MotionCardItem } from "@/interfaces";
+import { MotionCardItem } from "@/interfaces/@types-components";
 
 export default [
   {
@@ -37,4 +37,4 @@ export default [
     desc: "Create single thread level or component level layout exit animations.",
     img: "/assets/motion-link.webp",
   },
-] satisfies MotionCardItem[];
+] as const satisfies MotionCardItem[];

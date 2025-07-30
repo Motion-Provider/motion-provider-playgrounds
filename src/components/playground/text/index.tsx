@@ -1,4 +1,4 @@
-import { MotionPlaygroundProps } from "@/interfaces";
+import { MotionPlaygroundProps } from "@/interfaces/@types-components";
 import { cn } from "@/lib/utils";
 import MotionText from "@/motion/motion-text";
 import { FC } from "react";

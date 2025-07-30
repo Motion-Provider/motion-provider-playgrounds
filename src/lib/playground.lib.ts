@@ -1,4 +1,4 @@
-﻿import { InfoboxHintLibProps } from "@/interfaces";
+﻿import { InfoboxHintLibProps } from "@/interfaces/@types-lib";
 
 export default [
   "Use controllers below inside the nav to control the circle. Each Motion Provider component leverages controlling mechanism from the power of 'useAnimationControl' hook.",
@@ -8,4 +8,4 @@ export default [
   "You can literally configure your dream animation in seconds using the configuration below.",
   "Preview the animation you might feel comfortable with by hovering before you select it inside configuration.",
   "Use 'TAB' to make lightning—fast switch between the tools. You can control everything on this page by just pressing 'TAB'.",
-] satisfies InfoboxHintLibProps;
+] as const satisfies InfoboxHintLibProps;

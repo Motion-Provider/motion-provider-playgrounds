@@ -12,9 +12,9 @@ import {
 } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { SchemaLayoutProps } from "@/interfaces";
 import { Settings } from "lucide-react";
 import { FC } from "react";
+import { SchemaLayoutProps } from "@/interfaces/@types-layout";
 
 export const SchemaLayout: FC<SchemaLayoutProps> = ({ onSettings, schema }) => {
   const { borderBlur, borderColor, circleCount } = schema;

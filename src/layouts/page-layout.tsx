@@ -1,4 +1,4 @@
-import { PageLayoutProps } from "@/interfaces";
+import { PageLayoutProps } from "@/interfaces/@types-layout";
 import { interFont } from "@/lib/fonts";
 import { FC } from "react";
 

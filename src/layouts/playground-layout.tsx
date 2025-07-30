@@ -1,6 +1,6 @@
 import GridBg from "@/components/backgrounds/grid-bg";
 import InfoBox from "@/components/info-box";
-import { PlaygroundLayoutProps } from "@/interfaces";
+import { PlaygroundLayoutProps } from "@/interfaces/@types-layout";
 import { interFont } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
 import { FC } from "react";

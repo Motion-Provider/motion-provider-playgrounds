@@ -2,7 +2,7 @@ import { FC, useEffect, useRef, useState } from "react";
 import { Button } from "../ui/button";
 import { Check, Copy } from "lucide-react";
 import MotionContainer from "@/motion/motion-container";
-import { CopyCodeButtonProps } from "@/interfaces";
+import { CopyCodeButtonProps } from "@/interfaces/@types-components";
 
 export const CopyCode: FC<CopyCodeButtonProps> = ({
   className,

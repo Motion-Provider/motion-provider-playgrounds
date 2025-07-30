@@ -1,4 +1,5 @@
-﻿import { ReduxLibMotionChainProps, ReduxMetadataProps } from "@/interfaces";
+﻿import { ReduxLibMotionChainProps } from "@/interfaces/@types-lib";
+import { ReduxMetadataProps } from "@/interfaces/@types-redux";
 
 const ReduxLibMotionChainInitialState: ReduxLibMotionChainProps = {
   animation: {

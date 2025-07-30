@@ -1,3 +1,5 @@
+import { FC } from "react";
+import { cn } from "@/lib/utils";
 import {
   Card,
   CardContent,
@@ -5,19 +7,16 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import {
-  MultiSelectProps,
-  PlayerControllerProps,
-  PlaygroundPlayerProps,
-} from "@/interfaces";
-import { cn } from "@/lib/utils";
-import MotionContainer from "@/motion/motion-container";
-import { FC } from "react";
 import { MultiSelect } from "../multi-select";
 import { AnimationKeys } from "@/motion/types";
 import animations from "@/motion/lib/animate.lib";
 import { SelectedMotion } from "./selected-motion";
 import { Separator } from "@/components/ui/separator";
+import MotionContainer from "@/motion/motion-container";
+import {
+  MultiSelectProps,
+  PlayerControllerProps,
+} from "@/interfaces/@types-components";
 
 export const Controller: FC<PlayerControllerProps> = ({
   animation,

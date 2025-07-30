@@ -1,4 +1,3 @@
-import { MotionCardItemProps } from "@/interfaces";
 import MotionContainer from "@/motion/motion-container";
 import MotionImage from "@/motion/motion-image";
 import { FC, memo } from "react";
@@ -7,6 +6,7 @@ import { MotionControllerProps } from "@/motion/types";
 import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import MotionLink from "@/motion/motion-link";
+import { MotionCardItemProps } from "@/interfaces/@types-components";
 
 export const CardItem: FC<MotionCardItemProps> = memo((props) => {
   const { title, desc, img, isHovered, onClick } = props;

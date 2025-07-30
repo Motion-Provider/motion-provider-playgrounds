@@ -1,12 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-import { PlaygroundSelectedMotionProps } from "@/interfaces";
 import MotionChain from "@/motion/motion-chain";
 import { AnimationKeys, MotionAnimationProps } from "@/motion/types";
 import { FC, useCallback } from "react";
 import { MotionChainProps } from "@/motion/types";
 import { cn } from "@/lib/utils";
 import { Ban, Trash } from "lucide-react";
+import { PlaygroundSelectedMotionProps } from "@/interfaces/@types-components";
 
 export const SelectedMotion: FC<PlaygroundSelectedMotionProps> = ({
   onSelected,

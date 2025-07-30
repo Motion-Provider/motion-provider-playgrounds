@@ -4,10 +4,10 @@ import {
   DialogFooter,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { PlaygroundConfigProps } from "@/interfaces";
 import { FC } from "react";
 import Player from "../../player";
 import MotionText from "@/motion/motion-text";
+import { PlaygroundConfigProps } from "@/interfaces/@types-components";
 
 const PlaygroundConfig: FC<PlaygroundConfigProps> = ({
   animation,

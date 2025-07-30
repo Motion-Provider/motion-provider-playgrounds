@@ -1,4 +1,4 @@
-﻿import { InfoboxHintLibProps } from "@/interfaces";
+﻿import { InfoboxHintLibProps } from "@/interfaces/@types-lib";
 
 export default [
   "Welcome to Motion Chain Playground 🚀, here you will get useful insights about Motion Chain and of course the playground.",
@@ -10,4 +10,4 @@ export default [
   "Motion Chain provides a set of useful props to control and centralize the animation process. You can check out the 'Learn' tab for more details.",
   "Comes with 16 predefined delay algorithms (linear,exponential,sinusoidal..+13)",
   "Automatic child-animation matching: MP always will match the queued animation config with the closest child component in the given array and eventually animate it in sequence.",
-] satisfies InfoboxHintLibProps;
+] as const satisfies InfoboxHintLibProps;

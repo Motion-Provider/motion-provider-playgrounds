@@ -8,13 +8,13 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { PlayerViewerProps } from "@/interfaces";
 import { cn } from "@/lib/utils";
 import MotionContainer from "@/motion/motion-container";
 import { RefreshCcw } from "lucide-react";
 import { FC, useState } from "react";
 import { CopyCode } from "../copy-code";
 import { useCopyToClipboard } from "@uidotdev/usehooks";
+import { PlayerViewerProps } from "@/interfaces/@types-components";
 
 export const Viewer: FC<PlayerViewerProps> = ({
   animation,

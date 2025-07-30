@@ -7,7 +7,7 @@ import {
   SelectTrigger,
 } from "@/components/ui/select";
 import { Slider } from "@/components/ui/slider";
-import { PlaygroundConfigurationProps } from "@/interfaces";
+import { PlaygroundConfigurationProps } from "@/interfaces/@types-components";
 import { delayItems, transitionItems } from "@/lib/motion-types.lib";
 import { cn } from "@/lib/utils";
 import { TransitionKeys } from "@/motion/types";

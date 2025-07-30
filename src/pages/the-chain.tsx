@@ -1,9 +1,3 @@
-import {
-  MotionCircleStateProps,
-  PlayerControllerProps,
-  ReduxLibMotionChainProps,
-  SchemaProps,
-} from "@/interfaces";
 import React, { useState } from "react";
 import Head from "next/head";
 import { Circle } from "@/components/playground/circle";
@@ -19,6 +13,12 @@ import getRandomAnimation from "@/utils/getRandomAnimation";
 import { ReduxLibMotionChainInitialState } from "@/lib/redux.lib";
 import { useDispatch } from "react-redux";
 import { setDelayLogic, setMotion } from "@/redux/slices/motion";
+import {
+  MotionCircleStateProps,
+  PlayerControllerProps,
+  SchemaProps,
+} from "@/interfaces/@types-components";
+import { ReduxLibMotionChainProps } from "@/interfaces/@types-lib";
 
 export default function TheChain() {
   const { control, onReverse, onStop, reset } = useAnimationControl();

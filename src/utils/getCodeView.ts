@@ -1,4 +1,5 @@
-﻿import { GetCodeViewProps, Motions, ReduxMetadataProps } from "@/interfaces";
+﻿import { ReduxMetadataProps } from "@/interfaces/@types-redux";
+import { GetCodeViewProps } from "@/interfaces/@types-utils";
 
 export default function getCodeView({
   id,

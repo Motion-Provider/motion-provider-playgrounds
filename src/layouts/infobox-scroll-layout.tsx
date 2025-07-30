@@ -1,5 +1,5 @@
 ﻿import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-import { InfoBoxLayoutProps } from "@/interfaces";
+import { InfoBoxLayoutProps } from "@/interfaces/@types-layout";
 import { cn } from "@/lib/utils";
 
 export default function InfoBoxScrollLayout({
