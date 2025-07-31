@@ -14,15 +14,22 @@ export const Background: FC<HomepageBgProps> = ({
     if (selectedItemID != null && video.current) {
       const v = video.current;
       if (v.src.includes(`${selectedItemID}.mp4`)) return;
-      v.pause();
 
+      v.pause();
       v.src = `/assets/videos/${selectedItemID}.mp4`;
       v.load();
-      v.play();
+
+      v.play()?.catch((err) => {
+        if (err.name !== "AbortError") {
+          console.error("Video play weirdly failed:", err);
+        }
+      });
     }
 
     return () => {
-      if (video.current) video.current.pause();
+      if (video.current && video.current.src) {
+        video.current.pause();
+      }
     };
   }, [selectedItemID]);
 
