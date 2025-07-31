@@ -1,5 +1,3 @@
-import { Dock } from "@/components/dock";
-import { Button } from "@/components/ui/button";
 import {
   Boxes,
   Dice6,
@@ -10,11 +8,13 @@ import {
   SkipForward,
 } from "lucide-react";
 import { FC } from "react";
-import { SchemaLayout } from "./schema-layout";
-import { PlaygroundControllerLayoutProps } from "@/interfaces/@types-layout";
+import { Dock } from "@/components/dock";
+import { Button } from "@/components/ui/button";
 import { DockItem, SchemaProps } from "@/interfaces/@types-components";
+import { PlaygroundControllerLayoutProps } from "@/interfaces/@types-layout";
+import { PlaygroundSettings } from "../settings";
 
-const ControllerLayout: FC<
+const PlaygroundController: FC<
   PlaygroundControllerLayoutProps & { schema: SchemaProps }
 > = ({
   control,
@@ -77,7 +77,7 @@ const ControllerLayout: FC<
       text: "Roll a Dice",
     },
     {
-      children: <SchemaLayout onSettings={onSettings} schema={schema} />,
+      children: <PlaygroundSettings onSettings={onSettings} schema={schema} />,
       text: "Settings",
     },
     {
@@ -109,4 +109,4 @@ const ControllerLayout: FC<
   );
 };
 
-export default ControllerLayout;
+export default PlaygroundController;

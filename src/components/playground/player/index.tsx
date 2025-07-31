@@ -1,8 +1,8 @@
-import { Controller } from "./controller";
-import { Viewer } from "./viewer";
+import { PlayerController } from "./controller";
+import { PlayerViewer } from "./viewer";
 import { FC } from "react";
 import { interFont } from "@/lib/fonts";
-import { Configuration } from "./configuration";
+import { PlayerConfiguration } from "./configuration";
 import {
   PlaygroundConfigurationProps,
   PlaygroundPlayerProps,
@@ -16,18 +16,18 @@ const Player: FC<
       className={`w-full ${interFont.className} max-h-[500px] rounded-2xl p-6 bg-transparent`}
     >
       <div className="size-full flex flex-row gap-2">
-        <Controller
+        <PlayerController
           animation={animation}
           onAnimationChange={onAnimationChange}
           className="w-2/5 h-full"
         />
         <div className="w-3/5 h-full flex flex-col gap-2">
-          <Viewer
+          <PlayerViewer
             animation={animation}
             className="h-2/3 w-full"
             delayLogic={delayLogic}
           />
-          <Configuration
+          <PlayerConfiguration
             animation={animation}
             delayLogic={delayLogic}
             onAnimationChange={onAnimationChange}

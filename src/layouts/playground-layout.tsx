@@ -1,9 +1,9 @@
-import GridBg from "@/components/backgrounds/grid-bg";
-import InfoBox from "@/components/info-box";
-import { PlaygroundLayoutProps } from "@/interfaces/@types-layout";
-import { interFont } from "@/lib/fonts";
-import { cn } from "@/lib/utils";
 import { FC } from "react";
+import { cn } from "@/lib/utils";
+import { interFont } from "@/lib/fonts";
+import GridBg from "@/components/grid-bg";
+import InfoBox from "@/components/infobox";
+import { PlaygroundLayoutProps } from "@/interfaces/@types-layout";
 
 const PlaygroundLayout: FC<PlaygroundLayoutProps> = ({
   children,
@@ -17,7 +17,7 @@ const PlaygroundLayout: FC<PlaygroundLayoutProps> = ({
     )}
   >
     {children}
-    <GridBg className={"absolute top-0 left-0 w-full h-full"} />
+    <GridBg className="absolute top-0 left-0 w-full h-full" />
     <InfoBox />
   </main>
 );

@@ -1,19 +1,19 @@
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
+import { FC } from "react";
+import { cn } from "@/lib/utils";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
 } from "@/components/ui/select";
-import { Slider } from "@/components/ui/slider";
-import { PlaygroundConfigurationProps } from "@/interfaces/@types-components";
-import { delayItems, transitionItems } from "@/lib/motion-types.lib";
-import { cn } from "@/lib/utils";
+import { Badge } from "@/components/ui/badge";
 import { TransitionKeys } from "@/motion/types";
-import { FC } from "react";
+import { Slider } from "@/components/ui/slider";
+import { Card, CardContent } from "@/components/ui/card";
+import { PlaygroundConfigurationProps } from "@/interfaces/@types-components";
+import { delayItems, transitionItems } from "@/constants/motion-types.lib";
 
-export const Configuration: FC<PlaygroundConfigurationProps> = ({
+export const PlayerConfiguration: FC<PlaygroundConfigurationProps> = ({
   delayLogic,
   animation,
   onAnimationChange,

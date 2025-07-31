@@ -12,11 +12,11 @@ import { cn } from "@/lib/utils";
 import MotionContainer from "@/motion/motion-container";
 import { RefreshCcw } from "lucide-react";
 import { FC, useState } from "react";
-import { CopyCode } from "../copy-code";
+import { CopyCode } from "../../copy-code";
 import { useCopyToClipboard } from "@uidotdev/usehooks";
 import { PlayerViewerProps } from "@/interfaces/@types-components";
 
-export const Viewer: FC<PlayerViewerProps> = ({
+export const PlayerViewer: FC<PlayerViewerProps> = ({
   animation,
   className,
   delayLogic,
@@ -29,6 +29,7 @@ export const Viewer: FC<PlayerViewerProps> = ({
     ...animation,
     delayLogic,
   };
+
   return (
     <Card
       className={cn("dark relative bg-transparent overflow-hidden ", className)}
@@ -62,12 +63,9 @@ export const Viewer: FC<PlayerViewerProps> = ({
           className="size-28 rounded-2xl bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500"
         />
       </CardContent>
-      <CardFooter className="justify-between  flex w-full gap-2 ">
-        <Badge variant="outline">
-          <pre>{"<MotionContainer />"}</pre>
-        </Badge>
+      <CardFooter className="justify-end  flex w-full ">
         <div className="flex ">
-          <Button variant={"ghost"} onClick={handleRestartAnimation}>
+          <Button variant="ghost" onClick={handleRestartAnimation}>
             <MotionContainer
               animation={{
                 mode: ["spin"],

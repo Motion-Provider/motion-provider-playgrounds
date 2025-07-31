@@ -1,4 +1,4 @@
-﻿import { ReduxLibMetadataInitialState } from "@/lib/redux.lib";
+﻿import { ReduxLibMetadataInitialState } from "@/constants/redux/redux-motion-defaults.lib";
 import { createSlice } from "@reduxjs/toolkit";
 
 const metadataSlice = createSlice({

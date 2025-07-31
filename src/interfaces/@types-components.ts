@@ -16,7 +16,7 @@ export interface GridBackgroundProps {
   className?: string;
 }
 
-export interface MainPageBackgroundProps {
+export interface HomepageBgProps {
   selectedItemID: number | undefined;
   className?: string;
 }
@@ -28,7 +28,7 @@ export interface MotionCircleAnimationProps {
   duration: MotionAnimationProps["duration"];
 }
 
-export interface MotionCircleLayoutProps
+export interface MotionCircleProps
   extends Pick<MotionChainProps, "controller"> {
   animation: MotionCircleAnimationProps;
   delayLogic?: MotionChainProps["config"]["delayLogic"];
@@ -55,7 +55,6 @@ export interface PlayerViewerProps {
 export interface PlaygroundConfigProps
   extends PlaygroundPlayerProps,
     Omit<PlaygroundConfigurationProps, "className"> {
-  controller: MotionControllerProps;
   animation: MotionAnimationProps;
   isModalOpen: boolean;
   setIsMobileOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -70,8 +69,8 @@ export interface PlaygroundConfigurationProps {
 }
 
 export interface MotionPlaygroundProps
-  extends Pick<MotionCircleLayoutProps, "controller">,
-    Omit<MotionCircleLayoutProps, "style"> {
+  extends Pick<MotionCircleProps, "controller">,
+    Omit<MotionCircleProps, "style"> {
   children: React.ReactNode;
 }
 
@@ -148,19 +147,22 @@ export interface CardWrapperProps {
   onHover: (id?: number) => void;
   children: React.ReactNode;
 }
+
 /** Infobox Props */
 
 export interface SyntaxViewerProps {
   className?: string;
   currentMotion: Pick<MotionChainProps, "config" | "animations">;
 }
-
 export interface HintItemProps {
   text: string;
   motion?: string;
   backgroundImage?: string;
 }
-
+export interface InfoboxRouteItem {
+  name: string;
+  Component: React.ComponentType;
+}
 /** Pure component props */
 
 export interface CopyCodeButtonProps {
@@ -168,16 +170,25 @@ export interface CopyCodeButtonProps {
   onClick: () => void;
   variant?: VariantProps<typeof buttonVariants>["variant"];
 }
-
 export interface Option {
   label: string;
   value: string;
+}
+export interface SquareBackgroundPatternProps {
+  width?: number;
+  height?: number;
+  squareSize?: number;
+  gap?: number;
+  color?: string;
+  backgroundColor?: string;
+  patternId?: string;
+  className?: string;
 }
 
 /***** types *****/
 
 export type MotionCircleStateProps = Omit<
-  MotionCircleLayoutProps,
+  MotionCircleProps,
   "controller" | "style"
 >;
 export type PlaygroundPlayerProps = Omit<

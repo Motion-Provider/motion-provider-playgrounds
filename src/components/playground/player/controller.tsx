@@ -7,7 +7,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { MultiSelect } from "../multi-select";
 import { AnimationKeys } from "@/motion/types";
 import animations from "@/motion/lib/animate.lib";
 import { SelectedMotion } from "./selected-motion";
@@ -17,8 +16,9 @@ import {
   MultiSelectProps,
   PlayerControllerProps,
 } from "@/interfaces/@types-components";
+import { MultiSelect } from "./multi-select";
 
-export const Controller: FC<PlayerControllerProps> = ({
+export const PlayerController: FC<PlayerControllerProps> = ({
   animation,
   onAnimationChange,
   className,
