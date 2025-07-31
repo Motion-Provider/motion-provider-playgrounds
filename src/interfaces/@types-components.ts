@@ -157,7 +157,6 @@ export interface SyntaxViewerProps {
 export interface HintItemProps {
   text: string;
   motion?: string;
-  backgroundImage?: string;
 }
 export interface InfoboxRouteItem {
   name: string;

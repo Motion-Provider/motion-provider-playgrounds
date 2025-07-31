@@ -10,5 +10,8 @@
     const j = Math.floor(Math.random() * (i + 1));
     [array[i], array[j]] = [array[j], array[i]];
   }
-  return isFirstElementFixed ? [firstElement, ...array] : array;
+
+  return isFirstElementFixed
+    ? [firstElement, ...array.filter((val) => val !== firstElement)]
+    : array;
 }

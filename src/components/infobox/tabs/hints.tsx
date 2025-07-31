@@ -1,5 +1,11 @@
-﻿import { ReduxRootState } from "@/redux";
-import { Card, CardDescription, CardHeader } from "@/components/ui/card";
+﻿import {
+  FC,
+  useRef,
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+} from "react";
 import {
   Carousel,
   CarouselApi,
@@ -8,45 +14,35 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import {
-  FC,
-  useRef,
-  createContext,
-  useContext,
-  useState,
-  useEffect,
-} from "react";
+import { ReduxRootState } from "@/redux";
 import { useSelector } from "react-redux";
-import Autoplay from "embla-carousel-autoplay";
-import MotionContainer from "@/motion/motion-container";
-import { CheckCheck, Quote } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import MotionText from "@/motion/motion-text";
+import Autoplay from "embla-carousel-autoplay";
+import { CheckCheck, Quote } from "lucide-react";
 import shuffleArrays from "@/utils/shuffleArrays";
-import playgroundLib from "@/constants/infobox/hints/shared.lib";
-import { HintItemProps } from "@/interfaces/@types-components";
-import motionCardsLib from "@/constants/motion-cards.lib";
+import MotionContainer from "@/motion/motion-container";
 import chainLib from "@/constants/infobox/hints/chain.lib";
+import sharedLib from "@/constants/infobox/hints/shared.lib";
+import { HintItemProps } from "@/interfaces/@types-components";
+import { Card, CardDescription, CardHeader } from "@/components/ui/card";
 
 const MotionContext = createContext<Omit<HintItemProps, "text">>({
   motion: undefined,
-  backgroundImage: undefined,
 });
 
-const hints = shuffleArrays(chainLib, playgroundLib, true) as string[];
+const hints = shuffleArrays(chainLib, sharedLib, true) as string[];
 
 const Hints = () => {
   const { currentMotion } = useSelector(
     (state: ReduxRootState) => state.metadata
   );
   const clearName = currentMotion?.replace(/(Motion)/g, "$1 ");
-  const findBgImage = motionCardsLib.find((item) => item.title === clearName);
 
   return (
     <MotionContext.Provider
       value={{
         motion: clearName,
-        backgroundImage: findBgImage?.img,
       }}
     >
       <CarouselOrientation />
