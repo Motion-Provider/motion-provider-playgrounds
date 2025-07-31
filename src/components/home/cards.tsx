@@ -1,17 +1,18 @@
 import { FC, memo } from "react";
 import { cn } from "@/lib/utils";
-import CardWrapper from "./card-wrapper";
-import MotionChain from "@/motion/motion-chain";
+import { Badge } from "../ui/badge";
+import { Button } from "../ui/button";
 import {
   HomeCardsProps,
   MotionCardItemProps,
 } from "@/interfaces/@types-components";
-import { MotionControllerProps } from "@/motion/types";
-import MotionImage from "@/motion/motion-image";
-import MotionContainer from "@/motion/motion-container";
-import { Button } from "../ui/button";
-import MotionLink from "@/motion/motion-link";
+import CardWrapper from "./card-wrapper";
 import { ArrowRight } from "lucide-react";
+import MotionLink from "@/motion/motion-link";
+import MotionImage from "@/motion/motion-image";
+import MotionChain from "@/motion/motion-chain";
+import { MotionControllerProps } from "@/motion/types";
+import MotionContainer from "@/motion/motion-container";
 
 const Cards: FC<HomeCardsProps> = ({
   items,
@@ -78,6 +79,14 @@ const CardItem: FC<MotionCardItemProps> = memo((props) => {
 
   return (
     <div className="h-full text-center items-center flex justify-center relative overflow-hidden group ">
+      {title === "Motion Chain" && (
+        <Badge
+          variant={"outline"}
+          className="z-50 top-4 right-4 absolute font-bold"
+        >
+          HOT 🔥
+        </Badge>
+      )}
       <MotionImage
         animation={{
           mode: ["filterBlurIn"],
@@ -120,7 +129,7 @@ const CardItem: FC<MotionCardItemProps> = memo((props) => {
         </div>
         <Button
           variant={isHovered ? "default" : "outline"}
-          className="mb-4 w-full shrink-0 z-50 border-none scale-90 text-xs"
+          className="mb-4 w-full shrink-0 z-50 border-none text-xs relative"
         >
           <MotionLink
             onReverse={() => onClick()}
