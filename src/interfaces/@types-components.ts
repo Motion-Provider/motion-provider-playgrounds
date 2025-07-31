@@ -105,8 +105,6 @@ export interface DockProps {
   className?: string;
 }
 
-/** Schema */
-
 export interface SchemaProps {
   borderColor: BorderColors;
   borderBlur: BorderBlur;

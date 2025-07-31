@@ -46,6 +46,8 @@ function IconContainer({
 }: {
   mouseX: MotionValue;
 } & DockItem) {
+  if (typeof children === "undefined") return;
+
   let ref = useRef<HTMLDivElement>(null);
 
   let distance = useTransform(mouseX, (val) => {

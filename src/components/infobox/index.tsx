@@ -4,7 +4,8 @@ import InfoBoxPortal from "./portal";
 import { InfoboxRouteItem } from "@/interfaces/@types-components";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
 
-const routes = ["hints", "syntax", "learn"];
+const routes = ["hints", "syntax"];
+
 const components = routes.map((item) => ({
   name: item,
   Component: dynamic(() => import(`./tabs/${item}`)),

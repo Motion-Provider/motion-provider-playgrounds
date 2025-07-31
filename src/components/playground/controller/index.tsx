@@ -13,6 +13,8 @@ import { Button } from "@/components/ui/button";
 import { DockItem, SchemaProps } from "@/interfaces/@types-components";
 import { PlaygroundControllerLayoutProps } from "@/interfaces/@types-layout";
 import { PlaygroundSettings } from "../settings";
+import { useSelector } from "react-redux";
+import { ReduxRootState } from "@/redux";
 
 const PlaygroundController: FC<
   PlaygroundControllerLayoutProps & { schema: SchemaProps }
@@ -26,6 +28,10 @@ const PlaygroundController: FC<
   onModalOpen,
   onSettings,
 }) => {
+  const currentAnimation = useSelector(
+    (state: ReduxRootState) => state.metadata.currentMotion
+  );
+
   const handlePlayStop = () => {
     if (!control.isAnimationStopped) {
       onAnimate();
@@ -71,7 +77,7 @@ const PlaygroundController: FC<
           onClick={onRandomAnimate}
           className=" cursor-pointer"
         >
-          <Dice6 className="size-5 " />
+          <Dice6 className="size-5" />
         </Button>
       ),
       text: "Roll a Dice",

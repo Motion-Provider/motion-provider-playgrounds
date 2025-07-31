@@ -152,8 +152,8 @@ export const PlaygroundSettings: FC<SchemaLayoutProps> = ({
               </Select>
             </div>
             <p className="text-muted-foreground text-xs pt-2">
-              *Complexity is standing for the next random animation's array
-              size.
+              *Complexity is standing for the next random{"(dice)"} animation's
+              array size.
             </p>
           </div>
         </div>
