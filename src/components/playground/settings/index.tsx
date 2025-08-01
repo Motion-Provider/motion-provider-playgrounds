@@ -96,43 +96,6 @@ export const PlaygroundSettings: FC<SchemaLayoutProps> = ({
                 className="h-8 w-3/5"
               />
             </div>
-            {/** Image controllers will move to a separate component */}
-            {/* <div className="flex flex-row justify-between gap-4 ">
-              <Label htmlFor="imageLink">Image Link</Label>
-              <Input
-                id="imageLink"
-                defaultValue={img}
-                type="text"
-                onChange={(e) => onSettings("img", e.target.value)}
-                placeholder="https://example.com/image.jpg"
-                className="h-8 w-3/5"
-              />
-            </div>
-            <div className="flex flex-row justify-between gap-4 ">
-              <Label htmlFor="borderColor">Image Trigger</Label>
-              <Select
-                onValueChange={(e) => onSettings("imgMode", e)}
-                defaultValue={imgMode}
-              >
-                <SelectTrigger className="w-3/5" id="borderColor">
-                  <SelectValue placeholder="Immediately" />
-                </SelectTrigger>
-                <SelectContent className="dark">
-                  <SelectItem value="undefined">
-                    <RefreshCw className="size-4" />
-                    Immediately
-                  </SelectItem>
-                  <SelectItem value="hover">
-                    <SquareDashedMousePointer className="size-4" />
-                    On Hover
-                  </SelectItem>
-                  <SelectItem value="click">
-                    <MousePointerClick className="size-4" />
-                    On Click
-                  </SelectItem>
-                </SelectContent>
-              </Select>
-            </div> */}
             <div className="flex flex-row justify-between gap-4 ">
               <Label htmlFor="borderBlur">Border Blur</Label>
               <Select
