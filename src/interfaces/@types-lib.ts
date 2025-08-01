@@ -2,7 +2,7 @@
 
 /** interfaces */
 
-export interface ReduxLibMotionChainProps {
+export interface ReduxLibMotionProps {
   animation: MotionContainerProps["animation"];
   delayLogic: MotionChainProps["config"]["delayLogic"];
 }

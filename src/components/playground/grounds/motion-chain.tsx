@@ -7,13 +7,12 @@ import { MotionCircleProps } from "@/interfaces/@types-components";
 const Chain: FC<MotionCircleProps> = ({
   animation,
   controller,
-  style,
   delayLogic,
 }) => {
-  const { circleCount } = style;
+  // const { circleCount } = style;
 
-  const count = useDebounce(circleCount, 500);
-  const circles = Array.from({ length: count }).map((_, i) => 184 + i * 32);
+  // const count = useDebounce(circleCount, 500);
+  const circles = Array.from({ length: 30 }).map((_, i) => 184 + i * 32);
 
   return (
     <MotionChain
@@ -31,8 +30,7 @@ const Chain: FC<MotionCircleProps> = ({
         <div
           className={cn(
             "border rounded-full bg-transparent",
-            circles[idx] % 12 === 0 &&
-              `${style.borderColor} ${style.borderBlur}`
+            circles[idx] % 12 === 0 && `border-rose-500 blur-none`
           )}
           style={{
             height: `${circles[idx]}px`,

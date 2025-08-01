@@ -1,28 +1,11 @@
 ﻿import { MotionControllerProps, MotionImageProps } from "@/motion/types";
-import { MotionPlaygroundProps, SchemaProps } from "./@types-components";
+import { MotionPlaygroundProps } from "./@types-components";
 
 /** playground */
-
-export interface PlaygroundControllerLayoutProps {
-  onReverse: () => void;
-  onAnimate: () => void;
-  onRandomAnimate: () => void;
-  onReset: () => void;
-  onModalOpen: () => void;
-  onSettings: (key: keyof SchemaProps, value: string) => void;
-  control: Omit<MotionControllerProps, "configView" | "trigger">;
-}
 
 export interface PlaygroundLayoutProps {
   className?: string;
   children: React.ReactNode;
-}
-
-/** schema */
-
-export interface SchemaLayoutProps {
-  schema: SchemaProps;
-  onSettings: (key: keyof SchemaProps, value: string) => void;
 }
 
 /** infobox */

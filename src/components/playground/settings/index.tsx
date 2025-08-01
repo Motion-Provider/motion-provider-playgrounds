@@ -14,21 +14,16 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Settings } from "lucide-react";
-import { SchemaLayoutProps } from "@/interfaces/@types-layout";
 
-export const PlaygroundSettings: FC<SchemaLayoutProps> = ({
-  onSettings,
-  schema,
-}) => {
-  const { borderBlur, borderColor, circleCount } = schema;
-
+export const PlaygroundSettings = () => {
   return (
     <Popover modal>
       <PopoverTrigger className="cursor-pointer dark">
         <Settings className="size-5 " />
       </PopoverTrigger>
       <PopoverContent className="dark">
-        <div className="grid gap-4">
+        playground settings
+        {/* <div className="grid gap-4">
           <div className="space-y-2">
             <h4 className="leading-none">Settings</h4>
             <p className="text-muted-foreground text-sm">
@@ -119,7 +114,7 @@ export const PlaygroundSettings: FC<SchemaLayoutProps> = ({
               array size.
             </p>
           </div>
-        </div>
+        </div> */}
       </PopoverContent>
     </Popover>
   );

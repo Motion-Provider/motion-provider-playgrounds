@@ -93,7 +93,7 @@ const MotionMovie: FC<MotionMovieProps> = ({
 
   return useMemo(
     () => (
-      <div className={cn("overflow-hidden h-full w-full", wrapperClassName)}>
+      <div className={cn("overflow-hidden", wrapperClassName)}>
         <MotionImage
           animation={{
             ...animations,
@@ -104,7 +104,7 @@ const MotionMovie: FC<MotionMovieProps> = ({
             img: images[currImgIdx],
             duration,
           }}
-          className={cn(className)}
+          wrapperClassName={cn(className)}
           controller={controller}
         />
       </div>

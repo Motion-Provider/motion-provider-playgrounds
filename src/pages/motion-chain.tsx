@@ -1,6 +1,5 @@
 import Head from "next/head";
 import React, { useState } from "react";
-import motionChainSettingsLib from "@/constants/playground/motion-chain-settings.lib";
 import PlaygroundLayout from "@/layouts/playground-layout";
 import { useAnimation } from "@/motion/hooks/use-animation";
 import { useAnimationControl } from "@/motion/hooks/use-animation-control";
@@ -11,9 +10,8 @@ import { setDelayLogic, setMotion } from "@/redux/slices/motion";
 import {
   MotionCircleStateProps,
   PlayerControllerProps,
-  SchemaProps,
 } from "@/interfaces/@types-components";
-import { ReduxLibMotionChainProps } from "@/interfaces/@types-lib";
+import { ReduxLibMotionProps } from "@/interfaces/@types-lib";
 import { ReduxLibMotionChainInitialState } from "@/constants/redux/redux-motion-defaults.lib";
 import PlaygroundController from "@/components/playground/controller";
 import { GroundLabel } from "@/components/playground/ground-label";
@@ -26,16 +24,15 @@ export default function MotionChainPage() {
   const { control, onReverse, onStop, reset } = useAnimationControl();
   const { isAnimationStopped, reverse } = useAnimation(control);
 
-  const [settings, setSettings] = useState<SchemaProps>(motionChainSettingsLib);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [animation, setAnimation] = useState<ReduxLibMotionChainProps>({
-    ...(ReduxLibMotionChainInitialState as ReduxLibMotionChainProps),
+  const [animation, setAnimation] = useState<ReduxLibMotionProps>({
+    ...(ReduxLibMotionChainInitialState as ReduxLibMotionProps),
   });
 
   const handleRandomAnimation = () => {
     reset();
     setTimeout(() => {
-      const randomAnimations = getRandomAnimation(settings.complexity);
+      const randomAnimations = getRandomAnimation(1);
       dispatch(setMotion({ mode: randomAnimations }));
       setAnimation((prev) => ({
         ...prev,
@@ -44,12 +41,12 @@ export default function MotionChainPage() {
     }, 150);
   };
 
-  const handleSettings = (key: string, value: string) => {
-    setSettings((prev) => ({
-      ...prev,
-      [key]: value,
-    }));
-  };
+  // const handleSettings = (key: string, value: string) => {
+  //   setSettings((prev) => ({
+  //     ...prev,
+  //     [key]: value,
+  //   }));
+  // };
 
   const handleOpenModal = () => setIsModalOpen((prev) => !prev);
 
@@ -79,9 +76,6 @@ export default function MotionChainPage() {
       </Head>
       <Chain
         {...(animation as MotionCircleStateProps)}
-        style={{
-          ...settings,
-        }}
         delayLogic={animation.delayLogic!}
         controller={{
           configView: {
@@ -95,14 +89,12 @@ export default function MotionChainPage() {
       />
       <PlaygroundController
         onModalOpen={handleOpenModal}
-        schema={settings}
         control={{
           isAnimationStopped,
           reverse,
         }}
         onAnimate={onStop}
         onReset={reset}
-        onSettings={handleSettings}
         onRandomAnimate={handleRandomAnimation}
         onReverse={onReverse}
       />

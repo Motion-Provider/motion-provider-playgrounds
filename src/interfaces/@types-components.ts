@@ -32,7 +32,6 @@ export interface MotionCircleProps
   extends Pick<MotionChainProps, "controller"> {
   animation: MotionCircleAnimationProps;
   delayLogic?: MotionChainProps["config"]["delayLogic"];
-  style: Pick<SchemaProps, "circleCount" | "borderBlur" | "borderColor">;
 }
 
 export interface PlayerControllerProps {
@@ -58,6 +57,15 @@ export interface PlaygroundConfigProps
   animation: MotionAnimationProps;
   isModalOpen: boolean;
   setIsMobileOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export interface PlaygroundControllerProps {
+  onReverse: () => void;
+  onAnimate: () => void;
+  onRandomAnimate: () => void;
+  onReset: () => void;
+  onModalOpen: () => void;
+  control: Omit<MotionControllerProps, "configView" | "trigger">;
 }
 
 export interface PlaygroundConfigurationProps {
@@ -103,13 +111,6 @@ export interface DockItem {
 export interface DockProps {
   items: DockItem[];
   className?: string;
-}
-
-export interface SchemaProps {
-  borderColor: BorderColors;
-  borderBlur: BorderBlur;
-  circleCount: number;
-  complexity: number;
 }
 
 /** Landing page props */
@@ -192,14 +193,3 @@ export type PlaygroundPlayerProps = Omit<
   PlayerControllerProps & PlayerViewerProps,
   "className"
 >;
-export type BorderColors =
-  | "border-sky-500"
-  | "border-rose-500"
-  | "border-emerald-500"
-  | "border-purple-500";
-export type BorderBlur =
-  | "blur-sm"
-  | "blur-md"
-  | "blur-lg"
-  | "blur-xl"
-  | "blur-none";

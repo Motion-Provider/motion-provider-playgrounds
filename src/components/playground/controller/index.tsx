@@ -10,28 +10,18 @@ import {
 import { FC } from "react";
 import { Dock } from "@/components/dock";
 import { Button } from "@/components/ui/button";
-import { DockItem, SchemaProps } from "@/interfaces/@types-components";
-import { PlaygroundControllerLayoutProps } from "@/interfaces/@types-layout";
+import { DockItem } from "@/interfaces/@types-components";
+import { PlaygroundControllerProps } from "@/interfaces/@types-components";
 import { PlaygroundSettings } from "../settings";
-import { useSelector } from "react-redux";
-import { ReduxRootState } from "@/redux";
 
-const PlaygroundController: FC<
-  PlaygroundControllerLayoutProps & { schema: SchemaProps }
-> = ({
+const PlaygroundController: FC<PlaygroundControllerProps> = ({
   control,
-  schema,
   onAnimate,
   onRandomAnimate,
   onReverse,
   onReset,
   onModalOpen,
-  onSettings,
 }) => {
-  const currentAnimation = useSelector(
-    (state: ReduxRootState) => state.metadata.currentMotion
-  );
-
   const handlePlayStop = () => {
     if (!control.isAnimationStopped) {
       onAnimate();
@@ -83,7 +73,7 @@ const PlaygroundController: FC<
       text: "Roll a Dice",
     },
     {
-      children: <PlaygroundSettings onSettings={onSettings} schema={schema} />,
+      children: <PlaygroundSettings />,
       text: "Settings",
     },
     {

@@ -1,7 +1,7 @@
-﻿import { ReduxLibMotionChainProps } from "@/interfaces/@types-lib";
+﻿import { ReduxLibMotionProps } from "@/interfaces/@types-lib";
 import { ReduxMetadataProps } from "@/interfaces/@types-redux";
 
-const ReduxLibMotionChainInitialState: ReduxLibMotionChainProps = {
+const ReduxLibMotionChainInitialState: ReduxLibMotionProps = {
   animation: {
     mode: ["scaleZoomIn", "fadeIn"],
     transition: "cubicBounce",
