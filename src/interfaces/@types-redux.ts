@@ -2,43 +2,56 @@
 
 import { MotionImageConfigProps, SplittedTextModes } from "@/motion/types";
 
-interface ReduxChainSettingsProps {
+export interface ReduxChainSettingsProps {
   complexity: Complexity;
   borderColor: BorderColors;
   borderBlur: BorderBlur;
   circleCount: number;
 }
 
-interface ReduxTextSettingsProps {
+export interface ReduxTextSettingsProps {
   fontSize: number;
   fontFamily: string;
   mode: SplittedTextModes;
   space: number;
 }
-
-interface ReduxImageSettingsProps {
+export interface ReduxLinkSettingsProps {
+  href: string;
+  timer: number;
+}
+export interface ReduxImageSettingsProps {
   img: string;
   fn: MotionImageConfigProps["fn"];
   pieces: MotionImageConfigProps["pieces"];
 }
 
-interface ReduxContainerSettingsProps {
+export interface ReduxContainerSettingsProps {
   backgroundColor: BackgroundColors;
 }
-interface ReduxMovieSettingsProps extends Omit<ReduxImageSettingsProps, "img"> {
+export interface ReduxMovieSettingsProps
+  extends Omit<ReduxImageSettingsProps, "img"> {
   images: string[];
 }
 
 export interface ReduxMetadataProps {
   currentMotion: Motions | undefined;
+  settings: SettingsByProvider;
 }
 
 export interface ReduxProviderProps {
   children: React.ReactNode;
 }
 
-export interface ReduxControllerProps {}
+// export interface ReduxControllerProps {}
 
+export type SettingsByProvider = {
+  MotionContainer: ReduxContainerSettingsProps;
+  MotionChain: ReduxChainSettingsProps;
+  MotionText: ReduxTextSettingsProps;
+  MotionLink: ReduxLinkSettingsProps;
+  MotionImage: ReduxImageSettingsProps;
+  MotionMovie: ReduxMovieSettingsProps;
+};
 /** types */
 
 export type Complexity = number;
