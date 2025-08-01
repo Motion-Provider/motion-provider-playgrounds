@@ -36,6 +36,7 @@ const ReduxLibMotionsInitialState: SettingsByProvider = {
     fn: undefined,
     images: ["/assets/motion-movie.webp", "/assets/motion-container.webp"],
     pieces: 81,
+    animationDuration: 5,
   },
   MotionText: {
     fontFamily: "serif",

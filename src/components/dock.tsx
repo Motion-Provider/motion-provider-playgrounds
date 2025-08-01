@@ -9,7 +9,8 @@ import {
   useTransform,
 } from "motion/react";
 
-import { FC, useRef, useState } from "react";
+import { Children, FC, useRef, useState } from "react";
+import PlaygroundSettings from "./playground/settings";
 
 export const Dock: FC<DockProps> = ({ items, className }) => {
   return <FloatingDockDesktop items={items} className={className} />;
@@ -23,6 +24,7 @@ const FloatingDockDesktop = ({
   className?: string;
 }) => {
   let mouseX = useMotionValue(Infinity);
+
   return (
     <motion.div
       onMouseMove={(e) => mouseX.set(e.pageX)}
@@ -46,8 +48,6 @@ function IconContainer({
 }: {
   mouseX: MotionValue;
 } & DockItem) {
-  if (typeof children === "undefined") return;
-
   let ref = useRef<HTMLDivElement>(null);
 
   let distance = useTransform(mouseX, (val) => {
@@ -89,6 +89,8 @@ function IconContainer({
   });
 
   const [hovered, setHovered] = useState(false);
+
+  if (!children) return null;
 
   return (
     <motion.div

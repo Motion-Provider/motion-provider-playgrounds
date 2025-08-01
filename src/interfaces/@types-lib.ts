@@ -47,7 +47,6 @@ export type MotionSettingsFieldsProps =
       key: string;
       label: string;
       defaultValue: string[];
-      options: { value: string; label: string }[];
     };
 
 export type InfoboxHintLibProps = string[];

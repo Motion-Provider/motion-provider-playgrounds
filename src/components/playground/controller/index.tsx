@@ -12,7 +12,7 @@ import { Dock } from "@/components/dock";
 import { Button } from "@/components/ui/button";
 import { DockItem } from "@/interfaces/@types-components";
 import { PlaygroundControllerProps } from "@/interfaces/@types-components";
-import { PlaygroundSettings } from "../settings";
+import PlaygroundSettings from "../settings";
 
 const PlaygroundController: FC<PlaygroundControllerProps> = ({
   control,

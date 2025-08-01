@@ -31,6 +31,7 @@ export interface ReduxContainerSettingsProps {
 export interface ReduxMovieSettingsProps
   extends Omit<ReduxImageSettingsProps, "img"> {
   images: string[];
+  animationDuration: number;
 }
 
 export interface ReduxMetadataProps {
