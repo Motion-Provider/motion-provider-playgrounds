@@ -1,22 +1,23 @@
 import Head from "next/head";
 import React, { useState } from "react";
-import PlaygroundLayout from "@/layouts/playground-layout";
-import { useAnimation } from "@/motion/hooks/use-animation";
-import { useAnimationControl } from "@/motion/hooks/use-animation-control";
-import { DelayLogic } from "@/motion/types";
-import getRandomAnimation from "@/utils/getRandomAnimation";
-import { useDispatch } from "react-redux";
-import { setDelayLogic, setMotion } from "@/redux/slices/motion";
 import {
   MotionCircleStateProps,
   PlayerControllerProps,
 } from "@/interfaces/@types-components";
+import { ReduxRootState } from "@/redux";
+import { DelayLogic } from "@/motion/types";
+import { useDispatch, useSelector } from "react-redux";
+import PlaygroundLayout from "@/layouts/playground-layout";
+import { useAnimation } from "@/motion/hooks/use-animation";
+import getRandomAnimation from "@/utils/getRandomAnimation";
 import { ReduxLibMotionProps } from "@/interfaces/@types-lib";
-import { ReduxLibMotionChainInitialState } from "@/constants/redux/redux-motion-defaults.lib";
-import PlaygroundController from "@/components/playground/controller";
-import { GroundLabel } from "@/components/playground/ground-label";
-import PlaygroundConfiguration from "@/components/playground/configuration";
+import { setDelayLogic, setMotion } from "@/redux/slices/motion";
 import Chain from "@/components/playground/grounds/motion-chain";
+import { GroundLabel } from "@/components/playground/ground-label";
+import PlaygroundController from "@/components/playground/controller";
+import { useAnimationControl } from "@/motion/hooks/use-animation-control";
+import PlaygroundConfiguration from "@/components/playground/configuration";
+import { ReduxLibMotionChainInitialState } from "@/constants/redux/redux-motion-defaults.lib";
 
 export default function MotionChainPage() {
   const dispatch = useDispatch();
@@ -24,6 +25,9 @@ export default function MotionChainPage() {
   const { control, onReverse, onStop, reset } = useAnimationControl();
   const { isAnimationStopped, reverse } = useAnimation(control);
 
+  const settings = useSelector(
+    (state: ReduxRootState) => state.metadata.settings
+  );
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [animation, setAnimation] = useState<ReduxLibMotionProps>({
     ...(ReduxLibMotionChainInitialState as ReduxLibMotionProps),
@@ -32,7 +36,9 @@ export default function MotionChainPage() {
   const handleRandomAnimation = () => {
     reset();
     setTimeout(() => {
-      const randomAnimations = getRandomAnimation(1);
+      const randomAnimations = getRandomAnimation(
+        settings["MotionChain"].complexity
+      );
       dispatch(setMotion({ mode: randomAnimations }));
       setAnimation((prev) => ({
         ...prev,
@@ -40,13 +46,6 @@ export default function MotionChainPage() {
       }));
     }, 150);
   };
-
-  // const handleSettings = (key: string, value: string) => {
-  //   setSettings((prev) => ({
-  //     ...prev,
-  //     [key]: value,
-  //   }));
-  // };
 
   const handleOpenModal = () => setIsModalOpen((prev) => !prev);
 
@@ -76,6 +75,7 @@ export default function MotionChainPage() {
       </Head>
       <Chain
         {...(animation as MotionCircleStateProps)}
+        settings={settings["MotionChain"]}
         delayLogic={animation.delayLogic!}
         controller={{
           configView: {

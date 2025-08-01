@@ -7,6 +7,7 @@ import {
   MotionControllerProps,
 } from "@/motion/types";
 import { VariantProps } from "class-variance-authority";
+import { SettingsByProvider } from "./@types-redux";
 
 /***** interfaces *****/
 
@@ -31,6 +32,7 @@ export interface MotionCircleAnimationProps {
 export interface MotionCircleProps
   extends Pick<MotionChainProps, "controller"> {
   animation: MotionCircleAnimationProps;
+  settings: SettingsByProvider["MotionChain"];
   delayLogic?: MotionChainProps["config"]["delayLogic"];
 }
 

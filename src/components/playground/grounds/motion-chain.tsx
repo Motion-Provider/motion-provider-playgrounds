@@ -1,18 +1,19 @@
 import { FC } from "react";
 import { cn } from "@/lib/utils";
 import MotionChain from "@/motion/motion-chain";
-import { useDebounce } from "@uidotdev/usehooks";
 import { MotionCircleProps } from "@/interfaces/@types-components";
 
 const Chain: FC<MotionCircleProps> = ({
   animation,
   controller,
   delayLogic,
+  settings,
 }) => {
-  // const { circleCount } = style;
+  const { borderBlur, borderColor, circleCount } = settings;
 
-  // const count = useDebounce(circleCount, 500);
-  const circles = Array.from({ length: 30 }).map((_, i) => 184 + i * 32);
+  const circles = Array.from({ length: circleCount }).map(
+    (_, i) => 184 + i * 32
+  );
 
   return (
     <MotionChain
@@ -30,7 +31,7 @@ const Chain: FC<MotionCircleProps> = ({
         <div
           className={cn(
             "border rounded-full bg-transparent",
-            circles[idx] % 12 === 0 && `border-rose-500 blur-none`
+            circles[idx] % 12 === 0 && `${borderBlur} ${borderColor}`
           )}
           style={{
             height: `${circles[idx]}px`,
