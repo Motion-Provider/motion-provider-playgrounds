@@ -9,7 +9,7 @@ export const SquareBgPattern: FC<SquareBackgroundPatternProps> = ({
   color = "#ccc",
   backgroundColor = "transparent",
   patternId = "squarePattern",
-  className = "",
+  className,
 }) => {
   const patternSize = squareSize + gap;
 

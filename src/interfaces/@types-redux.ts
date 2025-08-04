@@ -1,14 +1,14 @@
 ﻿/** interfaces */
 
 import { MotionImageConfigProps, SplittedTextModes } from "@/motion/types";
-import { ReduxLibMotionProps } from "./@types-lib";
+
+/** Provider's settings interfaces */
 
 export interface ReduxChainSettingsProps {
   borderColor: BorderColors;
   borderBlur: BorderBlur;
   circleCount: number;
 }
-
 export interface ReduxTextSettingsProps {
   fontSize: number;
   fontFamily: string;
@@ -24,7 +24,6 @@ export interface ReduxImageSettingsProps {
   fn: MotionImageConfigProps["fn"];
   pieces: MotionImageConfigProps["pieces"];
 }
-
 export interface ReduxContainerSettingsProps {
   backgroundColor: BackgroundColors;
 }
@@ -34,14 +33,12 @@ export interface ReduxMovieSettingsProps
   animationDuration: number;
 }
 
+/** Provider's metadata interfaces */
+
 export interface ReduxMetadataProps {
   currentMotion: Motions | undefined;
   settings: SettingsByProvider;
   complexity: Complexity;
-}
-
-export interface ReduxProviderProps {
-  children: React.ReactNode;
 }
 
 export type SettingsByProvider = {

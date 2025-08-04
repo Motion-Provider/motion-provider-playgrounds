@@ -3,12 +3,9 @@ import { cn } from "@/lib/utils";
 import { interFont } from "@/lib/fonts";
 import GridBg from "@/components/grid-bg";
 import InfoBox from "@/components/infobox";
-import { PlaygroundLayoutProps } from "@/interfaces/@types-layout";
+import { LayoutProps } from "@/interfaces/@types-layout";
 
-const PlaygroundLayout: FC<PlaygroundLayoutProps> = ({
-  children,
-  className,
-}) => (
+const PlaygroundLayout: FC<LayoutProps> = ({ children, className }) => (
   <main
     className={cn(
       "w-full h-screen items-center justify-center flex overflow-hidden relative dark ",

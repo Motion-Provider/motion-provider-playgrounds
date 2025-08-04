@@ -1,24 +1,20 @@
-﻿import { MotionControllerProps, MotionImageProps } from "@/motion/types";
+﻿import { MotionImageProps } from "@/motion/types";
 import { MotionPlaygroundProps } from "./@types-components";
 
-/** playground */
+/** Global Layout Interfaces */
 
-export interface PlaygroundLayoutProps {
+export interface LayoutProps {
+  children: React.ReactNode;
   className?: string;
+}
+
+export interface PageLayoutProps {
   children: React.ReactNode;
 }
 
 /** infobox */
 
-export interface InfoBoxLayoutProps {
-  className?: string;
-  children: React.ReactNode;
-}
 export interface ImageLayoutProps
   extends Omit<MotionPlaygroundProps, "children" | "style"> {
   img: MotionImageProps["config"]["img"];
-}
-
-export interface PageLayoutProps {
-  children: React.ReactNode;
 }

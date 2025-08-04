@@ -12,15 +12,16 @@ import { SettingsByProvider } from "./@types-redux";
 
 /***** interfaces *****/
 
-/** background */
+/** Globals */
 
-export interface GridBackgroundProps {
+export interface ClassNameProps {
   className?: string;
 }
 
-export interface HomepageBgProps {
+/** background */
+
+export interface HomepageBgProps extends ClassNameProps {
   selectedItemID: number | undefined;
-  className?: string;
 }
 
 /********** playground **************/
@@ -55,15 +56,13 @@ export interface PlayerControllerProps {
   className?: string;
 }
 
-export interface PlaygroundMiniViewerProps {
+export interface PlaygroundMiniViewerProps extends ClassNameProps {
   animationMode: MotionAnimationProps["mode"];
-  className?: string;
 }
 
-export interface PlayerViewerProps {
+export interface PlayerViewerProps extends ClassNameProps {
   delayLogic: DelayLogic;
   animation: MotionAnimationProps;
-  className?: string;
 }
 
 export interface PlaygroundConfigProps
@@ -83,12 +82,11 @@ export interface PlaygroundControllerProps {
   control: Omit<MotionControllerProps, "configView" | "trigger">;
 }
 
-export interface PlaygroundConfigurationProps {
+export interface PlaygroundConfigurationProps extends ClassNameProps {
   animation: MotionAnimationProps;
   delayLogic: DelayLogic;
   onDelayLogicChange: (delayLogic: DelayLogic) => void;
   onAnimationChange: (key: keyof MotionAnimationProps, value: string) => void;
-  className?: string;
 }
 
 export interface MotionPlaygroundProps
@@ -97,18 +95,16 @@ export interface MotionPlaygroundProps
   children: React.ReactNode;
 }
 
-export interface PlaygroundConfigurationProps {
+export interface PlaygroundConfigurationProps extends ClassNameProps {
   animation: MotionAnimationProps;
   delayLogic: DelayLogic;
   onDelayLogicChange: (delayLogic: DelayLogic) => void;
   onAnimationChange: (key: keyof MotionAnimationProps, value: string) => void;
-  className?: string;
 }
 
-export interface PlaygroundSelectedMotionProps {
+export interface PlaygroundSelectedMotionProps extends ClassNameProps {
   selected: AnimationKeys[];
   onSelected: (selected: AnimationKeys[]) => void;
-  className?: string;
 }
 
 export interface MultiSelectProps {
@@ -123,9 +119,8 @@ export interface DockItem {
   children: React.ReactNode;
 }
 
-export interface DockProps {
+export interface DockProps extends ClassNameProps {
   items: DockItem[];
-  className?: string;
 }
 
 /** Landing page props */
@@ -144,8 +139,8 @@ export interface MotionCardItemProps extends MotionCardItem {
 
 export interface HomeCardsProps
   extends Pick<MotionCardItemProps, "isHovered" | "onClick">,
-    HomepageTransitionSectionProps {
-  className?: string;
+    HomepageTransitionSectionProps,
+    ClassNameProps {
   onHover: (id: number | undefined) => void;
   hoveredItemID?: MotionCardItemProps["id"];
   items: MotionCardItem[];
@@ -164,8 +159,7 @@ export interface CardWrapperProps {
 
 /** Infobox Props */
 
-export interface SyntaxViewerProps {
-  className?: string;
+export interface SyntaxViewerProps extends ClassNameProps {
   currentMotion: Pick<MotionChainProps, "config" | "animations">;
 }
 export interface HintItemProps {
@@ -176,10 +170,10 @@ export interface InfoboxRouteItem {
   name: string;
   Component: React.ComponentType;
 }
+
 /** Pure component props */
 
-export interface CopyCodeButtonProps {
-  className?: string;
+export interface CopyCodeButtonProps extends ClassNameProps {
   onClick: () => void;
   variant?: VariantProps<typeof buttonVariants>["variant"];
 }
@@ -187,7 +181,7 @@ export interface Option {
   label: string;
   value: string;
 }
-export interface SquareBackgroundPatternProps {
+export interface SquareBackgroundPatternProps extends ClassNameProps {
   width?: number;
   height?: number;
   squareSize?: number;
@@ -195,7 +189,6 @@ export interface SquareBackgroundPatternProps {
   color?: string;
   backgroundColor?: string;
   patternId?: string;
-  className?: string;
 }
 
 /***** types *****/

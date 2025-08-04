@@ -1,9 +1,9 @@
 import { cn } from "@/lib/utils";
 import { FC, useId } from "react";
 import MotionContainer from "@/motion/motion-container";
-import { GridBackgroundProps } from "@/interfaces/@types-components";
+import { ClassNameProps } from "@/interfaces/@types-components";
 
-const GridBg: FC<GridBackgroundProps> = ({ className }) => (
+const GridBg: FC<ClassNameProps> = ({ className }) => (
   <MotionContainer
     className="absolute top-0 left-0 w-full h-full"
     animation={{

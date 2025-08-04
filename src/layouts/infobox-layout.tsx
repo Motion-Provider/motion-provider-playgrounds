@@ -4,19 +4,17 @@ import { useRouter } from "next/router";
 import { interFont } from "@/lib/fonts";
 import { useDispatch } from "react-redux";
 import { setCurrentMotion } from "@/redux/slices/metadata";
-import { InfoBoxLayoutProps } from "@/interfaces/@types-layout";
+import { LayoutProps } from "@/interfaces/@types-layout";
+import { Motions } from "@/interfaces/@types-redux";
 
-export default function InfoBoxLayout({
-  children,
-  className,
-}: InfoBoxLayoutProps) {
+export default function InfoBoxLayout({ children, className }: LayoutProps) {
   const router = useRouter();
   const dispatch = useDispatch();
   const pathName = router.pathname.slice(1);
   const motionName = pathName
     .split("-")
     .map((item) => item[0].toUpperCase() + item.slice(1))
-    .join("");
+    .join("") as Motions;
 
   useEffect(() => {
     dispatch(setCurrentMotion(motionName));

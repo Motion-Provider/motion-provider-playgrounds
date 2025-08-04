@@ -50,5 +50,3 @@ export type MotionSettingsFieldsProps =
     };
 
 export type InfoboxHintLibProps = string[];
-export type InfoBoxRoutesProps = Record<string, React.ComponentType>;
-export type SyntaxViewerOptions = Record<string, string>;
