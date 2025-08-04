@@ -23,8 +23,12 @@ const metadataSlice = createSlice({
         );
       }
     },
+    setComplexity: (state, action: PayloadAction<number>) => {
+      state.complexity = action.payload;
+    },
   },
 });
 
-export const { setCurrentMotion, updateSettings } = metadataSlice.actions;
+export const { setCurrentMotion, updateSettings, setComplexity } =
+  metadataSlice.actions;
 export default metadataSlice.reducer;

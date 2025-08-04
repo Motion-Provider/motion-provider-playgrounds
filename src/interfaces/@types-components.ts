@@ -5,6 +5,7 @@ import {
   MotionAnimationProps,
   MotionChainProps,
   MotionControllerProps,
+  MotionTextProps,
 } from "@/motion/types";
 import { VariantProps } from "class-variance-authority";
 import { SettingsByProvider } from "./@types-redux";
@@ -21,20 +22,32 @@ export interface HomepageBgProps {
   selectedItemID: number | undefined;
   className?: string;
 }
-/** playground */
 
-export interface MotionCircleAnimationProps {
+/********** playground **************/
+
+/** motion engine clone interfaces */
+
+export interface MotionPlaygroundAnimationProps {
   mode: MotionAnimationProps["mode"];
   transition: MotionAnimationProps["transition"];
   duration: MotionAnimationProps["duration"];
 }
 
-export interface MotionCircleProps
+export interface MotionChainCloneProps
   extends Pick<MotionChainProps, "controller"> {
-  animation: MotionCircleAnimationProps;
+  animation: MotionPlaygroundAnimationProps;
   settings: SettingsByProvider["MotionChain"];
-  delayLogic?: MotionChainProps["config"]["delayLogic"];
+  delayLogic: MotionChainProps["config"]["delayLogic"];
 }
+
+export interface MotionTextCloneProps
+  extends Pick<MotionTextProps, "controller"> {
+  animation: MotionPlaygroundAnimationProps;
+  settings: SettingsByProvider["MotionText"];
+  delayLogic: MotionTextProps["config"]["delayLogic"];
+}
+
+/** motion engine clone interfaces ends */
 
 export interface PlayerControllerProps {
   animation: MotionAnimationProps;
@@ -79,8 +92,8 @@ export interface PlaygroundConfigurationProps {
 }
 
 export interface MotionPlaygroundProps
-  extends Pick<MotionCircleProps, "controller">,
-    Omit<MotionCircleProps, "style"> {
+  extends Pick<MotionChainCloneProps, "controller">,
+    Omit<MotionChainCloneProps, "style"> {
   children: React.ReactNode;
 }
 
@@ -188,7 +201,7 @@ export interface SquareBackgroundPatternProps {
 /***** types *****/
 
 export type MotionCircleStateProps = Omit<
-  MotionCircleProps,
+  MotionChainCloneProps,
   "controller" | "style"
 >;
 export type PlaygroundPlayerProps = Omit<

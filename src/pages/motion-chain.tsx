@@ -25,20 +25,19 @@ export default function MotionChainPage() {
   const { control, onReverse, onStop, reset } = useAnimationControl();
   const { isAnimationStopped, reverse } = useAnimation(control);
 
-  const settings = useSelector(
-    (state: ReduxRootState) => state.metadata.settings
-  );
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [animation, setAnimation] = useState<ReduxLibMotionProps>({
-    ...(ReduxLibMotionChainInitialState as ReduxLibMotionProps),
-  });
+  const [animation, setAnimation] = useState<ReduxLibMotionProps>(
+    ReduxLibMotionChainInitialState
+  );
+
+  const { complexity, settings } = useSelector(
+    (state: ReduxRootState) => state.metadata
+  );
 
   const handleRandomAnimation = () => {
     reset();
     setTimeout(() => {
-      const randomAnimations = getRandomAnimation(
-        settings["MotionChain"].complexity
-      );
+      const randomAnimations = getRandomAnimation(complexity);
       dispatch(setMotion({ mode: randomAnimations }));
       setAnimation((prev) => ({
         ...prev,
@@ -71,7 +70,7 @@ export default function MotionChainPage() {
   return (
     <PlaygroundLayout>
       <Head>
-        <title>Motion Chain</title>
+        <title>Playgrounds | Motion Chain</title>
       </Head>
       <Chain
         {...(animation as MotionCircleStateProps)}
@@ -98,21 +97,7 @@ export default function MotionChainPage() {
         onRandomAnimate={handleRandomAnimation}
         onReverse={onReverse}
       />
-      <GroundLabel
-        {...(animation as MotionCircleStateProps)}
-        controller={{
-          isAnimationStopped,
-          configView: {
-            once: false,
-            amount: 0.5,
-          },
-          reverse,
-          trigger: true,
-        }}
-        className="text-8xl"
-      >
-        Motion Chain
-      </GroundLabel>
+      <GroundLabel className="text-8xl">Motion Chain</GroundLabel>
       <PlaygroundConfiguration
         delayLogic={animation.delayLogic!}
         onDelayLogicChange={handleDelayLogicChange}

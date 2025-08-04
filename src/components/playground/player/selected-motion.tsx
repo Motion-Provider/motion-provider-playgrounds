@@ -1,11 +1,11 @@
-import { Button } from "@/components/ui/button";
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-import MotionChain from "@/motion/motion-chain";
-import { AnimationKeys, MotionAnimationProps } from "@/motion/types";
-import { FC, useCallback } from "react";
-import { MotionChainProps } from "@/motion/types";
 import { cn } from "@/lib/utils";
+import { FC, useCallback } from "react";
 import { Ban, Trash } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import MotionChain from "@/motion/motion-chain";
+import { MotionChainProps } from "@/motion/types";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import { AnimationKeys, MotionAnimationProps } from "@/motion/types";
 import { PlaygroundSelectedMotionProps } from "@/interfaces/@types-components";
 
 export const SelectedMotion: FC<PlaygroundSelectedMotionProps> = ({
@@ -20,9 +20,8 @@ export const SelectedMotion: FC<PlaygroundSelectedMotionProps> = ({
     () =>
       ({
         mode: ["filterBlurIn", "fadeUp"],
-        transition: "smooth",
-        delay: 0.25,
-        duration: 0.5,
+        transition: "slowElastic",
+        duration: 1,
       } as MotionAnimationProps),
     [selected.length]
   );
@@ -46,7 +45,7 @@ export const SelectedMotion: FC<PlaygroundSelectedMotionProps> = ({
         }
         elementType="div"
         config={{
-          duration: 1,
+          duration: 1 / selected.length,
           delayLogic: "linear",
         }}
         controller={{

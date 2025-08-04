@@ -25,6 +25,7 @@ export const PlayerController: FC<PlayerControllerProps> = ({
 }) => {
   const handleOnSelect = (val: AnimationKeys) =>
     onAnimationChange("mode", val as unknown as AnimationKeys);
+
   return (
     <Card
       className={cn("dark relative bg-transparent overflow-hidden", className)}

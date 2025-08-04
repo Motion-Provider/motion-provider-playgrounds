@@ -13,12 +13,20 @@ const ReduxLibMotionChainInitialState: ReduxLibMotionProps = {
   delayLogic: "linear",
 };
 
+const ReduxLibMotionTextInitialState: ReduxLibMotionProps = {
+  animation: {
+    mode: ["filterBlurIn", "fadeDown"],
+    transition: "smooth",
+    duration: 1,
+  },
+  delayLogic: "linear",
+};
+
 const ReduxLibMotionsInitialState: SettingsByProvider = {
   MotionChain: {
     borderBlur: "blur-none",
     borderColor: "border-rose-500",
     circleCount: 30,
-    complexity: 1,
   },
   MotionContainer: {
     backgroundColor: "bg-purple-500",
@@ -48,10 +56,12 @@ const ReduxLibMotionsInitialState: SettingsByProvider = {
 const ReduxLibMetadataInitialState: ReduxMetadataProps = {
   currentMotion: undefined,
   settings: ReduxLibMotionsInitialState,
+  complexity: 1,
 };
 
 export {
   ReduxLibMotionChainInitialState,
   ReduxLibMetadataInitialState,
   ReduxLibMotionsInitialState,
+  ReduxLibMotionTextInitialState,
 };

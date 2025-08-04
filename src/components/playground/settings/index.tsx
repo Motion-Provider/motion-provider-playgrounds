@@ -26,7 +26,8 @@ import { Label } from "@/components/ui/label";
 import { useIsClient } from "@uidotdev/usehooks";
 import { Separator } from "@/components/ui/separator";
 import { useDispatch, useSelector } from "react-redux";
-import { updateSettings } from "@/redux/slices/metadata";
+import { setComplexity, updateSettings } from "@/redux/slices/metadata";
+import { Badge } from "@/components/ui/badge";
 
 const PlaygroundSettings = () => {
   const isClient = useIsClient();
@@ -36,7 +37,7 @@ const PlaygroundSettings = () => {
   const settings = useSelector(
     (s: ReduxRootState) => s.metadata.settings[motion]
   );
-
+  const complexity = useSelector((s: ReduxRootState) => s.metadata.complexity);
   if (typeof motion === "undefined" || !isClient)
     return <Settings className="size-5 blur-sm" />;
 
@@ -50,7 +51,11 @@ const PlaygroundSettings = () => {
       <PopoverContent className={`dark ${interFont.className} w-[24rem]`}>
         <Card className="py-4 dark">
           <CardHeader>
-            <CardTitle>Settings</CardTitle>
+            <CardTitle className="inline-flex gap-2 items-center">
+              <Badge variant={"destructive"}>
+                <pre className="font-normal">{`<${motion} />`}</pre>
+              </Badge>{" "}
+            </CardTitle>
             <CardDescription className="tracking-tighter ">
               Adjust the current motion engine settings in seconds.
             </CardDescription>
@@ -179,6 +184,20 @@ const PlaygroundSettings = () => {
                 );
             }
           })}
+          <div className="flex justify-between flex-row ">
+            <Label htmlFor="complexity" className="text-sm ">
+              Complexity
+            </Label>
+            <Input
+              id="complexity"
+              type="number"
+              min={1}
+              max={20}
+              value={complexity}
+              onChange={(e) => dispatch(setComplexity(Number(e.target.value)))}
+              className="w-2/3"
+            />
+          </div>
         </div>
         <p className="text-muted-foreground text-xs tracking-tight pt-3 w-full">
           *Complexity increases the next random animation's array size by one.

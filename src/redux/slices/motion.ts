@@ -1,5 +1,5 @@
 ﻿import { ReduxLibMotionChainInitialState } from "@/constants/redux/redux-motion-defaults.lib";
-import { createSlice, createNextState } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 const motionSlice = createSlice({
   name: "motion",

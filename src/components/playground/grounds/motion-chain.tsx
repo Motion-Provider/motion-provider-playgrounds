@@ -1,9 +1,9 @@
 import { FC } from "react";
 import { cn } from "@/lib/utils";
 import MotionChain from "@/motion/motion-chain";
-import { MotionCircleProps } from "@/interfaces/@types-components";
+import { MotionChainCloneProps } from "@/interfaces/@types-components";
 
-const Chain: FC<MotionCircleProps> = ({
+const Chain: FC<MotionChainCloneProps> = ({
   animation,
   controller,
   delayLogic,

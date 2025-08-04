@@ -1,9 +1,9 @@
 ﻿/** interfaces */
 
 import { MotionImageConfigProps, SplittedTextModes } from "@/motion/types";
+import { ReduxLibMotionProps } from "./@types-lib";
 
 export interface ReduxChainSettingsProps {
-  complexity: Complexity;
   borderColor: BorderColors;
   borderBlur: BorderBlur;
   circleCount: number;
@@ -37,13 +37,12 @@ export interface ReduxMovieSettingsProps
 export interface ReduxMetadataProps {
   currentMotion: Motions | undefined;
   settings: SettingsByProvider;
+  complexity: Complexity;
 }
 
 export interface ReduxProviderProps {
   children: React.ReactNode;
 }
-
-// export interface ReduxControllerProps {}
 
 export type SettingsByProvider = {
   MotionContainer: ReduxContainerSettingsProps;
@@ -53,6 +52,7 @@ export type SettingsByProvider = {
   MotionImage: ReduxImageSettingsProps;
   MotionMovie: ReduxMovieSettingsProps;
 };
+
 /** types */
 
 export type Complexity = number;

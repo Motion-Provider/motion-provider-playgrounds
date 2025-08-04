@@ -18,14 +18,6 @@ export default {
       defaultValue: 30,
     },
     {
-      type: "number",
-      key: "complexity",
-      label: "Complexity",
-      min: 1,
-      max: 10,
-      defaultValue: 1,
-    },
-    {
       type: "select",
       defaultValue: "blur-none",
       key: "borderBlur",
