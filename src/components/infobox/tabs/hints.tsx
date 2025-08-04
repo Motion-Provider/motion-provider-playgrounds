@@ -31,7 +31,7 @@ const MotionContext = createContext<Omit<HintItemProps, "text">>({
   motion: undefined,
 });
 
-const hints = shuffleArrays(chainLib, sharedLib, true) as string[];
+const hintsData = shuffleArrays(chainLib, sharedLib, true) as string[];
 
 const Hints = () => {
   const { currentMotion } = useSelector(
@@ -79,7 +79,7 @@ const CarouselOrientation: FC = () => {
         className="w-full relative "
       >
         <CarouselContent className=" h-60 ">
-          {hints.map((val, index) => (
+          {hintsData.map((val, index) => (
             <CarouselItem key={index} className="pt-1 md:basis-1/2">
               <MotionContainer
                 animation={{

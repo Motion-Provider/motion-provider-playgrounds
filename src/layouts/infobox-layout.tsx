@@ -10,6 +10,7 @@ import { Motions } from "@/interfaces/@types-redux";
 export default function InfoBoxLayout({ children, className }: LayoutProps) {
   const router = useRouter();
   const dispatch = useDispatch();
+
   const pathName = router.pathname.slice(1);
   const motionName = pathName
     .split("-")
