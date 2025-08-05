@@ -1,4 +1,4 @@
-﻿import { InfoboxHintLibProps } from "@/interfaces/@types-lib";
+﻿import { InfoboxHintLibProps } from "@/interfaces/@types-constants";
 
 export default [
   "Use controllers below inside the nav to control the circle. Each Motion Provider component leverages controlling mechanism from the power of 'useAnimationControl' hook.",

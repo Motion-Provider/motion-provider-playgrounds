@@ -38,6 +38,7 @@ const PlaygroundSettings = () => {
     (s: ReduxRootState) => s.metadata.settings[motion]
   );
   const complexity = useSelector((s: ReduxRootState) => s.metadata.complexity);
+
   if (typeof motion === "undefined" || !isClient)
     return <Settings className="size-5 blur-sm" />;
 

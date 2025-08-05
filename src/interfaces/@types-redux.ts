@@ -1,6 +1,7 @@
 ﻿/** interfaces */
 
 import { MotionImageConfigProps, SplittedTextModes } from "@/motion/types";
+import { MotionAnimation } from "./@types-constants";
 
 /** Provider's settings interfaces */
 
@@ -35,7 +36,7 @@ export interface ReduxMovieSettingsProps
 
 /** Provider's metadata interfaces */
 
-export interface ReduxMetadataProps {
+export interface MetadataProps {
   currentMotion: Motions | undefined;
   settings: SettingsByProvider;
   complexity: Complexity;
@@ -50,6 +51,7 @@ export type SettingsByProvider = {
   MotionMovie: ReduxMovieSettingsProps;
 };
 
+export type MotionInitialsByProvider = Record<Motions, MotionAnimation>;
 /** types */
 
 export type Complexity = number;

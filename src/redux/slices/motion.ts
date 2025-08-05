@@ -1,9 +1,10 @@
-﻿import { ReduxLibMotionChainInitialState } from "@/constants/redux/redux-motion-defaults.lib";
-import { createSlice } from "@reduxjs/toolkit";
+﻿import { MotionDefaultInitialState } from "@/constants/redux/redux-motion-defaults.lib";
+import { MotionAnimation } from "@/interfaces/@types-constants";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const motionSlice = createSlice({
   name: "motion",
-  initialState: ReduxLibMotionChainInitialState,
+  initialState: MotionDefaultInitialState,
   reducers: {
     setMotion: (state, action) => ({
       ...state,
@@ -15,8 +16,9 @@ const motionSlice = createSlice({
     setDelayLogic: (state, action) => {
       state.delayLogic = action.payload;
     },
+    setAll: (_, action: PayloadAction<MotionAnimation>) => action.payload,
   },
 });
 
 export default motionSlice.reducer;
-export const { setMotion, setDelayLogic } = motionSlice.actions;
+export const { setMotion, setDelayLogic, setAll } = motionSlice.actions;

@@ -1,10 +1,10 @@
-﻿import { ReduxLibMetadataInitialState } from "@/constants/redux/redux-motion-defaults.lib";
+﻿import { MetadataInitialState } from "@/constants/redux/redux-motion-defaults.lib";
 import { Motions } from "@/interfaces/@types-redux";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const metadataSlice = createSlice({
   name: "metadata",
-  initialState: ReduxLibMetadataInitialState,
+  initialState: MetadataInitialState,
   reducers: {
     setCurrentMotion: (state, action: PayloadAction<Motions>) => {
       state.currentMotion = action.payload;

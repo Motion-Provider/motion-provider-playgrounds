@@ -5,7 +5,7 @@
   DialogTitle,
 } from "@/components/ui/dialog";
 import { FC, useState } from "react";
-import { CircleX } from "lucide-react";
+import { CircleX, Lightbulb } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
@@ -46,18 +46,27 @@ const PlaygroundConfiguration: FC<PlaygroundConfigProps> = ({
               >
                 <CircleX className="size-5" />
               </Button>
-              <AlertTitle>Use Shortcuts</AlertTitle>
+              <AlertTitle className="inline-flex items-center gap-1">
+                <Lightbulb className="size-5" />{" "}
+                <h2 className="text-lg">TIPS</h2>
+              </AlertTitle>
               <AlertDescription className="inline justify-center text-xs">
-                Configure your dream animation in seconds, use your keyboard's
-                accessibility{" "}
-                <Badge variant={"outline"}>
-                  <pre>TAB</pre>
-                </Badge>{" "}
-                ,switch to fullscreen mode{" "}
-                <Badge variant={"outline"}>
-                  <pre>F11</pre>
-                </Badge>{" "}
-                for lightning-fast editing and better experience.
+                <ul className="list-disc ml-5">
+                  <li>
+                    Configure your dream animation in seconds by using your
+                    keyboard's accessibility{" "}
+                    <Badge variant={"outline"}>
+                      <pre>TAB</pre>
+                    </Badge>{" "}
+                  </li>
+                  <li>
+                    Switch to fullscreen mode{" "}
+                    <Badge variant={"outline"}>
+                      <pre>F11</pre>
+                    </Badge>{" "}
+                    for lightning-fast editing and better experience.
+                  </li>
+                </ul>
               </AlertDescription>
             </Alert>
           </DialogFooter>

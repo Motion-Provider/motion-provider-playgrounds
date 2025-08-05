@@ -1,4 +1,4 @@
-﻿import { MotionSettingsFieldsProps } from "@/interfaces/@types-lib";
+﻿import { SettingsFieldsProps } from "@/interfaces/@types-constants";
 import { Motions, SettingsByProvider } from "@/interfaces/@types-redux";
 import { MotionImageConfigProps, MotionImageProps } from "@/motion/types";
 
@@ -269,4 +269,4 @@ export default {
       key: "space",
     },
   ],
-} satisfies Record<Motions, MotionSettingsFieldsProps[]>;
+} satisfies Record<Motions, SettingsFieldsProps[]>;

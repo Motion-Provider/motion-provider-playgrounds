@@ -9,15 +9,15 @@ import { DelayLogic } from "@/motion/types";
 import { useDispatch, useSelector } from "react-redux";
 import PlaygroundLayout from "@/layouts/playground-layout";
 import { useAnimation } from "@/motion/hooks/use-animation";
-import getRandomAnimation from "@/utils/getRandomAnimation";
-import { ReduxLibMotionProps } from "@/interfaces/@types-lib";
+import getRandomAnimation from "@/motion/utils/getRandomAnimation";
 import { setDelayLogic, setMotion } from "@/redux/slices/motion";
 import Chain from "@/components/playground/grounds/motion-chain";
 import { GroundLabel } from "@/components/playground/ground-label";
 import PlaygroundController from "@/components/playground/controller";
 import { useAnimationControl } from "@/motion/hooks/use-animation-control";
 import PlaygroundConfiguration from "@/components/playground/configuration";
-import { ReduxLibMotionChainInitialState } from "@/constants/redux/redux-motion-defaults.lib";
+import { MotionChainInitialState } from "@/constants/redux/redux-motion-defaults.lib";
+import { MotionAnimation } from "@/interfaces/@types-constants";
 
 export default function MotionChainPage() {
   const dispatch = useDispatch();
@@ -26,8 +26,8 @@ export default function MotionChainPage() {
   const { isAnimationStopped, reverse } = useAnimation(control);
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [animation, setAnimation] = useState<ReduxLibMotionProps>(
-    ReduxLibMotionChainInitialState
+  const [animation, setAnimation] = useState<MotionAnimation>(
+    MotionChainInitialState
   );
 
   const { complexity, settings } = useSelector(
@@ -37,11 +37,14 @@ export default function MotionChainPage() {
   const handleRandomAnimation = () => {
     reset();
     setTimeout(() => {
-      const randomAnimations = getRandomAnimation(complexity);
-      dispatch(setMotion({ mode: randomAnimations }));
+      const randomAnimations = getRandomAnimation({
+        count: complexity + 1,
+      });
+
+      dispatch(setMotion({ mode: randomAnimations! }));
       setAnimation((prev) => ({
         ...prev,
-        animation: { ...prev.animation, mode: randomAnimations },
+        animation: { ...prev.animation, mode: randomAnimations! },
       }));
     }, 150);
   };

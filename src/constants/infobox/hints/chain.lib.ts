@@ -1,4 +1,4 @@
-import { InfoboxHintLibProps } from "@/interfaces/@types-lib";
+import { InfoboxHintLibProps } from "@/interfaces/@types-constants";
 
 export default [
   "Welcome to Motion Chain Playground 🚀, here you will get useful insights about Motion Chain and of course the playground.",

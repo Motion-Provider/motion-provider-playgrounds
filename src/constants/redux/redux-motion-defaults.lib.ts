@@ -1,10 +1,11 @@
-﻿import { ReduxLibMotionProps } from "@/interfaces/@types-lib";
+﻿import { MotionAnimation } from "@/interfaces/@types-constants";
 import {
-  ReduxMetadataProps,
+  MotionInitialsByProvider,
+  MetadataProps,
   SettingsByProvider,
 } from "@/interfaces/@types-redux";
 
-const ReduxLibMotionChainInitialState: ReduxLibMotionProps = {
+const MotionChainInitialState: MotionAnimation = {
   animation: {
     mode: ["scaleZoomIn", "fadeIn"],
     transition: "cubicBounce",
@@ -13,7 +14,16 @@ const ReduxLibMotionChainInitialState: ReduxLibMotionProps = {
   delayLogic: "linear",
 };
 
-const ReduxLibMotionTextInitialState: ReduxLibMotionProps = {
+const MotionDefaultInitialState: MotionAnimation = {
+  animation: {
+    mode: ["fadeIn"],
+    transition: "smooth",
+    duration: 1,
+  },
+  delayLogic: "linear",
+};
+
+const MotionTextInitialState: MotionAnimation = {
   animation: {
     mode: ["filterBlurIn", "fadeDown"],
     transition: "smooth",
@@ -22,7 +32,15 @@ const ReduxLibMotionTextInitialState: ReduxLibMotionProps = {
   delayLogic: "linear",
 };
 
-const ReduxLibMotionsInitialState: SettingsByProvider = {
+const MotionsAnimationInitialState: MotionInitialsByProvider = {
+  MotionChain: MotionChainInitialState,
+  MotionContainer: MotionDefaultInitialState,
+  MotionText: MotionTextInitialState,
+  MotionImage: MotionDefaultInitialState,
+  MotionLink: MotionDefaultInitialState,
+  MotionMovie: MotionDefaultInitialState,
+};
+const MotionsInitialState: SettingsByProvider = {
   MotionChain: {
     borderBlur: "blur-none",
     borderColor: "border-rose-500",
@@ -53,15 +71,17 @@ const ReduxLibMotionsInitialState: SettingsByProvider = {
     space: 0,
   },
 };
-const ReduxLibMetadataInitialState: ReduxMetadataProps = {
+const MetadataInitialState: MetadataProps = {
   currentMotion: undefined,
-  settings: ReduxLibMotionsInitialState,
+  settings: MotionsInitialState,
   complexity: 1,
 };
 
 export {
-  ReduxLibMotionChainInitialState,
-  ReduxLibMetadataInitialState,
-  ReduxLibMotionsInitialState,
-  ReduxLibMotionTextInitialState,
+  MotionChainInitialState,
+  MetadataInitialState,
+  MotionsInitialState,
+  MotionTextInitialState,
+  MotionsAnimationInitialState,
+  MotionDefaultInitialState,
 };

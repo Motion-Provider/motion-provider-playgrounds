@@ -1,19 +1,15 @@
 ﻿import {
+  DelayLogic,
   ImageMotionPieces,
-  MotionChainProps,
-  MotionContainerProps,
+  MotionAnimationProps,
 } from "@/motion/types";
 
-/** interfaces */
-
-export interface ReduxLibMotionProps {
-  animation: MotionContainerProps["animation"];
-  delayLogic: MotionChainProps["config"]["delayLogic"];
+export interface MotionAnimation {
+  animation: Omit<MotionAnimationProps, "delay">;
+  delayLogic: DelayLogic;
 }
 
-/** types */
-
-export type MotionSettingsFieldsProps =
+export type SettingsFieldsProps =
   | {
       type: "number";
       key: string;
