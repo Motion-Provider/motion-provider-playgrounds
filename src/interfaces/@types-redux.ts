@@ -12,7 +12,6 @@ export interface ReduxChainSettingsProps {
 }
 export interface ReduxTextSettingsProps {
   fontSize: number;
-  fontFamily: string;
   mode: SplittedTextModes;
   space: number;
 }

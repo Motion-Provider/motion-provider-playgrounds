@@ -5,3 +5,8 @@ export interface GetCodeViewProps extends ReduxRootState {
   comment?: string;
   commentIncluded?: boolean;
 }
+
+export interface FontsSizeRangesSchema {
+  value: number;
+  className: string;
+}

@@ -162,22 +162,9 @@ const HintItem: FC<Pick<HintItemProps, "text">> = ({ text }) => {
           <Quote className="size-4 -rotate-0 self-end justify-self-end mt-2" />
         </CardDescription>
       </CardHeader>
-      <MotionText
-        animation={{
-          mode: ["filterBlurIn", "fadeUp"],
-          transition: "smooth",
-          duration: 1,
-        }}
-        elementType={"span"}
-        config={{
-          duration: 0.08,
-          mode: "chars",
-          delayLogic: "linear",
-        }}
-        wrapperClassName="absolute bottom-6 left-6 text-muted-foreground text-xs tracking-tighter"
-      >
+      <span className="absolute bottom-6 left-6 text-muted-foreground text-xs tracking-tighter">
         {cardFooter}
-      </MotionText>
+      </span>
     </Card>
   );
 };

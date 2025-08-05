@@ -41,6 +41,30 @@ export function ${currentMotion}_${id}() {
 `;
     case "MotionContainer":
       return "MCP";
+    case "MotionText":
+      return `${commentIncluded && `/*${comment}*/`}
+import MotionText from "@/motion/motion-text";
+
+export function ${currentMotion}_${id}() {
+  return (
+    <MotionText
+      elementType="p"
+      animation={{
+        mode: ${JSON.stringify(animation.mode)},
+        transition: ${JSON.stringify(animation.transition)},
+        duration: ${JSON.stringify(animation.duration)},
+      }}
+      config={{
+        duration: 0.12,
+        mode: "chars",
+        delayLogic: ${JSON.stringify(delayLogic)},
+      }}
+    >
+      Hello World!
+    </MotionText>
+  );
+}
+`;
     default:
       return "";
   }

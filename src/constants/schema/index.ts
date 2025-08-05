@@ -220,29 +220,6 @@ export default {
     },
     {
       type: "select",
-      key: "fontFamily",
-      label: "Font Family",
-      defaultValue: "sans",
-      options: [
-        {
-          label: "Sans",
-          value: "sans",
-        },
-        {
-          label: "Serif",
-          value: "serif",
-        },
-        {
-          label: "Mono",
-          value: "mono",
-        },
-      ] as {
-        value: SettingsByProvider["MotionText"]["fontFamily"];
-        label: string;
-      }[],
-    },
-    {
-      type: "select",
       key: "mode",
       label: "Animation Mode",
       defaultValue: "chars",

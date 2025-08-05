@@ -65,8 +65,7 @@ const MotionsInitialState: SettingsByProvider = {
     animationDuration: 5,
   },
   MotionText: {
-    fontFamily: "serif",
-    fontSize: 24,
+    fontSize: 16,
     mode: "chars",
     space: 0,
   },

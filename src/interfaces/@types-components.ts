@@ -9,6 +9,7 @@ import {
 } from "@/motion/types";
 import { VariantProps } from "class-variance-authority";
 import { SettingsByProvider } from "./@types-redux";
+import { MotionAnimation } from "./@types-constants";
 
 /***** interfaces *****/
 
@@ -28,24 +29,15 @@ export interface HomepageBgProps extends ClassNameProps {
 
 /** motion engine clone interfaces */
 
-export interface MotionPlaygroundAnimationProps {
-  mode: MotionAnimationProps["mode"];
-  transition: MotionAnimationProps["transition"];
-  duration: MotionAnimationProps["duration"];
+export interface StableCloneProps extends MotionAnimation {
+  controller: MotionControllerProps;
 }
-
-export interface MotionChainCloneProps
-  extends Pick<MotionChainProps, "controller"> {
-  animation: MotionPlaygroundAnimationProps;
+export interface MotionChainCloneProps extends StableCloneProps {
   settings: SettingsByProvider["MotionChain"];
-  delayLogic: MotionChainProps["config"]["delayLogic"];
 }
 
-export interface MotionTextCloneProps
-  extends Pick<MotionTextProps, "controller"> {
-  animation: MotionPlaygroundAnimationProps;
+export interface MotionTextCloneProps extends StableCloneProps {
   settings: SettingsByProvider["MotionText"];
-  delayLogic: MotionTextProps["config"]["delayLogic"];
 }
 
 /** motion engine clone interfaces ends */
