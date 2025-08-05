@@ -40,6 +40,10 @@ export interface MotionTextCloneProps extends StableCloneProps {
   settings: SettingsByProvider["MotionText"];
 }
 
+export interface MotionImageCloneProps extends StableCloneProps {
+  settings: SettingsByProvider["MotionImage"];
+}
+
 /** motion engine clone interfaces ends */
 
 export interface PlayerControllerProps {

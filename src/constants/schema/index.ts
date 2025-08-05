@@ -3,8 +3,7 @@ import { Motions, SettingsByProvider } from "@/interfaces/@types-redux";
 import { MotionImageConfigProps, MotionImageProps } from "@/motion/types";
 
 const Pieces = [
-  81, 121, 16, 25, 36, 49, 64, 81, 100, 121, 144, 169, 196, 225, 256, 289, 324,
-  361, 400,
+  16, 25, 36, 49, 64, 81, 100, 121, 144, 169, 196, 225, 256, 289, 324, 361, 400,
 ] as const as MotionImageProps["config"]["pieces"][];
 
 export default {
@@ -127,7 +126,7 @@ export default {
       type: "select",
       defaultValue: "none",
       key: "fn",
-      label: "Motion Trigger Function",
+      label: "Trigger Function",
       options: [
         {
           label: "None",

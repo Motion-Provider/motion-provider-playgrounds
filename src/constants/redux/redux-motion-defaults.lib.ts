@@ -32,11 +32,20 @@ const MotionTextInitialState: MotionAnimation = {
   delayLogic: "linear",
 };
 
+const MotionImageInitialState: MotionAnimation = {
+  animation: {
+    mode: ["filterBlurIn", "fadeIn"],
+    transition: "smooth",
+    duration: 1,
+  },
+  delayLogic: "sinusoidal",
+};
+
 const MotionsAnimationInitialState: MotionInitialsByProvider = {
   MotionChain: MotionChainInitialState,
   MotionContainer: MotionDefaultInitialState,
   MotionText: MotionTextInitialState,
-  MotionImage: MotionDefaultInitialState,
+  MotionImage: MotionImageInitialState,
   MotionLink: MotionDefaultInitialState,
   MotionMovie: MotionDefaultInitialState,
 };
@@ -83,4 +92,5 @@ export {
   MotionTextInitialState,
   MotionsAnimationInitialState,
   MotionDefaultInitialState,
+  MotionImageInitialState,
 };

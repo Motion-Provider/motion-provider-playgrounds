@@ -117,6 +117,7 @@ const PlaygroundSettings = () => {
                           })
                         )
                       }
+                      id={field.key}
                       className="w-2/3"
                     />
                   </div>
@@ -133,7 +134,12 @@ const PlaygroundSettings = () => {
                     <Select
                       value={val}
                       onValueChange={(v) =>
-                        dispatch(updateSettings({ key: field.key, value: v }))
+                        dispatch(
+                          updateSettings({
+                            key: field.key,
+                            value: v === "none" ? undefined : v,
+                          })
+                        )
                       }
                     >
                       <SelectTrigger className="w-2/3">
@@ -163,17 +169,19 @@ const PlaygroundSettings = () => {
               case "selectNumber":
                 return (
                   <div key={field.key} className="flex justify-between">
-                    <label>{field.label}</label>
+                    <Label htmlFor={field.key} className="text-sm">
+                      {field.label}
+                    </Label>
                     <Select
                       value={val}
                       onValueChange={(v) =>
                         dispatch(updateSettings({ key: field.key, value: v }))
                       }
                     >
-                      <SelectTrigger className="w-32">
+                      <SelectTrigger className="w-2/3">
                         <SelectValue />
                       </SelectTrigger>
-                      <SelectContent className="dark">
+                      <SelectContent className="dark" id={field.key}>
                         {field.options.map((o) => (
                           <SelectItem key={o.value} value={o.value.toString()}>
                             {o.label}

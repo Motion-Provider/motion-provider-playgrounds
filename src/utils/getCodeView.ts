@@ -65,6 +65,31 @@ export function ${currentMotion}_${id}() {
   );
 }
 `;
+    case "MotionImage":
+      return `${commentIncluded && `/*${comment}*/`}
+import MotionImage from "@/motion/motion-image";
+
+export function ${currentMotion}_${id}() {
+  return (
+    <MotionImage
+      animation={{
+        mode: ${JSON.stringify(animation.mode)},
+        transition: ${JSON.stringify(animation.transition)},
+        duration: ${JSON.stringify(animation.duration)},
+      }}
+      config={{
+        duration: 0.88,
+        // example image from unsplash
+        img: "https://images.unsplash.com/photo-1486848538113-ce1a4923fbc5?q=80&w=749&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        delayLogic: ${JSON.stringify(delayLogic)},
+        pieces: 64,
+      }}
+      wrapperClassName="size-[500px] rounded-lg overflow-hidden"
+      fallback={<div className="size-96 animate-pulse bg-stone-800 rounded-lg" />}
+    />
+  );
+}
+`;
     default:
       return "";
   }
