@@ -58,7 +58,7 @@ const PlaygroundSettings = () => {
               </Badge>{" "}
             </CardTitle>
             <CardDescription className="tracking-tighter ">
-              Adjust the current motion engine settings in seconds.
+              Adjust the playground's settings in seconds.
             </CardDescription>
           </CardHeader>
         </Card>

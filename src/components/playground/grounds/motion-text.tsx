@@ -73,7 +73,7 @@ const Text: FC<MotionTextCloneProps> = ({
                 since each creates a new DOM instance. Initially, debouncing is
                 being used however keep it in mind that the Motion Provider is
                 still in BETA. The mandatory optimizations will be done in the
-                future — if the community shows enough demand. Cheers!
+                future — if the community shows enough demand. Stay tuned!
                 <Button
                   onClick={handleCloseModal}
                   variant={"secondary"}
@@ -100,8 +100,7 @@ const Text: FC<MotionTextCloneProps> = ({
           </div>
           <div className="flex flex-col gap-1 w-full">
             <Label htmlFor="desc">Description</Label>
-            <Input
-              type="text"
+            <Textarea
               id="desc"
               name="desc"
               value={fields.desc}

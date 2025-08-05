@@ -5,6 +5,7 @@
   useContext,
   useState,
   useEffect,
+  useMemo,
 } from "react";
 import {
   Carousel,
@@ -26,31 +27,38 @@ import chainLib from "@/constants/infobox/hints/chain.lib";
 import sharedLib from "@/constants/infobox/hints/shared.lib";
 import { HintItemProps } from "@/interfaces/@types-components";
 import { Card, CardDescription, CardHeader } from "@/components/ui/card";
+import { Motions } from "@/interfaces/@types-redux";
+import { InfoboxHintLibProps } from "@/interfaces/@types-constants";
+import textLib from "@/constants/infobox/hints/text.lib";
 
-const MotionContext = createContext<Omit<HintItemProps, "text">>({
-  motion: undefined,
-});
-
-const hintsData = shuffleArrays(chainLib, sharedLib, true) as string[];
+const hintsByMotion = {
+  MotionChain: chainLib,
+  MotionText: textLib,
+  MotionContainer: sharedLib,
+  MotionLink: sharedLib,
+  MotionImage: sharedLib,
+  MotionMovie: sharedLib,
+} satisfies Record<Motions, InfoboxHintLibProps>;
 
 const Hints = () => {
-  const { currentMotion } = useSelector(
-    (state: ReduxRootState) => state.metadata
-  );
-  const clearName = currentMotion?.replace(/(Motion)/g, "$1 ");
-
-  return (
-    <MotionContext.Provider
-      value={{
-        motion: clearName,
-      }}
-    >
-      <CarouselOrientation />
-    </MotionContext.Provider>
-  );
+  return <CarouselOrientation />;
 };
 
 const CarouselOrientation: FC = () => {
+  const { currentMotion } = useSelector(
+    (state: ReduxRootState) => state.metadata
+  );
+
+  const hintsData = useMemo(
+    () =>
+      shuffleArrays(
+        hintsByMotion[currentMotion || "MotionChain"],
+        sharedLib,
+        true
+      ) as string[],
+    [currentMotion]
+  );
+
   const plugin = useRef(Autoplay({ delay: 5000, stopOnInteraction: true }));
 
   const [api, setApi] = useState<CarouselApi>();
@@ -149,24 +157,16 @@ const CarouselOrientation: FC = () => {
   );
 };
 
-const HintItem: FC<Pick<HintItemProps, "text">> = ({ text }) => {
-  const { motion } = useContext(MotionContext);
-  const cardFooter = `@${motion?.replace(" ", "")}`;
-
-  return (
-    <Card>
-      <CardHeader className="grid place-items-center text-center px-6 relative">
-        <CardDescription className="tracking-tight relative">
-          <Quote className="size-4 rotate-180 mb-2" />
-          {text}
-          <Quote className="size-4 -rotate-0 self-end justify-self-end mt-2" />
-        </CardDescription>
-      </CardHeader>
-      <span className="absolute bottom-6 left-6 text-muted-foreground text-xs tracking-tighter">
-        {cardFooter}
-      </span>
-    </Card>
-  );
-};
+const HintItem: FC<Pick<HintItemProps, "text">> = ({ text }) => (
+  <Card>
+    <CardHeader className="grid place-items-center text-center px-6 relative">
+      <CardDescription className="tracking-tight relative">
+        <Quote className="size-4 rotate-180 mb-2" />
+        {text}
+        <Quote className="size-4 -rotate-0 self-end justify-self-end mt-2" />
+      </CardDescription>
+    </CardHeader>
+  </Card>
+);
 
 export default Hints;

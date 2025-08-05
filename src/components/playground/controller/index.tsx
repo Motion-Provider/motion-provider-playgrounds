@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button";
 import { DockItem } from "@/interfaces/@types-components";
 import { PlaygroundControllerProps } from "@/interfaces/@types-components";
 import PlaygroundSettings from "../settings";
+import Playgrounds from "../playgrounds";
 
 const PlaygroundController: FC<PlaygroundControllerProps> = ({
   control,
@@ -89,11 +90,7 @@ const PlaygroundController: FC<PlaygroundControllerProps> = ({
       text: "Configuration",
     },
     {
-      children: (
-        <Button variant="ghost" className="cursor-pointer ">
-          <Boxes className="size-5" />
-        </Button>
-      ),
+      children: <Playgrounds />,
       text: "Change Playground",
     },
   ] as DockItem[];
