@@ -49,6 +49,7 @@ const MotionsAnimationInitialState: MotionInitialsByProvider = {
   MotionLink: MotionDefaultInitialState,
   MotionMovie: MotionDefaultInitialState,
 };
+
 const MotionsInitialState: SettingsByProvider = {
   MotionChain: {
     borderBlur: "blur-none",

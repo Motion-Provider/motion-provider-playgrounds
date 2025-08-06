@@ -30,13 +30,15 @@ import { Card, CardDescription, CardHeader } from "@/components/ui/card";
 import { Motions } from "@/interfaces/@types-redux";
 import { InfoboxHintLibProps } from "@/interfaces/@types-constants";
 import textLib from "@/constants/infobox/hints/text.lib";
+import imageLib from "@/constants/infobox/hints/image.lib";
+import containerLib from "@/constants/infobox/hints/container.lib";
 
 const hintsByMotion = {
   MotionChain: chainLib,
   MotionText: textLib,
-  MotionContainer: sharedLib,
+  MotionContainer: containerLib,
   MotionLink: sharedLib,
-  MotionImage: sharedLib,
+  MotionImage: imageLib,
   MotionMovie: sharedLib,
 } satisfies Record<Motions, InfoboxHintLibProps>;
 

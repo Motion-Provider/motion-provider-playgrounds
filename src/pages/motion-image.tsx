@@ -15,7 +15,6 @@ import { setDelayLogic, setMotion } from "@/redux/slices/motion";
 import Head from "next/head";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { toast } from "sonner";
 
 export default function MotionImagePage() {
   const dispatch = useDispatch();

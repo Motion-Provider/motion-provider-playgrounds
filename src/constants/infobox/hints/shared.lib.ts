@@ -8,4 +8,5 @@ export default [
   "You can literally configure your dream animation in seconds using the controller dock below.",
   "Preview the animation you might feel comfortable with by hovering before you select it inside the configuration section.",
   "Use 'TAB' to make lightning—fast switch between the tools. You can control everything on this page by just pressing 'TAB'.",
+  "Abiding by the fundamental laws of CSS, kindly never use 'transition-*' classnames in any of parent/child provider components that would transgress the tailwind class rules.",
 ] as const satisfies InfoboxHintLibProps;

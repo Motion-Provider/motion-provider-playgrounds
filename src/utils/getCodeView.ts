@@ -40,7 +40,23 @@ export function ${currentMotion}_${id}() {
 }
 `;
     case "MotionContainer":
-      return "MCP";
+      return `${commentIncluded && `/*${comment}*/`}
+import MotionContainer from "@/motion/motion-container";
+
+export function ${currentMotion}_${id}() {
+  return (
+    <MotionContainer
+      elementType="div"
+      animation={{
+        mode: ${JSON.stringify(animation.mode)},
+        transition: ${JSON.stringify(animation.transition)},
+        duration: ${JSON.stringify(animation.duration)},
+      }}
+      className="size-24 rounded-lg bg-lime-400"
+    />
+  );
+}  
+`;
     case "MotionText":
       return `${commentIncluded && `/*${comment}*/`}
 import MotionText from "@/motion/motion-text";
