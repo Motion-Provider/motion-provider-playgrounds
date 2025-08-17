@@ -15,7 +15,7 @@ import MotionContainer from "@/motion/motion-container";
 
 export default function Text() {
   return (
-    <div className="h-4/5 w-3/5 border rounded-lg">
+    <div className="h-4/5 w-3/5 border rounded-lg overflow-hidden">
       <TextProvider>
         <ResizablePanelGroup direction="horizontal" className="size-full">
           <ResizablePanel
@@ -29,8 +29,11 @@ export default function Text() {
                 delay: 0.5,
                 duration: 1,
               }}
+              controller={{
+                trigger: true,
+              }}
               elementType="div"
-              className="absolute -top-8 -left-8 -z-10 size-36 rounded-full bg-blue-600 blur-3xl"
+              className="absolute -bottom-8 -left-8 -z-10 w-full h-16 rounded-full bg-gradient-to-br from-blue-500 via-blue-600 to-40% to-rose-600 blur-2xl"
             />
 
             <ScrollArea className="size-full p-4">

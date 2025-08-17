@@ -1,17 +1,20 @@
 ﻿import { Illustration } from "@/components/container-illustration";
-import { MotionContainerCloneProps } from "@/interfaces/@types-components";
 import { cn } from "@/lib/utils";
 import MotionContainer from "@/motion/motion-container";
+import { ReduxRootState } from "@/redux";
+import { selectController } from "@/redux/slices/utils";
 import { FC, useMemo } from "react";
+import { useSelector } from "react-redux";
 import { toast } from "sonner";
 
-const Container: FC<MotionContainerCloneProps> = ({
-  animation,
-  controller,
-  settings,
-  delayLogic,
-}) => {
-  const { backgroundColor } = settings;
+const Container: FC = () => {
+  const { settings } = useSelector((state: ReduxRootState) => state.metadata);
+  const { animation, delayLogic } = useSelector(
+    (state: ReduxRootState) => state.motion
+  );
+  const { isAnimationStopped, reverse } = useSelector(selectController);
+
+  const { backgroundColor } = settings["MotionContainer"];
 
   useMemo(() => {
     toast.warning(
@@ -28,7 +31,15 @@ const Container: FC<MotionContainerCloneProps> = ({
         backgroundColor
       )}
       animation={animation}
-      controller={controller}
+      controller={{
+        configView: {
+          amount: 0.1,
+          once: false,
+        },
+        isAnimationStopped,
+        reverse,
+      }}
+      key={Object.keys(animation.mode).join("-")}
     >
       <Illustration className="size-full z-50  bg-black/40" />
     </MotionContainer>

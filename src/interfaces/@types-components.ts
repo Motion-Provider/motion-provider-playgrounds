@@ -1,11 +1,5 @@
 ﻿import { buttonVariants } from "@/components/ui/button";
-import {
-  AnimationKeys,
-  DelayLogic,
-  MotionAnimationProps,
-  MotionChainProps,
-  MotionControllerProps,
-} from "@/motion/types";
+import { MotionAnimationProps, MotionControllerProps } from "@/motion/types";
 import { VariantProps } from "class-variance-authority";
 import { SettingsByProvider } from "./@types-redux";
 import { MotionAnimation } from "./@types-constants";
@@ -41,10 +35,6 @@ export interface MotionTextCloneProps extends StableCloneProps {
 
 export interface MotionImageCloneProps extends StableCloneProps {
   settings: SettingsByProvider["MotionImage"];
-}
-
-export interface MotionContainerCloneProps extends StableCloneProps {
-  settings: SettingsByProvider["MotionContainer"];
 }
 
 /** clone interfaces ends */

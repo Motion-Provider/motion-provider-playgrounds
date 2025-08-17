@@ -1,36 +1,64 @@
 ﻿import { toast } from "sonner";
 import { Skeleton } from "@/components/ui/skeleton";
-import { MotionImageCloneProps } from "@/interfaces/@types-components";
 import MotionImage from "@/motion/motion-image";
 import { FC, useMemo } from "react";
+import { useSelector } from "react-redux";
+import { ReduxRootState } from "@/redux";
+import { selectController } from "@/redux/slices/utils";
+import { AnimationKeys, MotionControllerProps } from "@/motion/types";
+import getMotionKey from "@/utils/getMotionKey";
 
-const Image: FC<MotionImageCloneProps> = ({
-  settings,
-  animation,
-  controller,
-  delayLogic,
-}) => {
+const Image: FC = () => {
+  const { settings } = useSelector((state: ReduxRootState) => state.metadata);
+  const { animation, delayLogic } = useSelector(
+    (state: ReduxRootState) => state.motion
+  );
+  const reduxController = useSelector(selectController);
+
+  const { fn, img, pieces } = settings["MotionImage"];
+
   useMemo(() => {
-    if (typeof settings.fn !== "undefined") {
+    if (typeof fn !== "undefined") {
       toast.info(
-        `Image set to ${settings.fn.toString()} function, ${settings.fn.toString()} image to trigger animation and notice that the controller is disabled until the animation is set to "none"!`,
+        `Image set to ${fn.toString()} function, ${fn.toString()} image to trigger animation and notice that the controller is disabled until the animation is set to "none"!`,
         { duration: 5000, position: "top-center", richColors: true }
       );
     }
-  }, [settings.fn]);
+  }, [fn]);
 
+  const controller = useMemo(
+    () =>
+      ({
+        configView: {
+          once: false,
+          amount: 0.5,
+        },
+        trigger: true,
+        isAnimationStopped: reduxController.isAnimationStopped,
+        reverse: reduxController.reverse,
+      } as MotionControllerProps),
+    [reduxController]
+  );
+
+  const key = getMotionKey(
+    (animation.mode as AnimationKeys[]).join("-"),
+    "image",
+    delayLogic + animation.transition
+  );
   return (
     <MotionImage
       animation={animation}
       config={{
-        ...settings,
+        pieces: pieces,
+        img: img,
         duration: 0.88,
         delayLogic,
-        fn: settings.fn || undefined,
+        fn: fn || undefined,
       }}
+      key={key}
       wrapperClassName="size-[500px] rounded-lg overflow-hidden z-50"
-      fallback={<Skeleton className="size-[500px]  dark" />}
-      controller={typeof settings.fn === "undefined" ? controller : undefined}
+      fallback={<Skeleton className="size-[500px] dark" />}
+      controller={typeof fn === "undefined" ? controller : undefined}
     />
   );
 };
