@@ -1,6 +1,6 @@
 ﻿import { ReduxRootState } from "@/redux";
 
-export interface GetCodeViewProps extends ReduxRootState {
+export interface GetCodeViewProps extends Omit<ReduxRootState, "utils"> {
   id: string;
   comment?: string;
   commentIncluded?: boolean;

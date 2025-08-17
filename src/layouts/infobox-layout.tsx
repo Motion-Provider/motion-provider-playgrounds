@@ -26,7 +26,7 @@ export default function InfoBoxLayout({ children, className }: LayoutProps) {
 
     dispatch(setCurrentMotion(motionName));
     dispatch(setAll(MotionsAnimationInitialState[motionName]));
-  }, [dispatch, motionName]);
+  }, [motionName]);
 
   return (
     <div

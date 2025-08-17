@@ -1,4 +1,3 @@
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -8,31 +7,31 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { cn } from "@/lib/utils";
 import MotionContainer from "@/motion/motion-container";
 import { RefreshCcw } from "lucide-react";
-import { FC, useState } from "react";
+import { useMemo, useState } from "react";
 import { CopyCode } from "../../copy-code";
-import { useCopyToClipboard } from "@uidotdev/usehooks";
-import { PlayerViewerProps } from "@/interfaces/@types-components";
+import { useCopyToClipboard, useDebounce } from "@uidotdev/usehooks";
+import { useSelector } from "react-redux";
+import { ReduxRootState } from "@/redux";
 
-export const PlayerViewer: FC<PlayerViewerProps> = ({
-  animation,
-  className,
-  delayLogic,
-}) => {
-  const [animationKey, setAnimationKey] = useState<number>(0);
+export const PlayerViewer = () => {
+  const [key, setKey] = useState<number>(0);
   const [_, copyToClipboard] = useCopyToClipboard();
-  const handleRestartAnimation = () => setAnimationKey((prev) => prev + 1);
 
-  const copyData = {
-    ...animation,
-    delayLogic,
-  };
+  const motion = useSelector((state: ReduxRootState) => state.motion);
+  const debouncedAnimations = useDebounce(motion.animation.mode, 2000);
+
+  const animationKey = useMemo(
+    () => Object.keys(motion.animation.mode).join("-").concat(key.toString()),
+    [key, debouncedAnimations]
+  );
+
+  const handleRestart = () => setKey((prev) => prev + 1);
 
   return (
     <Card
-      className={cn("dark relative bg-transparent overflow-hidden ", className)}
+      className={"dark relative bg-transparent overflow-hidden h-2/3 w-full"}
     >
       <MotionContainer
         animation={{
@@ -55,7 +54,7 @@ export const PlayerViewer: FC<PlayerViewerProps> = ({
       <CardContent className="z-50 h-auto w-full items-center-safe justify-center flex ">
         <MotionContainer
           animation={{
-            ...animation,
+            ...motion.animation,
             delay: 0,
           }}
           elementType="div"
@@ -65,7 +64,7 @@ export const PlayerViewer: FC<PlayerViewerProps> = ({
       </CardContent>
       <CardFooter className="justify-end  flex w-full ">
         <div className="flex ">
-          <Button variant="ghost" onClick={handleRestartAnimation}>
+          <Button variant="ghost" onClick={handleRestart}>
             <MotionContainer
               animation={{
                 mode: ["spin"],
@@ -80,14 +79,14 @@ export const PlayerViewer: FC<PlayerViewerProps> = ({
                   amount: 0.5,
                 },
               }}
-              key={animationKey}
+              key={key}
             >
               <RefreshCcw className="text-white size-5" />
             </MotionContainer>
           </Button>
           <CopyCode
             variant={"ghost"}
-            onClick={() => copyToClipboard(JSON.stringify(copyData, null, 2))}
+            onClick={() => copyToClipboard(JSON.stringify(motion, null, 2))}
             className="text-white"
           />
         </div>

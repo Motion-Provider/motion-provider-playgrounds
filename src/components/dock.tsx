@@ -10,7 +10,7 @@ import {
 } from "motion/react";
 
 import { Children, FC, useRef, useState } from "react";
-import PlaygroundSettings from "./playground/settings";
+import PlaygroundSettings from "./playground/playground-settings";
 
 export const Dock: FC<DockProps> = ({ items, className }) => {
   return <FloatingDockDesktop items={items} className={className} />;

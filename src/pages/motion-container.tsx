@@ -2,7 +2,6 @@ import PlaygroundConfiguration from "@/components/playground/configuration";
 import PlaygroundController from "@/components/playground/controller";
 import { GroundLabel } from "@/components/playground/ground-label";
 import Container from "@/components/playground/grounds/motion-container";
-import Image from "@/components/playground/grounds/motion-image";
 import { MotionDefaultInitialState } from "@/constants/redux/redux-motion-defaults.lib";
 import { PlayerControllerProps } from "@/interfaces/@types-components";
 import { MotionAnimation } from "@/interfaces/@types-constants";

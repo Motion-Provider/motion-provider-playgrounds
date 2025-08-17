@@ -1,32 +1,37 @@
-import { cn } from "@/lib/utils";
-import { FC, useCallback } from "react";
+import { useMemo } from "react";
 import { Ban, Trash } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import MotionChain from "@/motion/motion-chain";
 import { MotionChainProps } from "@/motion/types";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-import { AnimationKeys, MotionAnimationProps } from "@/motion/types";
-import { PlaygroundSelectedMotionProps } from "@/interfaces/@types-components";
+import { AnimationKeys } from "@/motion/types";
+import { useDispatch, useSelector } from "react-redux";
+import { ReduxRootState, ReduxStoreDispatchType } from "@/redux";
+import { setMotion } from "@/redux/slices/motion";
 
-export const SelectedMotion: FC<PlaygroundSelectedMotionProps> = ({
-  onSelected,
-  selected,
-  className,
-}) => {
-  const handleSelect = (val: AnimationKeys) =>
-    onSelected(selected.filter((item) => item !== val));
+export const SelectedMotion = () => {
+  const dispatch = useDispatch<ReduxStoreDispatchType>();
+  const { animation } = useSelector((state: ReduxRootState) => state.motion);
+  const { mode: currentModes } = animation;
 
-  const itemsAnimation = useCallback(
+  const handleRemoveItem = (val: AnimationKeys) =>
+    dispatch(
+      setMotion({
+        mode: (currentModes as AnimationKeys[]).filter((item) => item !== val),
+      })
+    );
+
+  const chainAnimations = useMemo(
     () =>
-      ({
+      Array.from({ length: currentModes.length }).map(() => ({
         mode: ["filterBlurIn", "fadeUp"],
         transition: "slowElastic",
         duration: 1,
-      } as MotionAnimationProps),
-    [selected.length]
+      })) as MotionChainProps["animations"],
+    [currentModes.length]
   );
 
-  if (selected.length === 0)
+  if (currentModes.length === 0)
     return (
       <div className="h-[250px]  w-full">
         <div className="w-full my-1 text-rose-500 rounded-md bg-card py-2 px-4  flex items-center justify-between text-sm tracking-tight ">
@@ -36,16 +41,12 @@ export const SelectedMotion: FC<PlaygroundSelectedMotionProps> = ({
       </div>
     );
   return (
-    <ScrollArea className={cn(className, "h-[250px] w-full")}>
+    <ScrollArea className="h-[250px] w-full">
       <MotionChain
-        animations={
-          Array.from({ length: selected.length }).map(
-            itemsAnimation
-          ) as MotionChainProps["animations"]
-        }
+        animations={chainAnimations}
         elementType="div"
         config={{
-          duration: 1 / selected.length,
+          duration: 1 / currentModes.length,
           delayLogic: "linear",
         }}
         controller={{
@@ -54,13 +55,13 @@ export const SelectedMotion: FC<PlaygroundSelectedMotionProps> = ({
             amount: 0.5,
           },
         }}
-        key={selected.length}
+        key={currentModes.length}
         className="size-full items-center justify-center flex flex-col gap-2"
       >
-        {selected.map((item) => (
+        {(currentModes as AnimationKeys[]).map((item) => (
           <Button
             variant={"outline"}
-            onClick={() => handleSelect(item)}
+            onClick={() => handleRemoveItem(item)}
             className="w-full my-1 hover:text-rose-500"
           >
             <pre>{item}</pre>

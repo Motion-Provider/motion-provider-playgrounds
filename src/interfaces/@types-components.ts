@@ -5,7 +5,6 @@ import {
   MotionAnimationProps,
   MotionChainProps,
   MotionControllerProps,
-  MotionTextProps,
 } from "@/motion/types";
 import { VariantProps } from "class-variance-authority";
 import { SettingsByProvider } from "./@types-redux";
@@ -27,7 +26,7 @@ export interface HomepageBgProps extends ClassNameProps {
 
 /********** playground **************/
 
-/** motion engine clone interfaces */
+/** clone interfaces */
 
 export interface StableCloneProps extends MotionAnimation {
   controller: MotionControllerProps;
@@ -48,70 +47,10 @@ export interface MotionContainerCloneProps extends StableCloneProps {
   settings: SettingsByProvider["MotionContainer"];
 }
 
-/** motion engine clone interfaces ends */
-
-export interface PlayerControllerProps {
-  animation: MotionAnimationProps;
-  onAnimationChange: (key: keyof MotionAnimationProps, value: string) => void;
-  className?: string;
-}
+/** clone interfaces ends */
 
 export interface PlaygroundMiniViewerProps extends ClassNameProps {
   animationMode: MotionAnimationProps["mode"];
-}
-
-export interface PlayerViewerProps extends ClassNameProps {
-  delayLogic: DelayLogic;
-  animation: MotionAnimationProps;
-}
-
-export interface PlaygroundConfigProps
-  extends PlaygroundPlayerProps,
-    Omit<PlaygroundConfigurationProps, "className"> {
-  animation: MotionAnimationProps;
-  isModalOpen: boolean;
-  setIsMobileOpen: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-export interface PlaygroundControllerProps {
-  onReverse: () => void;
-  onAnimate: () => void;
-  onRandomAnimate: () => void;
-  onReset: () => void;
-  onModalOpen: () => void;
-  control: Omit<MotionControllerProps, "configView" | "trigger">;
-}
-
-export interface PlaygroundConfigurationProps extends ClassNameProps {
-  animation: MotionAnimationProps;
-  delayLogic: DelayLogic;
-  onDelayLogicChange: (delayLogic: DelayLogic) => void;
-  onAnimationChange: (key: keyof MotionAnimationProps, value: string) => void;
-}
-
-export interface MotionPlaygroundProps
-  extends Pick<MotionChainCloneProps, "controller">,
-    Omit<MotionChainCloneProps, "style"> {
-  children: React.ReactNode;
-}
-
-export interface PlaygroundConfigurationProps extends ClassNameProps {
-  animation: MotionAnimationProps;
-  delayLogic: DelayLogic;
-  onDelayLogicChange: (delayLogic: DelayLogic) => void;
-  onAnimationChange: (key: keyof MotionAnimationProps, value: string) => void;
-}
-
-export interface PlaygroundSelectedMotionProps extends ClassNameProps {
-  selected: AnimationKeys[];
-  onSelected: (selected: AnimationKeys[]) => void;
-}
-
-export interface MultiSelectProps {
-  items: AnimationKeys[];
-  selected: AnimationKeys[];
-  onChange: (selected: AnimationKeys[]) => void;
-  placeholder?: string;
 }
 
 export interface DockItem {
@@ -152,16 +91,13 @@ export interface HomepageTransitionSectionProps {
 
 export interface CardWrapperProps {
   id: number;
-  isHovered: boolean;
-  onHover: (id?: number) => void;
   children: React.ReactNode;
+  onHoverEnter: (id: number) => void;
+  onHoverLeave: () => void;
 }
 
 /** Infobox Props */
 
-export interface SyntaxViewerProps extends ClassNameProps {
-  currentMotion: Pick<MotionChainProps, "config" | "animations">;
-}
 export interface HintItemProps {
   text: string;
   motion?: string;
@@ -191,13 +127,23 @@ export interface SquareBackgroundPatternProps extends ClassNameProps {
   patternId?: string;
 }
 
-/***** types *****/
+/******** Grounds Props *********/
 
-export type MotionCircleStateProps = Omit<
-  MotionChainCloneProps,
-  "controller" | "style"
->;
-export type PlaygroundPlayerProps = Omit<
-  PlayerControllerProps & PlayerViewerProps,
-  "className"
->;
+/** Motion Text */
+
+export type TextFieldsValue = { header: string; desc: string };
+export type TextConfigValue = { duration: number };
+export type TextFieldsDispatch = {
+  setHeader: (v: string) => void;
+  setDesc: (v: string) => void;
+  getHeader: () => string;
+  getDesc: () => string;
+};
+export type TextConfigDispatch = {
+  setDuration: (v: number) => void;
+  getDuration: () => number;
+};
+export interface FieldWrapperProps {
+  children: React.ReactNode;
+}
+/** Motion Text Ends */

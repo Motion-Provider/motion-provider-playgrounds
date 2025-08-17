@@ -1,13 +1,13 @@
 import Head from "next/head";
-import { useCallback, useState } from "react";
-import PageLayout from "@/layouts/page-layout";
 import Cards from "@/components/home/cards";
-import { Hero } from "@/components/home/hero";
+import { useCallback, useState } from "react";
+import Hero from "@/components/home/hero";
+import PageLayout from "@/layouts/page-layout";
+import { Background } from "@/components/home/background";
+import motionCardsLib from "@/constants/motion-cards.lib";
 import { useAnimation } from "@/motion/hooks/use-animation";
 import { MotionCardItem } from "@/interfaces/@types-components";
 import { useAnimationControl } from "@/motion/hooks/use-animation-control";
-import { Background } from "@/components/home/background";
-import motionCardsLib from "@/constants/motion-cards.lib";
 
 export default function Home() {
   const [selectedItem, setSelectedItem] = useState<MotionCardItem | undefined>(

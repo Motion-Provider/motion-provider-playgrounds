@@ -1,31 +1,48 @@
-import { FC } from "react";
+import { useMemo } from "react";
 import { cn } from "@/lib/utils";
+import { ReduxRootState } from "@/redux";
+import { useSelector } from "react-redux";
 import MotionChain from "@/motion/motion-chain";
-import { MotionChainCloneProps } from "@/interfaces/@types-components";
+import { selectController } from "@/redux/slices/utils";
 
-const Chain: FC<MotionChainCloneProps> = ({
-  animation,
-  controller,
-  delayLogic,
-  settings,
-}) => {
-  const { borderBlur, borderColor, circleCount } = settings;
+export default function Chain() {
+  const { settings } = useSelector((state: ReduxRootState) => state.metadata);
+  const { borderBlur, borderColor, circleCount } = settings["MotionChain"];
+  const { animation, delayLogic } = useSelector(
+    (state: ReduxRootState) => state.motion
+  );
+  const { isAnimationStopped, reverse } = useSelector(selectController);
 
   const circles = Array.from({ length: circleCount }).map(
     (_, i) => 184 + i * 32
   );
 
+  const animations = useMemo(() => {
+    return {
+      modes: circles.map((_) => animation),
+      key: Object.keys(animation.mode).join("-"),
+    };
+  }, [circles, animation]);
+
   return (
     <MotionChain
-      animations={circles.map((_) => animation)}
+      animations={animations.modes}
       config={{
         duration: 0.15,
         delayLogic,
       }}
       elementType="div"
       className="border absolute rounded-full border-b-primary-foreground/30 border-t-secondary-foreground/60 bg-transparent border-x-stone-700 "
-      controller={controller}
-      key={animation.mode[0]}
+      controller={{
+        configView: {
+          amount: 0.1,
+          once: false,
+        },
+        isAnimationStopped,
+        reverse,
+        trigger: true,
+      }}
+      key={animations.key}
     >
       {circles.map((_, idx) => (
         <div
@@ -42,6 +59,4 @@ const Chain: FC<MotionChainCloneProps> = ({
       ))}
     </MotionChain>
   );
-};
-
-export default Chain;
+}

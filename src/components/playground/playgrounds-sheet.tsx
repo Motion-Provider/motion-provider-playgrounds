@@ -21,7 +21,7 @@ import Link from "next/link";
 import { interFont } from "@/lib/fonts";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 
-const Playgrounds = () => {
+const PlaygroundsSheet = () => {
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -70,4 +70,4 @@ const Playgrounds = () => {
   );
 };
 
-export default Playgrounds;
+export default PlaygroundsSheet;

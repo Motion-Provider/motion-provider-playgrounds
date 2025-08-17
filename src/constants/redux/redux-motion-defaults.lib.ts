@@ -3,6 +3,7 @@ import {
   MotionInitialsByProvider,
   MetadataProps,
   SettingsByProvider,
+  ReduxUtilsProps,
 } from "@/interfaces/@types-redux";
 
 const MotionChainInitialState: MotionAnimation = {
@@ -86,6 +87,14 @@ const MetadataInitialState: MetadataProps = {
   complexity: 1,
 };
 
+const UtilsInitialState: ReduxUtilsProps = {
+  isModalOpen: false,
+  controller: {
+    isAnimationStopped: false,
+    reverse: false,
+  },
+};
+
 export {
   MotionChainInitialState,
   MetadataInitialState,
@@ -94,4 +103,5 @@ export {
   MotionsAnimationInitialState,
   MotionDefaultInitialState,
   MotionImageInitialState,
+  UtilsInitialState,
 };

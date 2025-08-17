@@ -4,6 +4,8 @@ import { FC, useEffect, useRef } from "react";
 import MotionContainer from "@/motion/motion-container";
 import { HomepageBgProps } from "@/interfaces/@types-components";
 
+const cache = new Map<number, string>();
+
 export const Background: FC<HomepageBgProps> = ({
   selectedItemID,
   className,
@@ -11,27 +13,64 @@ export const Background: FC<HomepageBgProps> = ({
   const video = useRef<HTMLVideoElement | null>(null);
 
   useEffect(() => {
-    if (selectedItemID != null && video.current) {
-      const v = video.current;
-      if (v.src.includes(`${selectedItemID}.mp4`)) return;
+    let cancelled = false;
+    const v = video.current;
 
+    if (!v) return;
+
+    async function setVideoFromCache(id: number) {
+      if (cache.has(id) && v) {
+        const url = cache.get(id)!;
+
+        if (v?.currentSrc && v?.currentSrc.includes(url)) return;
+
+        v.pause();
+        v.src = url;
+
+        v.play()?.catch((e) => {
+          console.error(e);
+        });
+        return;
+      }
+
+      try {
+        const res = await fetch(`/assets/videos/${id}.mp4`);
+        const blob = await res.blob();
+
+        if (cancelled || !v) return;
+
+        const objectUrl = URL.createObjectURL(blob);
+        cache.set(id, objectUrl);
+
+        v.pause();
+        v.src = objectUrl;
+
+        v.play()?.catch(() => {});
+      } catch (err) {
+        console.error("Video fetch error:", err);
+      }
+    }
+
+    if (typeof selectedItemID !== "undefined") {
+      setVideoFromCache(selectedItemID);
+    } else {
       v.pause();
-      v.src = `/assets/videos/${selectedItemID}.mp4`;
-      v.load();
-
-      v.play()?.catch((err) => {
-        if (err.name !== "AbortError") {
-          console.error("Video play weirdly failed:", err);
-        }
-      });
     }
 
     return () => {
-      if (video.current && video.current.src) {
-        video.current.pause();
-      }
+      cancelled = true;
+      if (video.current) video.current.pause();
     };
   }, [selectedItemID]);
+
+  useEffect(() => {
+    return () => {
+      for (const url of cache.values()) {
+        URL.revokeObjectURL(url);
+      }
+      cache.clear();
+    };
+  }, []);
 
   if (typeof selectedItemID === "undefined")
     return <GridBg className={className} />;
@@ -53,6 +92,8 @@ export const Background: FC<HomepageBgProps> = ({
         autoPlay
         muted
         loop
+        playsInline
+        preload="auto"
         className="absolute inset-0 size-full -z-10 opacity-30 object-cover"
       />
     </MotionContainer>

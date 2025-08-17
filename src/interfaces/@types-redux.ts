@@ -1,6 +1,10 @@
 ﻿/** interfaces */
 
-import { MotionImageConfigProps, SplittedTextModes } from "@/motion/types";
+import {
+  MotionControllerProps,
+  MotionImageConfigProps,
+  SplittedTextModes,
+} from "@/motion/types";
 import { MotionAnimation } from "./@types-constants";
 
 /** Provider's settings interfaces */
@@ -33,6 +37,13 @@ export interface ReduxMovieSettingsProps
   animationDuration: number;
 }
 
+/** Utils interfaces */
+
+export interface ReduxUtilsProps {
+  isModalOpen: boolean;
+  controller: Omit<MotionControllerProps, "trigger" | "configView">;
+}
+
 /** Provider's metadata interfaces */
 
 export interface MetadataProps {
@@ -49,6 +60,8 @@ export type SettingsByProvider = {
   MotionImage: ReduxImageSettingsProps;
   MotionMovie: ReduxMovieSettingsProps;
 };
+
+/** Controller Props */
 
 export type MotionInitialsByProvider = Record<Motions, MotionAnimation>;
 /** types */

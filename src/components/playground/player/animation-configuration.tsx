@@ -1,5 +1,3 @@
-import { FC } from "react";
-import { cn } from "@/lib/utils";
 import {
   Select,
   SelectContent,
@@ -7,23 +5,32 @@ import {
   SelectTrigger,
 } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
-import { TransitionKeys } from "@/motion/types";
+import { DelayLogic, TransitionKeys } from "@/motion/types";
 import { Slider } from "@/components/ui/slider";
 import { Card, CardContent } from "@/components/ui/card";
-import { PlaygroundConfigurationProps } from "@/interfaces/@types-components";
 import { delayItems, transitionItems } from "@/constants/motion-types.lib";
+import { useDispatch, useSelector } from "react-redux";
+import { ReduxRootState, ReduxStoreDispatchType } from "@/redux";
+import { setDelayLogic, setMotion } from "@/redux/slices/motion";
 
-export const PlayerConfiguration: FC<PlaygroundConfigurationProps> = ({
-  delayLogic,
-  animation,
-  onAnimationChange,
-  onDelayLogicChange,
-  className,
-}) => {
+export const AnimationConfiguration = () => {
+  const dispatch = useDispatch<ReduxStoreDispatchType>();
+  const { animation, delayLogic } = useSelector(
+    (state: ReduxRootState) => state.motion
+  );
+
   const handleTransitionChange = (value: TransitionKeys) =>
-    onAnimationChange("transition", value);
+    dispatch(
+      setMotion({
+        transition: value,
+      })
+    );
+  const handleDurationChange = (val: number) =>
+    dispatch(setMotion({ duration: val }));
+
+  const handleDelayChange = (log: DelayLogic) => dispatch(setDelayLogic(log));
   return (
-    <Card className={cn("dark relative bg-transparent size-full", className)}>
+    <Card className={"dark relative bg-transparent size-full h-1/3 w-full"}>
       <CardContent className="flex flex-col gap-2 absolute size-full top-0 rounded-2xl p-4">
         <div className="w-full flex flex-row  px-2">
           <Badge
@@ -32,7 +39,7 @@ export const PlayerConfiguration: FC<PlaygroundConfigurationProps> = ({
           >
             Delay
           </Badge>
-          <Select value={delayLogic} onValueChange={onDelayLogicChange}>
+          <Select value={delayLogic} onValueChange={handleDelayChange}>
             <SelectTrigger className="w-full text-xs border-l-0 rounded-l-none">
               Change sequence{`(${delayLogic})`}
             </SelectTrigger>
@@ -85,9 +92,7 @@ export const PlayerConfiguration: FC<PlaygroundConfigurationProps> = ({
               max={15}
               step={0.25}
               value={[animation.duration!]}
-              onValueChange={(value) =>
-                onAnimationChange("duration", value[0] as never)
-              }
+              onValueChange={(value) => handleDurationChange(value[0])}
               className="dark border  rounded-l-md border-r-0 p-2 "
             />
             <Badge

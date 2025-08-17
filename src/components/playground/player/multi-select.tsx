@@ -1,8 +1,6 @@
-import { FC } from "react";
 import { Box } from "lucide-react";
 import { interFont } from "@/lib/fonts";
 import { AnimationKeys } from "@/motion/types";
-import { MultiSelectProps } from "@/interfaces/@types-components";
 import {
   HoverCard,
   HoverCardContent,
@@ -15,25 +13,41 @@ import {
   SelectTrigger,
 } from "@/components/ui/select";
 import { HoverViewer } from "./hover-viewer";
-import { SquareBgPattern } from "@/components/square-bg-pattern";
 import { Badge } from "@/components/ui/badge";
+import { useDispatch, useSelector } from "react-redux";
+import { ReduxRootState, ReduxStoreDispatchType } from "@/redux";
+import { toast } from "sonner";
+import { setMotion } from "@/redux/slices/motion";
+import animations from "@/motion/lib/animate.lib";
 
-export const MultiSelect: FC<MultiSelectProps> = ({
-  items,
-  selected,
-  onChange,
-}) => {
-  const toggleValue = (value: AnimationKeys) => {
-    if (selected.includes(value)) {
-      onChange(selected.filter((v) => v !== value));
-    } else {
-      onChange([...selected, value]);
+const items = Object.keys(animations).sort((a, b) =>
+  a.localeCompare(b)
+) as AnimationKeys[];
+
+export const MultiSelect = () => {
+  const dispatch = useDispatch<ReduxStoreDispatchType>();
+  const { animation } = useSelector((state: ReduxRootState) => state.motion);
+  const { mode: currentModes } = animation;
+
+  const onAnimationAdded = (value: AnimationKeys) => {
+    if (currentModes.includes(value)) {
+      toast.warning(`${value} is already selected Capitan.`, {
+        duration: 3000,
+        position: "top-center",
+        richColors: true,
+      });
+      return;
     }
+    dispatch(
+      setMotion({
+        mode: [...currentModes, value],
+      })
+    );
   };
 
   return (
-    <Select onValueChange={toggleValue}>
-      <SelectTrigger className="w-full">Select an animation </SelectTrigger>
+    <Select onValueChange={onAnimationAdded}>
+      <SelectTrigger className="w-full">Select an animation</SelectTrigger>
       <SelectContent
         className={`w-full relative h-auto p-2 dark ${interFont.className} w-full`}
       >
@@ -51,12 +65,6 @@ export const MultiSelect: FC<MultiSelectProps> = ({
               </HoverCardTrigger>
               <HoverCardContent className="w-full dark p-16 relative overflow-hidden">
                 <HoverViewer animationMode={item} className="size-16 z-10" />
-                <SquareBgPattern
-                  squareSize={2}
-                  gap={8}
-                  color="#fff00"
-                  className="absolute inset-0 -z-10 size-full"
-                />
                 <Badge variant={"outline"} className="absolute top-2 right-2">
                   <pre>{item}</pre>
                 </Badge>

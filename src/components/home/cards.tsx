@@ -13,6 +13,7 @@ import MotionImage from "@/motion/motion-image";
 import MotionChain from "@/motion/motion-chain";
 import { MotionControllerProps } from "@/motion/types";
 import MotionContainer from "@/motion/motion-container";
+import { useDelayedHover } from "@/hooks/useDelayedHover";
 
 const Cards: FC<HomeCardsProps> = ({
   items,
@@ -22,6 +23,8 @@ const Cards: FC<HomeCardsProps> = ({
   onHover,
   controller,
 }) => {
+  const { onEnter, onLeave } = useDelayedHover(onHover, 500);
+
   return (
     <div
       className={cn(
@@ -47,12 +50,12 @@ const Cards: FC<HomeCardsProps> = ({
           <CardWrapper
             id={item.id}
             key={item.id}
-            isHovered={item.id === hoveredItemID}
-            onHover={onHover}
+            onHoverEnter={onEnter}
+            onHoverLeave={onLeave}
           >
             <CardItem
-              onClick={onClick}
               {...item}
+              onClick={onClick}
               isHovered={item.id === hoveredItemID}
               key={item.id}
             />
@@ -132,7 +135,7 @@ const CardItem: FC<MotionCardItemProps> = memo((props) => {
           className="mb-4 w-full shrink-0 z-50 border-none text-xs relative"
         >
           <MotionLink
-            onReverse={() => onClick()}
+            onReverse={onClick}
             href={`/${btnLink}`}
             timer={3000}
             className="flex flex-row gap-2 size-full items-center justify-center"

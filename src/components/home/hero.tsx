@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, memo } from "react";
 import Link from "next/link";
 import { MotionLogo } from "../motion-logo";
 import { Badge } from "../ui/badge";
@@ -6,7 +6,7 @@ import { Waitlist } from "./waitlist";
 import MotionText from "@/motion/motion-text";
 import { HomepageTransitionSectionProps } from "@/interfaces/@types-components";
 
-export const Hero: FC<HomepageTransitionSectionProps> = ({ controller }) => (
+const Hero: FC<HomepageTransitionSectionProps> = ({ controller }) => (
   <div className="relative size-full flex md:p-24 p-12 items-center-safe">
     <div className="flex gap-4 flex-col ">
       <div>
@@ -68,3 +68,5 @@ export const Hero: FC<HomepageTransitionSectionProps> = ({ controller }) => (
     </p>
   </div>
 );
+
+export default memo(Hero);

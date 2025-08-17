@@ -22,11 +22,8 @@ const Syntax = () => {
   const [copiedText, copyToClipboard] = useCopyToClipboard();
   const currentCodeID = crypto.randomUUID().slice(0, 6);
 
-  const metadata = useSelector(
-    (state: ReduxRootState) => state.metadata
-  ) as ReduxRootState["metadata"];
+  const { metadata, motion } = useSelector((state: ReduxRootState) => state);
 
-  const motion = useSelector((state: ReduxRootState) => state.motion);
   const handleCopyCode = () => copyToClipboard(code);
 
   const code = useMemo(
@@ -40,6 +37,7 @@ const Syntax = () => {
       }),
     [metadata, motion]
   );
+
   return (
     <InfoBoxScrollLayout className="w-full">
       <SyntaxHighlighter
