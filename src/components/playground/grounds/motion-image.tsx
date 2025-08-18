@@ -43,7 +43,9 @@ const Image: FC = () => {
   const key = getMotionKey(
     (animation.mode as AnimationKeys[]).join("-"),
     "image",
-    delayLogic + animation.transition
+    `${delayLogic}-${animation.transition}-${
+      animation.duration
+    }-${JSON.stringify(fn)}`
   );
   return (
     <MotionImage

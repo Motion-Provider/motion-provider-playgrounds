@@ -33,7 +33,8 @@ const PlaygroundsSheet = () => {
         <SheetHeader>
           <SheetTitle>Change Motion Playground</SheetTitle>
           <SheetDescription>
-            Select a Motion Playground to start.
+            Select a ground to continue. All unique, human-crafted AI-FREE
+            staffs.
           </SheetDescription>
         </SheetHeader>
         <ScrollArea className="w-full h-3/4">

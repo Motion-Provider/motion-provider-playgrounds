@@ -4,6 +4,8 @@ import { ReduxRootState } from "@/redux";
 import { useSelector } from "react-redux";
 import MotionChain from "@/motion/motion-chain";
 import { selectController } from "@/redux/slices/utils";
+import getMotionKey from "@/utils/getMotionKey";
+import { AnimationKeys } from "@/motion/types";
 
 export default function Chain() {
   const { settings } = useSelector((state: ReduxRootState) => state.metadata);
@@ -17,16 +19,23 @@ export default function Chain() {
     (_, i) => 184 + i * 32
   );
 
-  const animations = useMemo(() => {
-    return {
-      modes: circles.map((_) => animation),
-      key: Object.keys(animation.mode).join("-"),
-    };
-  }, [circles, animation]);
+  const animations = useMemo(
+    () => circles.map((_) => animation),
+    [circles, animation]
+  );
 
+  const key = useMemo(
+    () =>
+      getMotionKey(
+        (animation.mode as AnimationKeys[]).join(" "),
+        "chain",
+        `${delayLogic}-${animation.transition}-${animation.duration}`
+      ),
+    [animation, delayLogic]
+  );
   return (
     <MotionChain
-      animations={animations.modes}
+      animations={animations}
       config={{
         duration: 0.15,
         delayLogic,
@@ -42,7 +51,7 @@ export default function Chain() {
         reverse,
         trigger: true,
       }}
-      key={animations.key}
+      key={key}
     >
       {circles.map((_, idx) => (
         <div

@@ -17,7 +17,7 @@ export const DurationControl: FC = memo(() => {
       <Label htmlFor="duration">Config Duration</Label>
       <div className="flex flex-row-reverse">
         <Badge variant="secondary" className="dark border-l-0 rounded-l-none">
-          Duration {duration.toFixed(3)}
+          {duration.toFixed(3)}
           {"(s)"}
         </Badge>
         <Slider

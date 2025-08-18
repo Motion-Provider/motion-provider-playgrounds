@@ -13,7 +13,7 @@ export default function MotionImagePage() {
       </Head>
       <Image />
       <PlaygroundController />
-      <GroundLabel className="text-8xl">Motion Image</GroundLabel>
+      <GroundLabel className="text-7xl">Motion Image</GroundLabel>
       <PlaygroundConfiguration />
     </PlaygroundLayout>
   );

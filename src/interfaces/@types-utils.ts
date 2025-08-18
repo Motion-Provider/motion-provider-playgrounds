@@ -10,3 +10,9 @@ export interface FontsSizeRangesSchema {
   value: number;
   className: string;
 }
+
+export type GetMotionKey = (
+  data: string,
+  prefix: string,
+  median: string
+) => string;

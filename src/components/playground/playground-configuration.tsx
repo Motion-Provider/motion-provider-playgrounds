@@ -70,6 +70,18 @@ const ConfigurationFooter = () => {
               </Badge>{" "}
               for lightning-fast editing and better experience.
             </li>
+            <li>
+              {" "}
+              <Badge variant={"outline"}>
+                <pre>delay</pre>
+              </Badge>{" "}
+              and
+              <Badge variant={"outline"}>
+                <pre>transition</pre>
+              </Badge>{" "}
+              might not be updated instantly — please play/stop to see the
+              changes.
+            </li>
           </ul>
         </AlertDescription>
       </Alert>

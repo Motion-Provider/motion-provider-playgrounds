@@ -42,14 +42,21 @@ export interface MotionImageCloneProps extends StableCloneProps {
 export interface PlaygroundMiniViewerProps extends ClassNameProps {
   animationMode: MotionAnimationProps["mode"];
 }
-
+export type DockTooltip = string | React.ReactNode;
 export interface DockItem {
-  text: string;
+  id: string;
   children: React.ReactNode;
+  tooltip?: DockTooltip;
+  ariaLabel?: string;
 }
-
 export interface DockProps extends ClassNameProps {
   items: DockItem[];
+}
+export interface DockContextValue {
+  items: DockItem[];
+  setItems: (items: DockItem[]) => void;
+  updateItem: (id: string, patch: Partial<DockItem>) => void;
+  registerItem: (item: DockItem) => () => void;
 }
 
 /** Landing page props */

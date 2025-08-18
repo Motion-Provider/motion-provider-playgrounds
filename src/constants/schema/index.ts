@@ -151,7 +151,7 @@ export default {
         "/assets/motion-container.webp",
       ],
       key: "images",
-      label: "Images",
+      label: "Image List",
     },
     {
       type: "selectNumber",
@@ -170,26 +170,6 @@ export default {
       defaultValue: 5,
       key: "animationDuration",
       label: "Total Duration",
-    },
-    {
-      type: "select",
-      defaultValue: "none",
-      key: "fn",
-      label: "Motion Trigger Function",
-      options: [
-        {
-          label: "None",
-          value: "none",
-        },
-        {
-          label: "Hover",
-          value: "hover",
-        },
-        {
-          label: "Click",
-          value: "click",
-        },
-      ] as { label: string; value: MotionImageConfigProps["fn"] }[],
     },
   ],
   MotionLink: [

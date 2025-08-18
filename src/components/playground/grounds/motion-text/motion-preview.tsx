@@ -12,25 +12,34 @@ import { selectController } from "@/redux/slices/utils";
 import { getFontSizeClass } from "@/utils/fontSizeRange";
 import { ResizablePanel } from "@/components/ui/resizable";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import { AnimationKeys, MotionAnimationProps } from "@/motion/types";
 
 const HeaderBlock: FC<{
   header: string;
-  animation: any;
+  animation: MotionAnimationProps;
   config: any;
   controller: any;
 }> = memo(({ header, animation, config, controller }) => {
-  const headerKey = useMemo(
-    () => `header-${animation.mode[0]}-${header.split(" ").join("-")}`,
-    [animation.mode, header]
+  const key = useMemo(
+    () =>
+      getMotionKey(
+        header,
+        "header",
+        `${(animation.mode as AnimationKeys[]).join("-")}-${Object.values(
+          config
+        )
+          .toString()
+          .replace(",", "-")}`
+      ),
+    [animation, header, config]
   );
-
   return (
     <MotionText
       elementType="h1"
       animation={animation}
       config={config}
       className="text-4xl tracking-tighter"
-      key={headerKey}
+      key={key}
       controller={controller}
     >
       {header ? header : "Type a header to be animated."}
@@ -40,14 +49,23 @@ const HeaderBlock: FC<{
 
 const DescBlock: FC<{
   desc: string;
-  animation: any;
+  animation: MotionAnimationProps;
   config: any;
   controller: any;
   fontSizeClass?: string;
 }> = memo(({ desc, animation, config, controller, fontSizeClass }) => {
-  const descKey = useMemo(
-    () => getMotionKey(desc, "desc", animation.mode[0]),
-    [animation.mode, desc]
+  const key = useMemo(
+    () =>
+      getMotionKey(
+        desc,
+        "desc",
+        `${(animation.mode as AnimationKeys[]).join("-")}-${Object.values(
+          config
+        )
+          .toString()
+          .replace(",", "-")}`
+      ),
+    [animation, desc, config]
   );
 
   return (
@@ -56,7 +74,7 @@ const DescBlock: FC<{
       animation={animation}
       config={config}
       wrapperClassName={cn("tracking-tight", fontSizeClass)}
-      key={descKey}
+      key={key}
       controller={controller}
     >
       {desc ? desc : "Type a description to be animated."}
@@ -89,10 +107,6 @@ export const MotionPreview: FC = memo(() => {
 
   const controller = useMemo(
     () => ({
-      configView: {
-        amount: 0.1,
-        once: false,
-      },
       isAnimationStopped,
       reverse,
       trigger: true,
@@ -101,8 +115,8 @@ export const MotionPreview: FC = memo(() => {
   );
 
   return (
-    <ResizablePanel defaultSize={65} className="p-12">
-      <ScrollArea className="size-full">
+    <ResizablePanel defaultSize={65} className=" size-full">
+      <ScrollArea className="size-full z-50 py-16 px-24">
         <HeaderBlock
           header={header}
           animation={animation}

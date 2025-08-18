@@ -32,7 +32,7 @@ export interface ReduxContainerSettingsProps {
   backgroundColor: BackgroundColors;
 }
 export interface ReduxMovieSettingsProps
-  extends Omit<ReduxImageSettingsProps, "img"> {
+  extends Omit<ReduxImageSettingsProps, "img" | "fn"> {
   images: string[];
   animationDuration: number;
 }

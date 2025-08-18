@@ -58,7 +58,7 @@ const MotionsInitialState: SettingsByProvider = {
     circleCount: 30,
   },
   MotionContainer: {
-    backgroundColor: "bg-purple-500",
+    backgroundColor: "bg-rose-500",
   },
   MotionImage: {
     fn: undefined,

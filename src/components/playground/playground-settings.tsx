@@ -1,6 +1,7 @@
 import { cn } from "@/lib/utils";
 import {
   Card,
+  CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
@@ -19,7 +20,7 @@ import {
 } from "@/components/ui/popover";
 import { interFont } from "@/lib/fonts";
 import schema from "@/constants/schema";
-import { Settings } from "lucide-react";
+import { Plus, Settings, Trash } from "lucide-react";
 import { ReduxRootState } from "@/redux";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -28,6 +29,7 @@ import { Separator } from "@/components/ui/separator";
 import { useDispatch, useSelector } from "react-redux";
 import { setComplexity, updateSettings } from "@/redux/slices/metadata";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "../ui/button";
 
 const PlaygroundSettings = () => {
   const isClient = useIsClient();
@@ -190,6 +192,73 @@ const PlaygroundSettings = () => {
                       </SelectContent>
                     </Select>
                   </div>
+                );
+              case "selectStringArray":
+                return (
+                  <Card key={field.key} className="dark mb-2 -mt-2">
+                    <CardHeader>
+                      <CardTitle>{field.label}</CardTitle>
+                      <CardDescription className="text-xs">
+                        Add or remove image URLs in order to animate them.
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent className="flex flex-col gap-2 -mt-3">
+                      {val.map((item: string, idx: number) => (
+                        <div key={idx} className="flex items-center gap-2">
+                          <Input
+                            type="text"
+                            value={item}
+                            onChange={(e) => {
+                              const newArr = [...val];
+                              newArr[idx] = e.target.value;
+                              dispatch(
+                                updateSettings({
+                                  key: field.key,
+                                  value: newArr,
+                                })
+                              );
+                            }}
+                            className="w-full"
+                          />
+                          <Button
+                            type="button"
+                            variant="ghost"
+                            onClick={() => {
+                              const newArr = val.filter(
+                                (_: string, i: number) => i !== idx
+                              );
+                              dispatch(
+                                updateSettings({
+                                  key: field.key,
+                                  value: newArr,
+                                })
+                              );
+                            }}
+                            className="text-red-500 text-sm"
+                          >
+                            <Trash className="h-4 w-4" />
+                          </Button>
+                        </div>
+                      ))}
+
+                      <Button
+                        onClick={() =>
+                          dispatch(
+                            updateSettings({
+                              key: field.key,
+                              value: [...val, ""],
+                            })
+                          )
+                        }
+                        size="sm"
+                        variant="default"
+                        className="mt-2"
+                      >
+                        <Plus className=" h-4 w-4 " />
+                        <span>Add item</span>
+                      </Button>
+                    </CardContent>
+                  </Card>
                 );
             }
           })}
