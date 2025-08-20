@@ -20,8 +20,8 @@ export interface ReduxTextSettingsProps {
   space: number;
 }
 export interface ReduxLinkSettingsProps {
-  href: string;
-  timer: number;
+  route: string;
+  trigger: boolean;
 }
 export interface ReduxImageSettingsProps {
   img: string;

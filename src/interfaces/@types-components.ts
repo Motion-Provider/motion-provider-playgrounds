@@ -124,6 +124,40 @@ export interface SquareBackgroundPatternProps extends ClassNameProps {
   patternId?: string;
 }
 
+export interface SafariMockProps extends ClassNameProps {
+  width?: number;
+  height?: number;
+}
+
+export interface LinkNavbarProps extends ClassNameProps {}
+
+export interface LinkNavItemProps extends ClassNameProps {
+  id: number;
+  title: string;
+}
+export type Tweet = {
+  id: string;
+  author: string;
+  handle: string;
+  avatar?: string;
+  text: string;
+  minutesAgo: number;
+};
+
+export interface SelectIconProps {
+  name: string;
+}
+
+export interface LinkNavItem {
+  id: number;
+  title: string;
+}
+
+export interface LinkNavItemComponentProps {
+  item: LinkNavItemProps;
+  onClick?: () => void;
+}
+
 /******** Grounds Props *********/
 
 /** Motion Text */

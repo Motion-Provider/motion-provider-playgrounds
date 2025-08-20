@@ -1,5 +1,5 @@
 ﻿import { Skeleton } from "@/components/ui/skeleton";
-import { FC } from "react";
+import { FC, useMemo } from "react";
 import { useSelector } from "react-redux";
 import { ReduxRootState } from "@/redux";
 import { selectController } from "@/redux/slices/utils";
@@ -16,16 +16,21 @@ const Movie: FC = () => {
 
   const { animationDuration, images, pieces } = settings["MotionMovie"];
 
-  const key = getMotionKey(
-    (animation.mode as AnimationKeys[]).join("-"),
-    "movie",
-    `${delayLogic}-${animation.transition}-${animation.duration}`
+  const key = useMemo(
+    () =>
+      getMotionKey(
+        (animation.mode as AnimationKeys[]).join("-"),
+        "movie",
+        `${delayLogic}-${animation.transition}-${animation.duration}-${animationDuration}`
+      ),
+    [animation, delayLogic, animationDuration]
   );
+
   return (
     <MotionMovie
       animations={{
         enter: animation.mode,
-        exit: animation.mode,
+        exit: ["fadeOut"],
         transition: animation.transition,
         duration: animation.duration,
       }}
@@ -36,12 +41,16 @@ const Movie: FC = () => {
         delayLogic,
       }}
       key={key}
-      wrapperClassName="size-[500px] rounded-lg overflow-hidden z-50"
+      wrapperClassName="size-[500px] z-50 rounded-lg absolute"
       fallback={<Skeleton className="size-[500px] dark" />}
       controller={{
-        trigger: true,
+        configView: {
+          amount: 0.5,
+          once: false,
+        },
         isAnimationStopped: reduxController.isAnimationStopped,
         reverse: reduxController.reverse,
+        trigger: true,
       }}
     />
   );

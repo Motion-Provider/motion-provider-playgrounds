@@ -5,6 +5,7 @@ import { Badge } from "../ui/badge";
 import { Waitlist } from "./waitlist";
 import MotionText from "@/motion/motion-text";
 import { HomepageTransitionSectionProps } from "@/interfaces/@types-components";
+import { MotionProviderLogo } from "../motion-provider-logo";
 
 const Hero: FC<HomepageTransitionSectionProps> = ({ controller }) => (
   <div className="relative size-full flex md:p-24 p-12 items-center-safe">
@@ -56,6 +57,7 @@ const Hero: FC<HomepageTransitionSectionProps> = ({ controller }) => (
       </div>
     </div>
     <MotionLogo />
+    <MotionProviderLogo />
     <p className="absolute bottom-12 md:right-auto right-0 text-muted-foreground text-xs text-center w-full md:w-auto">
       ©{new Date().getFullYear()} Motion Provider —{" "}
       <Link

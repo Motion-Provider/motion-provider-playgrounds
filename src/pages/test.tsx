@@ -1,7 +1,10 @@
-﻿export default function Test() {
+﻿import { Skeleton } from "@/components/ui/skeleton";
+import MotionMovie from "@/motion/motion-movie";
+
+export default function Test() {
   return (
     <div className="h-screen w-full items-center justify-center flex flex-col relative">
-      <MotionText_5294ea />
+      <MotionMovie_6734d7 />
     </div>
   );
 }
@@ -12,24 +15,32 @@ engine and matches with the current state
 of the animation. You can copy&paste, 
 ready-to-use in seconds!
 */
-import MotionText from "@/motion/motion-text";
 
-export function MotionText_5294ea() {
+export function MotionMovie_6734d7() {
+  const images = [
+    "https://images.unsplash.com/photo-1755097441290-408c244d0c8f?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "https://plus.unsplash.com/premium_photo-1755105194454-21564954e25e?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  ];
+
   return (
-    <MotionText
-      elementType="p"
-      animation={{
-        mode: ["rotateClockwise", "typingEffect"],
-        transition: "cubicBounce",
+    <MotionMovie
+      animations={{
+        enter: ["filterBlurIn", "fadeIn"],
+        exit: ["fadeOut"],
+        transition: "smooth",
         duration: 1,
       }}
       config={{
-        duration: 0.48,
-        mode: "chars",
-        delayLogic: "linear",
+        pieces: 64,
+        images: images,
+        animationDuration: 5,
+        delayLogic: "sinusoidal",
       }}
-    >
-      Hello World!
-    </MotionText>
+      wrapperClassName="size-[500px] z-50 rounded-lg absolute"
+      className="size-full"
+      fallback={
+        <div className="size-96 animate-pulse bg-stone-800 rounded-lg" />
+      }
+    />
   );
 }

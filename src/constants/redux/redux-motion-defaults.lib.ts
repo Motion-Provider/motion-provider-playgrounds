@@ -42,13 +42,21 @@ const MotionImageInitialState: MotionAnimation = {
   delayLogic: "sinusoidal",
 };
 
+const MotionMovieInitialState: MotionAnimation = {
+  animation: {
+    mode: ["filterBlurIn", "fadeIn"],
+    transition: "smooth",
+    duration: 1,
+  },
+  delayLogic: "sinusoidal",
+};
 const MotionsAnimationInitialState: MotionInitialsByProvider = {
   MotionChain: MotionChainInitialState,
   MotionContainer: MotionDefaultInitialState,
   MotionText: MotionTextInitialState,
   MotionImage: MotionImageInitialState,
   MotionLink: MotionDefaultInitialState,
-  MotionMovie: MotionDefaultInitialState,
+  MotionMovie: MotionMovieInitialState,
 };
 
 const MotionsInitialState: SettingsByProvider = {
@@ -66,11 +74,10 @@ const MotionsInitialState: SettingsByProvider = {
     pieces: 81,
   },
   MotionLink: {
-    href: "/",
-    timer: 5000,
+    route: "motionsocials.dev/home",
+    trigger: false,
   },
   MotionMovie: {
-    fn: undefined,
     images: ["/assets/motion-movie.webp", "/assets/motion-container.webp"],
     pieces: 81,
     animationDuration: 5,

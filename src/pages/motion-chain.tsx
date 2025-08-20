@@ -3,8 +3,8 @@ import React from "react";
 import PlaygroundLayout from "@/layouts/playground-layout";
 import Chain from "@/components/playground/grounds/motion-chain";
 import { GroundLabel } from "@/components/playground/ground-label";
-import PlaygroundConfiguration from "@/components/playground/playground-configuration";
 import PlaygroundController from "@/components/playground/playground-controller";
+import PlaygroundConfiguration from "@/components/playground/playground-configuration";
 
 export default function MotionChainPage() {
   return (

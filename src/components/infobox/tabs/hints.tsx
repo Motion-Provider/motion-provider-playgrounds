@@ -1,12 +1,4 @@
-﻿import {
-  FC,
-  useRef,
-  createContext,
-  useContext,
-  useState,
-  useEffect,
-  useMemo,
-} from "react";
+﻿import { FC, useRef, useState, useEffect, useMemo } from "react";
 import {
   Carousel,
   CarouselApi,
@@ -32,21 +24,19 @@ import { InfoboxHintLibProps } from "@/interfaces/@types-constants";
 import textLib from "@/constants/infobox/hints/text.lib";
 import imageLib from "@/constants/infobox/hints/image.lib";
 import containerLib from "@/constants/infobox/hints/container.lib";
+import linkLib from "@/constants/infobox/hints/link.lib";
+import movieLib from "@/constants/infobox/hints/movie.lib";
 
 const hintsByMotion = {
   MotionChain: chainLib,
   MotionText: textLib,
   MotionContainer: containerLib,
-  MotionLink: sharedLib,
+  MotionLink: linkLib,
   MotionImage: imageLib,
-  MotionMovie: sharedLib,
+  MotionMovie: movieLib,
 } satisfies Record<Motions, InfoboxHintLibProps>;
 
-const Hints = () => {
-  return <CarouselOrientation />;
-};
-
-const CarouselOrientation: FC = () => {
+const Hints: FC = () => {
   const { currentMotion } = useSelector(
     (state: ReduxRootState) => state.metadata
   );
@@ -88,7 +78,7 @@ const CarouselOrientation: FC = () => {
         orientation="vertical"
         className="w-full relative "
       >
-        <CarouselContent className=" h-60 ">
+        <CarouselContent className="h-60">
           {hintsData.map((val, index) => (
             <CarouselItem key={index} className="pt-1 md:basis-1/2">
               <MotionContainer

@@ -69,7 +69,7 @@ const PlaygroundSettings = () => {
             orientation="horizontal"
             className="my-4 w-16 h-4 self-center"
           />
-          {SETTINGS_SCHEMA.map((field) => {
+          {SETTINGS_SCHEMA.map((field: any) => {
             const val = (settings as any)[field.key];
             switch (field.type) {
               case "number":
@@ -148,7 +148,7 @@ const PlaygroundSettings = () => {
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent id={field.key} className="dark">
-                        {field.options.map((o) => (
+                        {field.options.map((o: (typeof field.options)[0]) => (
                           <SelectItem key={o.value} value={o.value!}>
                             {field.key.toLowerCase().includes("color") && (
                               <span
@@ -184,7 +184,7 @@ const PlaygroundSettings = () => {
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent className="dark" id={field.key}>
-                        {field.options.map((o) => (
+                        {field.options.map((o: (typeof field.options)[0]) => (
                           <SelectItem key={o.value} value={o.value.toString()}>
                             {o.label}
                           </SelectItem>
