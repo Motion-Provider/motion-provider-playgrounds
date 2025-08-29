@@ -5,7 +5,7 @@ import { FC } from "react";
 
 const PageLayout: FC<PageLayoutProps> = ({ children }) => (
   <main
-    className={`w-full h-screen relative dark ${interFont.className} flex flex-row overflow-hidden`}
+    className={`w-full h-screen relative ${interFont.className} flex flex-row overflow-hidden`}
   >
     <Head>
       <meta

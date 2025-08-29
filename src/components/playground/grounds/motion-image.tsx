@@ -59,7 +59,7 @@ const Image: FC = () => {
       }}
       key={key}
       wrapperClassName="size-[500px] rounded-lg overflow-hidden z-50"
-      fallback={<Skeleton className="size-[500px] dark" />}
+      fallback={<Skeleton className="size-[500px] " />}
       controller={typeof fn === "undefined" ? controller : undefined}
     />
   );

@@ -32,7 +32,7 @@ export default function InfoBoxLayout({ children, className }: LayoutProps) {
     <div
       className={cn(
         interFont.className,
-        "items-center justify-center flex overflow-hidden relative dark",
+        "items-center justify-center flex overflow-hidden relative",
         className
       )}
     >

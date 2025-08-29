@@ -50,7 +50,7 @@ export default function Installation() {
   const defaultManager = packageManagers[0]?.id ?? "npm";
 
   return (
-    <div className="h-full w-full px-6 py-2 dark">
+    <div className="h-full w-full px-6 py-2">
       <ScrollArea className="h-60 w-full">
         <header className="pt-2">
           <h3 className="text-xl  leading-tight">Motion Provider — BETA</h3>

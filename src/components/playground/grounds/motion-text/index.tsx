@@ -16,7 +16,7 @@ const MotionPreview = dynamic(
   () => import("./motion-preview").then((mod) => mod.MotionPreview),
   {
     ssr: false,
-    loading: () => <Skeleton className="h-full w-[64.33%] dark" />,
+    loading: () => <Skeleton className="h-full w-[64.33%]" />,
   }
 );
 

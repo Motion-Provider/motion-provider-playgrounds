@@ -49,7 +49,7 @@ export const MultiSelect = () => {
     <Select onValueChange={onAnimationAdded}>
       <SelectTrigger className="w-full">Select an animation</SelectTrigger>
       <SelectContent
-        className={`w-full relative h-auto p-2 dark ${interFont.className} w-full`}
+        className={`w-full relative h-auto p-2 ${interFont.className} w-full`}
       >
         {items.map((item) => (
           <SelectItem

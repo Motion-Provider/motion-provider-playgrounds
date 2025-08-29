@@ -30,9 +30,7 @@ export const PlayerViewer = () => {
   const handleRestart = () => setKey((prev) => prev + 1);
 
   return (
-    <Card
-      className={"dark relative bg-transparent overflow-hidden h-2/3 w-full"}
-    >
+    <Card className="relative bg-transparent overflow-hidden h-2/3 w-full">
       <MotionContainer
         animation={{
           mode: ["fadeIn"],

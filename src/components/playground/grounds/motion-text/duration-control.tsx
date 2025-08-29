@@ -16,7 +16,7 @@ export const DurationControl: FC = memo(() => {
     <FieldWrapper>
       <Label htmlFor="duration">Config Duration</Label>
       <div className="flex flex-row-reverse">
-        <Badge variant="secondary" className="dark border-l-0 rounded-l-none">
+        <Badge variant="secondary" className="border-l-0 rounded-l-none">
           {duration.toFixed(3)}
           {"(s)"}
         </Badge>
@@ -28,7 +28,7 @@ export const DurationControl: FC = memo(() => {
           step={0.005}
           value={[duration]}
           onValueChange={(value) => setDuration(value[0])}
-          className="dark border  rounded-l-md border-r-0 p-2 "
+          className=" border  rounded-l-md border-r-0 p-2 "
         />
       </div>
       <p className="text-muted-foreground text-xs">

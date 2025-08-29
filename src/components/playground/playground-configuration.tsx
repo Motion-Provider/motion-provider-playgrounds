@@ -43,7 +43,7 @@ const ConfigurationFooter = () => {
   if (!isOpen) return null;
   return (
     <DialogFooter className="text-xs w-full -mt-8 px-6">
-      <Alert className="w-full dark bg-transparent">
+      <Alert className="w-full bg-transparent">
         <Button
           variant="ghost"
           className="absolute top-1 right-1 z-50"

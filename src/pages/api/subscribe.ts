@@ -17,6 +17,7 @@ function bump(
 ) {
   const now = Date.now();
   const entry = map.get(key);
+
   if (!entry || now > entry.resetAt) {
     map.set(key, { count: 1, resetAt: now + RATE_LIMIT_WINDOW_MS });
     return true;

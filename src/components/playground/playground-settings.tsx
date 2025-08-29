@@ -48,11 +48,11 @@ const PlaygroundSettings = () => {
 
   return (
     <Popover modal>
-      <PopoverTrigger className="cursor-pointer dark">
+      <PopoverTrigger className="cursor-pointer">
         <Settings className="size-5 " />
       </PopoverTrigger>
-      <PopoverContent className={`dark ${interFont.className} w-[24rem]`}>
-        <Card className="py-4 dark">
+      <PopoverContent className={` ${interFont.className} w-[24rem]`}>
+        <Card className="py-4">
           <CardHeader>
             <CardTitle className="inline-flex gap-2 items-center">
               <Badge variant={"destructive"}>
@@ -147,7 +147,7 @@ const PlaygroundSettings = () => {
                       <SelectTrigger className="w-2/3">
                         <SelectValue />
                       </SelectTrigger>
-                      <SelectContent id={field.key} className="dark">
+                      <SelectContent id={field.key}>
                         {field.options.map((o: (typeof field.options)[0]) => (
                           <SelectItem key={o.value} value={o.value!}>
                             {field.key.toLowerCase().includes("color") && (
@@ -183,7 +183,7 @@ const PlaygroundSettings = () => {
                       <SelectTrigger className="w-2/3">
                         <SelectValue />
                       </SelectTrigger>
-                      <SelectContent className="dark" id={field.key}>
+                      <SelectContent id={field.key}>
                         {field.options.map((o: (typeof field.options)[0]) => (
                           <SelectItem key={o.value} value={o.value.toString()}>
                             {o.label}
@@ -195,7 +195,7 @@ const PlaygroundSettings = () => {
                 );
               case "selectStringArray":
                 return (
-                  <Card key={field.key} className="dark mb-2 -mt-2">
+                  <Card key={field.key} className=" mb-2 -mt-2">
                     <CardHeader>
                       <CardTitle>{field.label}</CardTitle>
                       <CardDescription className="text-xs">

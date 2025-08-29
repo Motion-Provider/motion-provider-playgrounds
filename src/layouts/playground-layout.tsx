@@ -10,7 +10,7 @@ import Head from "next/head";
 const PlaygroundLayout: FC<LayoutProps> = ({ children, className }) => (
   <div
     className={cn(
-      "w-full h-screen items-center justify-center flex overflow-hidden relative dark ",
+      "w-full h-screen items-center justify-center flex overflow-hidden relative ",
       interFont.className,
       className
     )}

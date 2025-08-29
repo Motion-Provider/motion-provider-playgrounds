@@ -30,7 +30,7 @@ export const AnimationConfiguration = () => {
 
   const handleDelayChange = (log: DelayLogic) => dispatch(setDelayLogic(log));
   return (
-    <Card className={"dark relative bg-transparent size-full h-1/3 w-full"}>
+    <Card className={" relative bg-transparent size-full h-1/3 w-full"}>
       <CardContent className="flex flex-col gap-2 absolute size-full top-0 rounded-2xl p-4">
         <div className="w-full flex flex-row  px-2">
           <Badge
@@ -43,7 +43,7 @@ export const AnimationConfiguration = () => {
             <SelectTrigger className="w-full text-xs border-l-0 rounded-l-none">
               Change sequence{`(${delayLogic})`}
             </SelectTrigger>
-            <SelectContent className="w-full relative h-60 p-2 dark">
+            <SelectContent className="w-full relative h-60 p-2 ">
               {delayItems.map((item) => (
                 <SelectItem
                   value={item}
@@ -71,7 +71,7 @@ export const AnimationConfiguration = () => {
             <SelectTrigger className="w-full text-xs border-l-0 rounded-l-none">
               Change transition{`(${animation.transition})`}
             </SelectTrigger>
-            <SelectContent className="w-full relative h-60 p-2 dark">
+            <SelectContent className="w-full relative h-60 p-2 ">
               {transitionItems.map((item) => (
                 <SelectItem
                   value={item}
@@ -93,12 +93,9 @@ export const AnimationConfiguration = () => {
               step={0.25}
               value={[animation.duration!]}
               onValueChange={(value) => handleDurationChange(value[0])}
-              className="dark border  rounded-l-md border-r-0 p-2 "
+              className=" border  rounded-l-md border-r-0 p-2 "
             />
-            <Badge
-              variant={"secondary"}
-              className="dark border-l-0 rounded-l-none"
-            >
+            <Badge variant={"secondary"} className=" border-l-0 rounded-l-none">
               Duration {animation.duration}
               {"(s)"}
             </Badge>

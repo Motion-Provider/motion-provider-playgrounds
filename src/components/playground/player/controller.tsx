@@ -12,9 +12,7 @@ import { MultiSelect } from "./multi-select";
 
 export const PlayerController = () => {
   return (
-    <Card
-      className={"dark relative bg-transparent overflow-hidden w-2/5 h-full"}
-    >
+    <Card className="relative bg-transparent overflow-hidden w-2/5 h-full">
       <CardHeader>
         <CardTitle>Motion Animation</CardTitle>
         <CardDescription>

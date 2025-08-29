@@ -29,7 +29,7 @@ const PlaygroundsSheet = () => {
           <Boxes className="size-5" />
         </Button>
       </SheetTrigger>
-      <SheetContent className={`dark ${interFont.className}`}>
+      <SheetContent className={interFont.className}>
         <SheetHeader>
           <SheetTitle>Change Motion Playground</SheetTitle>
           <SheetDescription>

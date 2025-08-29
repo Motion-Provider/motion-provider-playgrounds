@@ -51,7 +51,7 @@ const LinkNavbar: FC = () => {
             trigger: !trigger,
           }}
           wrapperClassName="p-1"
-          fallback={<Skeleton className="h-10 w-10 dark" />}
+          fallback={<Skeleton className="h-10 w-10" />}
         />
       </Avatar>
       <MotionText

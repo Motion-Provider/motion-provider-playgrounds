@@ -42,7 +42,7 @@ const Movie: FC = () => {
       }}
       key={key}
       wrapperClassName="size-[500px] z-50 rounded-lg absolute"
-      fallback={<Skeleton className="size-[500px] dark" />}
+      fallback={<Skeleton className="size-[500px] " />}
       controller={{
         configView: {
           amount: 0.5,
