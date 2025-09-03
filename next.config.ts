@@ -1,13 +1,13 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  output: "export",
   images: {
     unoptimized: true,
   },
   eslint: {
     ignoreDuringBuilds: true,
   },
+
   /* config options here */
   reactStrictMode: true,
   devIndicators: false,
@@ -24,6 +24,7 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  allowedDevOrigins: ["local-origin.dev", "*.local-origin.dev"],
 };
 
 export default nextConfig;
