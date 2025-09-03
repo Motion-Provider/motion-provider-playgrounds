@@ -1,12 +1,12 @@
 import { ArrowRight } from "lucide-react";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
-import { FC, useState } from "react";
+import { FC, memo, useState } from "react";
 import { cn } from "@/lib/utils";
 import { Skeleton } from "../ui/skeleton";
 import { toast } from "sonner";
 
-export const Waitlist: FC<{
+const Waitlist: FC<{
   isDescriptionOpen?: boolean;
   className?: string;
 }> = ({ isDescriptionOpen = true, className }) => {
@@ -89,3 +89,5 @@ export const Waitlist: FC<{
     </>
   );
 };
+
+export default memo(Waitlist);

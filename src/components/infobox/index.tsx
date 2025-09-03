@@ -3,7 +3,7 @@ import dynamic from "next/dynamic";
 import InfoBoxPortal from "./portal";
 import { InfoboxRouteItem } from "@/interfaces/@types-components";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
-import { Waitlist } from "../home/waitlist";
+import Waitlist from "../home/waitlist";
 import { Button } from "../ui/button";
 import Link from "next/link";
 import { Coffee } from "lucide-react";
