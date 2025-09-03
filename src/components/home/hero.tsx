@@ -2,7 +2,7 @@ import { FC, memo } from "react";
 import Link from "next/link";
 import { MotionLogo } from "../motion-logo";
 import { Badge } from "../ui/badge";
-import { Waitlist } from "./waitlist";
+import Waitlist from "./waitlist";
 import MotionText from "@/motion/motion-text";
 import { HomepageTransitionSectionProps } from "@/interfaces/@types-components";
 import { MotionProviderLogo } from "../motion-provider-logo";
@@ -65,7 +65,7 @@ const Hero: FC<HomepageTransitionSectionProps> = ({ controller }) => (
         target="_blank"
         className="hover:underline underline-offset-2"
       >
-        created by Burak Bilen
+        crafted by Burak Bilen
       </Link>
     </p>
   </div>

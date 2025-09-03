@@ -5,7 +5,7 @@
   "start_url": "/",
   "scope": "/",
   "id": "/",
-  "display_override": "",
+  "display_override": ["fullscreen", "minimal-ui"],
   "icons": [
     {
       "src": "/android-chrome-192x192.png",
@@ -20,7 +20,7 @@
   ],
   "theme_color": "#0a0a0a",
   "background_color": "#0a0a0a",
-  "display": "fullscreen",
+  "display": "standalone",
   "screenshots": [
     {
       "src": "/assets/screenshots/motion-provider-mobile-screenshot.jpg",
