@@ -55,7 +55,7 @@ const PlaygroundLayout: FC<LayoutProps> = ({ children, className }) => (
         sizes="16x16"
         href="/favicon-16x16.png"
       />
-      <link rel="manifest" href="/site.webmanifest"></link>
+      <link rel="manifest" href="/site.webmanifest" />
     </Head>
     {children}
     <GridBg className="absolute top-0 left-0 w-full h-full" />
