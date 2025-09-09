@@ -1,15 +1,12 @@
 import { useState, useCallback } from "react";
 import { UseAnimationControlProps, UseAnimationProps } from "../types";
 
-const initial: UseAnimationControlProps = {
-  reverseAnimation: false,
-  stopAnimation: false,
-};
-
-export const useAnimationControl = () => {
-  const [control, setControl] = useState<UseAnimationProps>(
-    initial as UseAnimationProps
-  );
+export const useAnimationControl = (initial?: UseAnimationControlProps) => {
+  const [control, setControl] = useState<UseAnimationProps>({
+    stopAnimation: false,
+    reverseAnimation: false,
+    ...initial,
+  });
 
   const onReverse = useCallback(() => {
     setControl((prev) => ({
@@ -27,7 +24,5 @@ export const useAnimationControl = () => {
     }));
   }, []);
 
-  const reset = () => setControl(initial as UseAnimationProps);
-
-  return { control, onReverse, onStop, reset };
+  return { control, onReverse, onStop };
 };

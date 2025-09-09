@@ -34,11 +34,11 @@ function animationReducer(
 }
 
 export const useAnimation = ({
-  stopAnimation,
+  stopAnimation = false,
   reverseAnimation = false,
 }: UseAnimationProps): UseAnimationStateProps => {
   const [state, dispatch] = useReducer(animationReducer, initialState);
-  const recallDuration = 50;
+  const recallDuration = 500;
 
   useEffect(() => {
     let timeout: ReturnType<typeof setTimeout>;
