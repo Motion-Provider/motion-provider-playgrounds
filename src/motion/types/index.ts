@@ -1,112 +1,808 @@
-/*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+**/
-// Welcome to the Motion Provider Interfaces
-// Author: Burak Bilen
-// Warning: Any changes in this file may cause fatal type errors in the application. Be aware.
-/*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+**/
-
-// Imports
-
-import { UseInViewOptions } from "motion/react";
-
-/*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+**/
-
-// Core Interfaces
+import { EasingDefinition, UseInViewOptions } from "motion/react";
+import { HTMLAttributes } from "react";
+import { AnimationKeys } from "../constants/animations";
+import { TransitionKeys } from "../constants/transitions";
 
 export interface MotionControllerProps {
-  configView?: UseInViewOptions;
+  /**
+   * @description
+   * Allows you to pass options to the useInView hook,
+   * which is used to control the animation with it's
+   * viewport visibility.
+   *
+   * @see https://motion.dev/docs/react-use-in-view
+   */
+  configView?: Omit<UseInViewOptions, "root">;
+  /**
+   * @description
+   * A controllered prop to trigger the animation state in 2 ways:
+   * - Start animate
+   * - Reverse animate
+   *
+   * Behaves like a mini version of @param [MotionControllerProps]
+   * because it works with only 2 way in one flow:
+   *
+   * Start —> animateBegin & Reverse —> animateRollback
+   *
+   * @default undefined
+   * @type boolean
+   * @example
+   *
+   * const [trigger, setTrigger] = useState(false);
+   *
+   * <MotionContainer
+   *   onClick={() => setTrigger(prev => !prev)}
+   *   elementType="div"
+   *   animation={{
+   *     mode: ["filterBrightnessFade"],
+   *     transition: "springy",
+   *     duration: 1,
+   *   }}
+   *   controller={{
+   *     trigger,
+   *   }}
+   *   className="your-css-goes-here"
+   * />
+   *   <IfThereIsChildComponent />
+   * </MotionContainer>
+   *
+   */
   trigger?: boolean;
+  /**
+   * @description
+   * Indicates whether the animation should be stopped completely.
+   * Not recommended for stand-alone use. Powerful with useAnimation
+   * hook when passed as a prop to control the animation flow.
+   *
+   * @default undefined
+   * @type {boolean}
+   * @example
+   * const { onReverse, control } = useAnimationControl();
+   * const { isAnimationStopped, reverse } = useAnimation(control);
+   *
+   * // might be used in any MP component
+   * <MotionContainer
+   *   elementType="div"
+   *   animation={{
+   *     mode: ["fadeIn", "filterBlurIn"],
+   *     transition: "smooth",
+   *   }}
+   *   controller={{
+   *     isAnimationStopped,
+   *     reverse
+   *   }}
+   *   className="your-css-goes-here"
+   * />
+   */
   isAnimationStopped?: boolean;
+  /**
+   * @description
+   * Indicates whether the animation should be reversed.
+   * Not recommended for stand-alone use. Powerful with useAnimation
+   * hook when passed as a prop to control the animation flow.
+   *
+   * @default undefined
+   * @type {boolean}
+   * @example
+   * const { onReverse, control } = useAnimationControl();
+   * const { isAnimationStopped, reverse } = useAnimation(control);
+   *
+   * // might be used in any MP component
+   * <MotionContainer
+   *   elementType="div"
+   *   animation={{
+   *     mode: ["fadeIn", "filterBlurIn"],
+   *     transition: "smooth",
+   *   }}
+   *   controller={{
+   *     isAnimationStopped,
+   *     reverse
+   *   }}
+   *   className="your-css-goes-here"
+   * />
+   */
   reverse?: boolean;
 }
 
 export interface MotionAnimationProps {
+  /**
+   * @description
+   * Predefined animation mode(s) to be applied. MP provides
+   * outrageous numbers(75+) of predefined animation modes for
+   * you to choose from without worrying about the compexity which
+   * is fixed and always hovering around O(n).
+   *
+   * @default "opacity"
+   * @type {AnimationKeys | AnimationKeys[]}
+   * @example
+   *
+   * <MotionContainer
+   *   elementType="div"
+   *   animation={{
+   *     // yes, that's actually quite all the thing
+   *     // to animate without hesitation :)
+   *     mode: "fadeIn",
+   *     transition: "smooth",
+   *   }}
+   *   className="your-css-goes-here"
+   * />
+   */
   mode: AnimationKeys | AnimationKeys[];
+  /**
+   * @description
+   * Predefined animation transition type to be applied.
+   * Find the best transition based on your animation needing.
+   *
+   * @default "default"
+   * @type {TransitionKeys}
+   * @example
+   *
+   * <MotionContainer
+   *   elementType="div"
+   *   animation={{
+   *     mode: "fadeIn",
+   *     // powerful typesafe API's enables developer
+   *     // to struggle less to choose the right transition
+   *     transition: "smooth",
+   *   }}
+   *   className="your-css-goes-here"
+   * />
+   */
   transition: TransitionKeys;
+  /**
+   * @description
+   * Delay of the animation applies right before the animation starts.
+   * Creates a standby time and you can think of it as a pause before
+   * the animation starts.
+   *
+   * @type {number} delay of the animation in seconds(s).
+   * @default 0
+   */
   delay?: number;
+  /**
+   * @description
+   * Duration of the animation in seconds(s).
+   * It's recommended to keep it between 0.3-1.5
+   * seconds.
+   *
+   * @type {number} duration of the animation in seconds(s).
+   * @default 0.5
+   * @minimum 0
+   *
+   */
   duration?: number;
 }
 
-/*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+**/
-
-// Core Config Interfaces
+// Configs
 
 export interface MotionChainConfigProps {
-  delayByElement?: number;
-  isDynamicallyQueued?: boolean;
+  /**
+   * @description
+   * Indicates the animation's sequence and
+   * also comes with powerful pre-defined APIs.
+   *
+   * @default "linear"
+   * @type {DelayLogic}
+   *
+   */
   delayLogic?: DelayLogic;
+  /**
+   * @description
+   * Custom delay logic for each animation.
+   * You can create custom sequence effect
+   * depending on the index of the animation
+   * with this prop.
+   *
+   * @default undefined
+   * @type {(index: number) => number}
+   *
+   */
   customLogic?: (index: number) => number;
+  /**
+   * @description
+   * Total duration of the animation process in seconds(s).
+   * duration represents the base of the
+   * animation that is being used inside the
+   * 'calculateDelay' utility fn to make sure
+   * each animation is passing in sequence.
+   *
+   * @default 0.5
+   * @type {number}
+   * @minimum 0
+   *
+   */
   duration: number;
 }
 
 export interface MotionTextConfigProps extends MotionChainConfigProps {
+  /**
+   * @description
+   * Text modes are used to split the text into words
+   * or characters and animate them individually.
+   *
+   * @default "chars"
+   * @type {SplittedTextModes}
+   *
+   */
   mode: SplittedTextModes;
+  /**
+   * @description
+   * Indicates the space between each word or character.
+   *
+   * @default 0
+   * @type {MotionTextConfigSpaceProps}
+   *
+   */
   space?: MotionTextConfigSpaceProps;
 }
 
 export interface MotionImageConfigProps extends MotionChainConfigProps {
+  /**
+   * @description
+   * The amount of pieces that is going to
+   * be splitted for the calculation of
+   * per-piece delay throughout the image.
+   *
+   * IMPORTANT NOTE:
+   * Keeping the amount of pieces higher than 200
+   * might cause performance issues particularly
+   * CLS metrics. So keep in mind that this prop
+   * has to be used with caution.
+   *
+   * @default 64
+   * @type {ImageMotionPieces}
+   *
+   */
   pieces: ImageMotionPieces;
+  /**
+   * @description
+   * Some magic prop to add event handlers and
+   * trigger per-piece animations. It can be
+   * used to create interactive motion. There are
+   * 2 modes available:
+   * - `"hover"`: mouse movement triggers a 3x3 neighborhood around the pointer.
+   * - `"click"`: clicking triggers the neighborhood for the clicked cell.
+   *
+   * @default undefined
+   * @type {ImageMotionFnTypes}
+   *
+   */
   fn?: ImageMotionFnTypes;
+  /**
+   * @description
+   * The path to the image that is going to be
+   * used through MotionImage components
+   * in order to fill the grid.
+   *
+   * @default undefined
+   * @type {string}
+   */
   img?: string;
 }
 
+type MotionMovieConfigProps = Omit<
+  MotionImageConfigProps,
+  "duration" | "img"
+> & {
+  /**
+   * @description
+   * A list of path that is going to be
+   * used through MotionMovie components
+   * in order to fill the grid and make the
+   * transition between the provided slides.
+   *
+   * @default undefined
+   * @type {string}
+   */
+  images: string[];
+  /**
+   *
+   * @description
+   * Total animation duration of the slide
+   * transition process in seconds(s). It has
+   * to be bigger than the base duration in order
+   * to create a smooth transition otherwise the MotionMovie
+   * error logger will be triggered with a warn in your console.
+   *
+   * @default 2
+   * @type {number}
+   */
+  animationDuration: number;
+};
+
 export interface MotionMovieAnimationsProps
   extends Omit<MotionAnimationProps, "mode"> {
+  /**
+   * @description
+   * Enter animations are covering the start point
+   * of the animation process per slide which
+   * means the user will see each slide within
+   * the enter animations.
+   *
+   * @default undefined
+   * @type {AnimationKeys[] | AnimationKeys}
+   */
   enter: AnimationKeys[] | AnimationKeys;
+  /**
+   * @description
+   * Exit animations are covering the end point
+   * of the animation process per slide which
+   * means the user will end seeing the slide with
+   * the exit prop's animations.
+   *
+   * @default undefined
+   * @type {AnimationKeys[] | AnimationKeys}
+   */
   exit: AnimationKeys[] | AnimationKeys;
 }
 
-/*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+**/
+// Core
 
-// Core Component Interfaces
+type GeneralHTMLAttributes = Omit<HTMLAttributes<HTMLElement>, "children">;
 
-export interface MotionContainerProps {
-  controller?: MotionControllerProps;
+export interface MotionContainerProps extends GeneralHTMLAttributes {
+  /**
+   * @description
+   * Defines properties that can be
+   * mandatoryly used across MP components. It includes animation modes,
+   * transitions, delays, and durations. Basically everything you need to
+   * make the web better :)
+   *
+   * @property {AnimationKeys | AnimationKeys[]} mode - animation mode(s)
+   * @property {TransitionKeys} transition - animation transition type
+   * @property {number | undefined} [delay] - animation delay
+   * @property {number} [duration] - animation duration
+   *
+   * @example
+   *
+   * <MotionContainer
+   *   elementType="div"
+   *   animation={{
+   *     mode: ["fadeIn", "filterBlurIn"],
+   *     transition: "smooth",
+   *   }}
+   *   className="your-css-goes-here"
+   * />
+   *
+   */
   animation: MotionAnimationProps;
+  /**
+   * @description
+   * The elementType prop allows you to specify the HTML element type
+   * that will be used as the root element for the MotionContainer.
+   *
+   * @default "div"
+   * @type {React.ElementType}
+   */
+  elementType: React.ElementType;
+  /**
+   * @description
+   * The children prop is a React node that will be rendered inside
+   * the MotionContainer component. It is optional and can be used to
+   * add content to the component.
+   *
+   * @default undefined
+   * @type {React.ReactNode}
+   */
   children?: React.ReactNode;
-  className?: string;
-  elementType: React.ElementType;
+  /**
+   * @description
+   * This is the central scaffold part that you might see as
+   * a god of CAS(Centralized Animation System). It's actually
+   * standing on the top of each MP components to control
+   * and manage the animation process by managing the flow.
+   *
+   * Highly recommended to use with both
+   * @type {UseAnimationControlProps}
+   * and @type {UseAnimationProps}
+   *
+   * @default undefined
+   * @typedef {Object} MotionControllerProps
+   * @param {boolean} isAnimationStopped
+   * @param {boolean} reverseAnimation
+   * @param {Partial<UseInViewOptions>} [configView]
+   * @param {boolean} [trigger]
+   *
+   * @example
+   *
+   * //full example
+   *
+   * const { onReverse, control } = useAnimationControl();
+   * const { isAnimationStopped, reverse } = useAnimation(control);
+   *
+   * // trigger the animation freely
+   * <button onClick={onReverse}>Reverse</button>
+   * <MotionContainer
+   *   elementType="div"
+   *   animation={{
+   *     mode: ["fadeUp", "translate3dIn"],
+   *     transition: "cubicBounce",
+   *     duration: 1,
+   *   }}
+   *   controller={{
+   *     trigger: true, // immediately start animation bypassing configView
+   *     configView: { once: true, amount: 0.5 } // determine whether to start animation when it's in viewport
+   *     isAnimationStopped, // pass the CAS props
+   *     reverse // pass the CAS props
+   *   }}
+   *   className="your-css-goes-here"
+   * />
+   *   <IfThereIsChildComponent />
+   * </MotionContainer>
+   *
+   */
+  controller?: MotionControllerProps;
 }
 
-export interface MotionChainProps {
-  controller?: MotionControllerProps;
+export interface MotionChainProps extends GeneralHTMLAttributes {
+  /**
+   * @description
+   * Defines properties that can be mandatoryly used across MP components.
+   * It includes animation modes, transitions, delays, and durations. Basically
+   * everything you need to make the web better :)
+   *
+   * @type {MotionAnimationProps[]} animations
+   * @example
+   *
+   * const animations = Array.from({ length: 5 }, () => ({
+   *    mode: ["scaleZoomIn","fadeIn"],
+   *    transition: "slowSmooth",
+   * }))
+   * <MotionChain
+   *   elementType="div"
+   *   animations={animations}
+   *   className="your-css-goes-here"
+   * />
+   *
+   */
   animations: MotionAnimationProps[];
-  config: MotionChainConfigProps;
+  /**
+   * @description
+   * The elementType prop allows you to specify the HTML element type
+   * that will be used as the root element for the MotionContainer where
+   * MotionChain encapsulates as its children.
+   *
+   * @default "div"
+   * @type {React.ElementType}
+   */
+  elementType: React.ElementType;
+  /**
+   * @description
+   * The children prop is a React nodes that will be rendered inside
+   * the MotionChain component.
+   *
+   * @default undefined
+   * @type {React.ReactNode[]}
+   */
   children: React.ReactNode[];
-  className?: string;
-  elementType: React.ElementType;
+  config: MotionChainConfigProps;
+  /**
+   * @description
+   * This is the central scaffold part that you might see as
+   * a god of CAS(Centralized Animation System). It's actually
+   * standing on the top of each MP components to control
+   * and manage the animation process by managing the flow.
+   *
+   * Highly recommended to use with both:
+   * @type {UseAnimationControlProps}
+   * @type {UseAnimationProps}
+   *
+   * @default undefined
+   * @typedef {Object} MotionControllerProps
+   * @param {boolean} isAnimationStopped
+   * @param {boolean} reverseAnimation
+   * @param {Partial<UseInViewOptions>} [configView]
+   * @param {boolean} [trigger]
+   *
+   * @example
+   *
+   * //full example
+   *
+   * const { onReverse, control } = useAnimationControl();
+   * const { isAnimationStopped, reverse } = useAnimation(control);
+   *
+   * // trigger the animation freely
+   * <button onClick={onReverse}>Reverse</button>
+   * <MotionContainer
+   *   elementType="div"
+   *   animation={{
+   *     mode: ["fadeUp", "translate3dIn"],
+   *     transition: "cubicBounce",
+   *     duration: 1,
+   *   }}
+   *   controller={{
+   *     trigger: true, // immediately start animation bypassing configView
+   *     configView: { once: true, amount: 0.5 } // determine whether to start animation when it's in viewport
+   *     isAnimationStopped, // pass the CAS props
+   *     reverse // pass the CAS props
+   *   }}
+   *   className="your-css-goes-here"
+   * />
+   *   <IfThereIsChildComponent />
+   * </MotionContainer>
+   *
+   */
+  controller?: MotionControllerProps;
 }
 
-export interface MotionTextProps {
+export interface MotionTextProps extends GeneralHTMLAttributes {
+  /**
+   * @description
+   * Defines properties that can be
+   * mandatoryly used across MP components. It includes animation modes,
+   * transitions, delays, and durations. Basically everything you need to
+   * make the web better :)
+   *
+   * @property {AnimationKeys | AnimationKeys[]} mode - animation mode(s)
+   * @property {TransitionKeys} transition - animation transition type
+   * @property {number | undefined} [delay] - animation delay
+   * @property {number} [duration] - animation duration
+   *
+   * @example
+   *
+   * <MotionContainer
+   *   elementType="div"
+   *   animation={{
+   *     mode: ["fadeIn", "filterBlurIn"],
+   *     transition: "smooth",
+   *   }}
+   *   className="your-css-goes-here"
+   * />
+   *
+   */
   animation: MotionAnimationProps;
+  /**
+   * @description
+   * The elementType prop allows you to specify the HTML element type
+   * that will be used as the root element for the MotionContainer.
+   *
+   * @default "div"
+   * @type {React.ElementType}
+   */
+  elementType: React.ElementType;
   config: MotionTextConfigProps;
-  controller?: MotionControllerProps;
-  elementType: React.ElementType;
+  /**
+   * @description
+   * The children prop is a React node that will be rendered inside
+   * the MotionContainer component. It is optional and can be used to
+   * add content to the component.
+   *
+   * @default undefined
+   * @type {React.ReactNode}
+   */
   children: React.ReactNode;
-  className?: string;
+  /**
+   * @description
+   * This is the central scaffold part that you might see as
+   * a god of CAS(Centralized Animation System). It's actually
+   * standing on the top of each MP components to control
+   * and manage the animation process by managing the flow.
+   *
+   * Highly recommended to use with both
+   * @type {UseAnimationControlProps}
+   * and @type {UseAnimationProps}
+   *
+   * @default undefined
+   * @typedef {Object} MotionControllerProps
+   * @param {boolean} isAnimationStopped
+   * @param {boolean} reverseAnimation
+   * @param {Partial<UseInViewOptions>} [configView]
+   * @param {boolean} [trigger]
+   *
+   * @example
+   *
+   * //full example
+   *
+   * const { onReverse, control } = useAnimationControl();
+   * const { isAnimationStopped, reverse } = useAnimation(control);
+   *
+   * // trigger the animation freely
+   * <button onClick={onReverse}>Reverse</button>
+   * <MotionContainer
+   *   elementType="div"
+   *   animation={{
+   *     mode: ["fadeUp", "translate3dIn"],
+   *     transition: "cubicBounce",
+   *     duration: 1,
+   *   }}
+   *   controller={{
+   *     trigger: true, // immediately start animation bypassing configView
+   *     configView: { once: true, amount: 0.5 } // determine whether to start animation when it's in viewport
+   *     isAnimationStopped, // pass the CAS props
+   *     reverse // pass the CAS props
+   *   }}
+   *   className="your-css-goes-here"
+   * />
+   *   <IfThereIsChildComponent />
+   * </MotionContainer>
+   *
+   */
+  controller?: MotionControllerProps;
+  /**
+   * @description
+   * The wrapperClassName prop is a string that
+   * specifies the class name(s) to be applied to the
+   * wrapper element that wraps the child text elements
+   *
+   * @default undefined
+   * @type {string}
+   */
   wrapperClassName?: string;
 }
 
-export interface MotionImageProps {
+export interface MotionImageProps extends GeneralHTMLAttributes {
+  /**
+   * Defines properties that can be
+   * mandatoryly used across MP components. It includes animation modes,
+   * transitions, delays, and durations. Basically everything you need to
+   * make the web better :)
+   *
+   * @typedef {Object} MotionAnimationProps
+   * @property {AnimationKeys | AnimationKeys[]} mode - animation mode(s)
+   * @property {TransitionKeys} transition - animation transition type
+   * @property {number | undefined} [delay] - animation delay
+   * @property {number} [duration] - animation duration
+   *
+   * @example
+   *
+   * <MotionContainer
+   *   elementType="div"
+   *   animation={{
+   *     mode: ["fadeIn", "filterBlurIn"],
+   *     transition: "smooth",
+   *   }}
+   *   className="your-css-goes-here"
+   * />
+   *
+   */
   animation: MotionAnimationProps;
-  className?: string;
+  /**
+   * @description
+   * A fallback component to be rendered when the image
+   * is being loaded.
+   *
+   * @default undefined
+   * @type {React.ReactNode}
+   */
   fallback?: React.ReactNode;
+  /**
+   * @description
+   * The wrapperClassName prop is a string that
+   * specifies the class name(s) to be applied to the
+   * wrapper element that wraps the child text elements
+   *
+   * @default undefined
+   * @type {string}
+   */
   wrapperClassName?: string;
-  config: Omit<MotionImageConfigProps, "isDynamicallyQueued">;
+  config: MotionImageConfigProps;
+  /**
+   * @description
+   * This is the central scaffold part that you might see as
+   * a god of CAS(Centralized Animation System). It's actually
+   * standing on the top of each MP components to control
+   * and manage the animation process by managing the flow.
+   *
+   * Highly recommended to use with both
+   * @type {UseAnimationControlProps}
+   * and @type {UseAnimationProps}
+   *
+   * @default undefined
+   * @typedef {Object} MotionControllerProps
+   * @param {boolean} isAnimationStopped
+   * @param {boolean} reverseAnimation
+   * @param {Partial<UseInViewOptions>} [configView]
+   * @param {boolean} [trigger]
+   *
+   * @example
+   *
+   * //full example
+   *
+   * const { onReverse, control } = useAnimationControl();
+   * const { isAnimationStopped, reverse } = useAnimation(control);
+   *
+   * // trigger the animation freely
+   * <button onClick={onReverse}>Reverse</button>
+   * <MotionContainer
+   *   elementType="div"
+   *   animation={{
+   *     mode: ["fadeUp", "translate3dIn"],
+   *     transition: "cubicBounce",
+   *     duration: 1,
+   *   }}
+   *   controller={{
+   *     trigger: true, // immediately start animation bypassing configView
+   *     configView: { once: true, amount: 0.5 } // determine whether to start animation when it's in viewport
+   *     isAnimationStopped, // pass the CAS props
+   *     reverse // pass the CAS props
+   *   }}
+   *   className="your-css-goes-here"
+   * />
+   *   <IfThereIsChildComponent />
+   * </MotionContainer>
+   *
+   */
   controller?: MotionControllerProps;
 }
 
-export interface MotionMovieProps {
+export interface MotionMovieProps extends GeneralHTMLAttributes {
+  /**
+   * @description
+   * A superset of @type {MotionImageProps} that enables you
+   * to create a visual slider conventionally using almost the
+   * same syntax similar to @type {MotionImageProps}.
+   *
+   *
+   * @default undefined
+   * @type {MotionMovieAnimationsProps}
+   */
   animations: MotionMovieAnimationsProps;
+  /**
+   * @description
+   * This is the central scaffold part that you might see as
+   * a god of CAS(Centralized Animation System). It's actually
+   * standing on the top of each MP components to control
+   * and manage the animation process by managing the flow.
+   *
+   * Highly recommended to use with both
+   * @type {UseAnimationControlProps}
+   * and @type {UseAnimationProps}
+   *
+   * @default undefined
+   * @typedef {Object} MotionControllerProps
+   * @param {boolean} isAnimationStopped
+   * @param {boolean} reverseAnimation
+   * @param {Partial<UseInViewOptions>} [configView]
+   * @param {boolean} [trigger]
+   *
+   * @example
+   *
+   * //full example
+   *
+   * const { onReverse, control } = useAnimationControl();
+   * const { isAnimationStopped, reverse } = useAnimation(control);
+   *
+   * // trigger the animation freely
+   * <button onClick={onReverse}>Reverse</button>
+   * <MotionContainer
+   *   elementType="div"
+   *   animation={{
+   *     mode: ["fadeUp", "translate3dIn"],
+   *     transition: "cubicBounce",
+   *     duration: 1,
+   *   }}
+   *   controller={{
+   *     trigger: true, // immediately start animation bypassing configView
+   *     configView: { once: true, amount: 0.5 } // determine whether to start animation when it's in viewport
+   *     isAnimationStopped, // pass the CAS props
+   *     reverse // pass the CAS props
+   *   }}
+   *   className="your-css-goes-here"
+   * />
+   *   <IfThereIsChildComponent />
+   * </MotionContainer>
+   *
+   */
   controller?: MotionControllerProps;
-  config: Omit<
-    MotionImageConfigProps,
-    "isDynamicallyQueued" | "duration" | "img"
-  > & {
-    images: string[];
-    animationDuration: number;
-  };
+  config: MotionMovieConfigProps;
+  /**
+   * @description
+   * A fallback component to be rendered when the image
+   * is being loaded.
+   *
+   * @default undefined
+   * @type {React.ReactNode}
+   */
   fallback?: React.ReactNode;
-  className?: string;
+  /**
+   * @description
+   * The wrapperClassName prop is a string that
+   * specifies the class name(s) to be applied to the
+   * wrapper element that wraps the child text elements
+   *
+   * @default undefined
+   * @type {string}
+   */
   wrapperClassName?: string;
 }
 
@@ -117,30 +813,20 @@ export interface MotionLinkProps {
   onReverse: () => void;
   children: React.ReactNode;
 }
-/*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+**/
 
 /*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+**/
 
-// Motion Provider Component Interfaces
-
-/*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+**/
-
-// Motion Provider Utils Interfaces
+// Utils
 
 export interface CalculateDelayProps {
-  delayLogic: DelayLogic;
+  delayLogic: DelayLogic | undefined;
   index: number;
   baseDuration: number;
   customLogic?: (index: number) => number;
 }
 
-export type GetRandomAnimation = AnimationKeys[] | AnimationKeys | undefined;
-export interface GetRandomAnimationProps {
-  count: number;
-}
-
 export interface GetErrorLogsProps {
-  error: string;
+  msg: string;
   src: MotionComponentSources | MotionHooksSources | MotionUtilsSources;
   mod: "error" | "warn";
 }
@@ -153,7 +839,7 @@ export type GetSplittedTextOutputProps = string[];
 
 /*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+**/
 
-// Lib Interfaces
+// Constants
 
 export interface AnimationLibraryProps {
   [key: string]: {
@@ -161,16 +847,39 @@ export interface AnimationLibraryProps {
     animate: AnimationObjProps;
   };
 }
-
+export type AnimationModule = {
+  initial: AnimationObjProps;
+  animate: AnimationObjProps;
+};
 export interface TransitionConfig {
   duration?: number;
-  ease?: string | number[];
+  ease?: EasingDefinition | number[];
   delay?: number;
 }
+export interface TransitionsLib {
+  [key: string]: TransitionConfig;
+}
+/*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+**/
+
+// Defaults
+
+type ComponentPropsMap = {
+  MotionContainer: MotionContainerProps;
+  MotionChain: MotionChainProps;
+  MotionImage: MotionImageProps;
+  MotionText: MotionTextProps;
+  MotionLink: MotionLinkProps;
+  MotionMovie: MotionMovieProps;
+  CoreMotion: Record<string, unknown>;
+};
+
+export type MotionDefaultsProps = {
+  [K in keyof ComponentPropsMap]?: Partial<ComponentPropsMap[K]>;
+};
 
 /*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+**/
 
-// Hook Interfaces
+// Hooks
 
 export interface UseAnimationProps {
   stopAnimation: boolean;
@@ -190,11 +899,11 @@ export type UseAnimationActionTypes =
   | { type: "UPDATE"; payload: { reverseAnimation: boolean } };
 
 export interface AnimationObjProps {
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 export interface UseAnimationMixerProps {
-  animations: AnimationLibraryProps[] | AnimationLibraryProps;
+  animations: AnimationModule[] | AnimationModule;
   reverse?: boolean;
 }
 
@@ -205,18 +914,17 @@ export interface UseOutputAnimationMixerProps {
 
 export type UseAnimationControlProps = Partial<UseAnimationProps>;
 
-export interface UseAnimationExitProps {}
 /*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+**/
 
-// Namespace Types
+// Namespaces
 
-// Strings
 export type MotionComponentSources =
   | "MotionContainer"
   | "MotionImage"
   | "MotionMovie"
   | "MotionChain"
-  | "MotionText";
+  | "MotionText"
+  | "CoreMotion";
 export type MotionHooksSources = "useAnimationMixer" | "useAnimation";
 export type MotionUtilsSources =
   | "getSplittedText"
@@ -226,8 +934,10 @@ export type MotionEngineType = "container" | "text" | "queue";
 export type ImageMotionFnTypes = "hover" | "click";
 export type SplittedTextModes = "words" | "chars";
 
-// Numbers
 export type MotionTextConfigSpaceProps = number | string;
+
+// Number unions
+
 export type ImageMotionPieces =
   | 16
   | 25
@@ -247,7 +957,8 @@ export type ImageMotionPieces =
   | 361
   | 400;
 
-// Datasets
+// string-set unions
+
 export type DelayLogic =
   | "linear"
   | "exponential"
@@ -266,117 +977,3 @@ export type DelayLogic =
   | "bounce"
   | "spiral"
   | "quantum";
-
-export type AnimationKeys =
-  | "opacity"
-  | "slideDown"
-  | "slideLeft"
-  | "slideRight"
-  | "slideUp"
-  | "staggeredIn"
-  | "staggeredOut"
-  | "fadeIn"
-  | "fadeOut"
-  | "fadeUp"
-  | "fadeDown"
-  | "fadeLeft"
-  | "fadeRight"
-  | "scaleZoomIn"
-  | "scaleZoomOut"
-  | "scaleGrowShrink"
-  | "rotateIn"
-  | "rotateOut"
-  | "rotateFlipX"
-  | "rotateFlipY"
-  | "rotateSwing"
-  | "rotateClockwise"
-  | "rotateRoll"
-  | "rotating360"
-  | "bounceY"
-  | "bounceX"
-  | "rotateBounce"
-  | "elasticBounce"
-  | "bounceInOut"
-  | "burakHeartbeat"
-  | "burakRubberBand"
-  | "burakWobble"
-  | "burakPulse"
-  | "skewX"
-  | "textShimmer"
-  | "swingHorizontal"
-  | "flash"
-  | "hoverEffect"
-  | "wave"
-  | "funChickenDance"
-  | "funJellyFish"
-  | "funRocketBoost"
-  | "funDizzyLizard"
-  | "funBlobMorph"
-  | "funMoonWalk"
-  | "funPeekABoo"
-  | "funSnailTrail"
-  | "funPopcornPop"
-  | "funYoYoSpin"
-  | "funWarpDrive"
-  | "funSpringFling"
-  | "funTwinkleToes"
-  | "funGhostFloat"
-  | "filterBlurIn"
-  | "filterBlurOut"
-  | "filterBrightnessFade"
-  | "filterContrastShift"
-  | "filterGrayscaleFade"
-  | "filterHueRotate"
-  | "filterInvertColors"
-  | "filterSaturateIncrease"
-  | "filterSepiaTone"
-  | "translate3dIn"
-  | "translate3dOut"
-  | "translate3dRotate"
-  | "translate3dZoom"
-  | "translate3dBounce"
-  | "translate3dWave"
-  | "translate3dZigZag"
-  | "spin"
-  | "drift"
-  | "glitch"
-  | "slideBounce"
-  | "flipCard"
-  | "jitter"
-  | "flip3D"
-  | "neonGlow"
-  | "typingEffect"
-  | "pathMotion"
-  | "jellyTwist"
-  | "depthPush"
-  | "colorShift"
-  | "orbitRotation"
-  | "moveToRightBottom"
-  | "moveToRightTop"
-  | "moveToLeftBottom"
-  | "moveToTopCenter"
-  | "moveToLeftTop";
-
-export type TransitionKeys =
-  | "none"
-  | "default"
-  | "smooth"
-  | "easeIn"
-  | "easeOut"
-  | "linear"
-  | "cubicSmooth"
-  | "cubicFastStart"
-  | "cubicFastEnd"
-  | "cubicBounce"
-  | "cubicElastic"
-  | "slowSmooth"
-  | "slowCubic"
-  | "slowElastic"
-  | "quickEaseInOut"
-  | "quickBounce"
-  | "delayedSmooth"
-  | "delayedCubic"
-  | "delayedElastic"
-  | "fadeSlide"
-  | "fadeScale"
-  | "fadeRotate";
