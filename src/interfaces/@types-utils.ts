@@ -1,4 +1,5 @@
 ﻿import { ReduxRootState } from "@/redux";
+import { AnimationKeys } from "@/motion/constants/animations";
 
 export interface GetCodeViewProps extends Omit<ReduxRootState, "utils"> {
   id: string;
@@ -16,3 +17,8 @@ export type GetMotionKey = (
   prefix: string,
   median: string
 ) => string;
+
+export type GetRandomAnimation = AnimationKeys[] | AnimationKeys | undefined;
+export interface GetRandomAnimationProps {
+  count: number;
+}
