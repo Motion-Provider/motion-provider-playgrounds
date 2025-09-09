@@ -1,6 +1,5 @@
 import { Box } from "lucide-react";
 import { interFont } from "@/lib/fonts";
-import { AnimationKeys } from "@/motion/types";
 import {
   HoverCard,
   HoverCardContent,
@@ -18,7 +17,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { ReduxRootState, ReduxStoreDispatchType } from "@/redux";
 import { toast } from "sonner";
 import { setMotion } from "@/redux/slices/motion";
-import animations from "@/motion/lib/animate.lib";
+import animations from "@/motion/constants/animations";
+import { AnimationKeys } from "@/motion/constants/animations";
 
 const items = Object.keys(animations).sort((a, b) =>
   a.localeCompare(b)

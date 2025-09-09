@@ -36,7 +36,7 @@ const Cards: FC<HomeCardsProps> = ({
         className="relative"
         animations={items.map(() => ({
           mode: ["fadeRight"],
-          transition: "slowSmooth",
+          transition: "gentle",
           duration: 1,
         }))}
         config={{

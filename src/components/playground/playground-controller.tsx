@@ -1,4 +1,3 @@
-import React, { useMemo } from "react";
 import Dock from "@/components/dock";
 import { DockItem } from "@/interfaces/@types-components";
 import PlaygroundSettings from "./playground-settings";

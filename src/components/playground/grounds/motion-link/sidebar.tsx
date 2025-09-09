@@ -1,5 +1,5 @@
 ﻿import React, { FC, useCallback, useEffect, useMemo, useRef } from "react";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar } from "@/components/ui/avatar";
 import { LinkNavItemComponentProps } from "@/interfaces/@types-components";
 import SelectIcon from "./select-icon";
 import { Button } from "@/components/ui/button";

@@ -154,7 +154,7 @@ const WhoNotToFollow = () => {
           <MotionChain
             elementType="ul"
             animations={whoNotToFollow.map((_) => ({
-              mode: ["fadeIn", "filterBlurIn", "burakHeartbeat"],
+              mode: ["fadeIn", "filterBlurIn", "heartbeat"],
               transition: "cubicBounce",
               duration: 2,
             }))}

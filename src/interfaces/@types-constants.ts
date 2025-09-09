@@ -3,7 +3,6 @@
   ImageMotionPieces,
   MotionAnimationProps,
 } from "@/motion/types";
-import { Metadata } from "next";
 
 export interface MotionAnimation {
   animation: Omit<MotionAnimationProps, "delay">;

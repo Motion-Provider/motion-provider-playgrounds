@@ -1,10 +1,10 @@
-﻿import { Button } from "@/components/ui/button";
-import getRandomAnimation from "@/motion/utils/getRandomAnimation";
-import { ReduxRootState, ReduxStoreDispatchType } from "@/redux";
+﻿import { Dice6 } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { setMotion } from "@/redux/slices/motion";
-import { resetAnimationThunk } from "@/redux/slices/utils";
-import { Dice6 } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
+import { resetAnimationThunk } from "@/redux/slices/utils";
+import { ReduxRootState, ReduxStoreDispatchType } from "@/redux";
+import getRandomAnimation from "@/utils/getRandomAnimation";
 
 const AnimateRandomButton = () => {
   const dispatch = useDispatch<ReduxStoreDispatchType>();

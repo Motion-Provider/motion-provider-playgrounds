@@ -5,13 +5,34 @@ import {
   SelectTrigger,
 } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
-import { DelayLogic, TransitionKeys } from "@/motion/types";
+import { DelayLogic } from "@/motion/types";
 import { Slider } from "@/components/ui/slider";
 import { Card, CardContent } from "@/components/ui/card";
-import { delayItems, transitionItems } from "@/constants/motion-types.lib";
 import { useDispatch, useSelector } from "react-redux";
 import { ReduxRootState, ReduxStoreDispatchType } from "@/redux";
 import { setDelayLogic, setMotion } from "@/redux/slices/motion";
+import transitions from "@/motion/constants/transitions";
+import { TransitionKeys } from "@/motion/constants/transitions";
+
+const delayItems = [
+  "linear",
+  "exponential",
+  "sinusoidal",
+  "custom",
+  "square",
+  "triangle",
+  "sawtooth",
+  "cosine",
+  "fibonacci",
+  "chaos",
+  "pendulum",
+  "perlin",
+  "chaotic",
+  "cumulative",
+  "bounce",
+  "spiral",
+  "quantum",
+] as DelayLogic[];
 
 export const AnimationConfiguration = () => {
   const dispatch = useDispatch<ReduxStoreDispatchType>();
@@ -72,7 +93,7 @@ export const AnimationConfiguration = () => {
               Change transition{`(${animation.transition})`}
             </SelectTrigger>
             <SelectContent className="w-full relative h-60 p-2 ">
-              {transitionItems.map((item) => (
+              {(Object.keys(transitions) as TransitionKeys[]).map((item) => (
                 <SelectItem
                   value={item}
                   title="Add an animation"

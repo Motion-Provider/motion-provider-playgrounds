@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import MotionChain from "@/motion/motion-chain";
 import { selectController } from "@/redux/slices/utils";
 import getMotionKey from "@/utils/getMotionKey";
-import { AnimationKeys } from "@/motion/types";
+import { AnimationKeys } from "@/motion/constants/animations";
 
 export default function Chain() {
   const { settings } = useSelector((state: ReduxRootState) => state.metadata);

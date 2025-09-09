@@ -1,12 +1,8 @@
-﻿"use client";
-
-import React from "react";
+﻿import React from "react";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CopyCode } from "@/components/copy-code";
-import { Badge } from "@/components/ui/badge";
-import { Alert } from "@/components/ui/alert";
 import { PrismLight as SyntaxHighlighter } from "react-syntax-highlighter";
 import bash from "react-syntax-highlighter/dist/cjs/languages/prism/bash";
 import tomorrow from "react-syntax-highlighter/dist/cjs/styles/prism/tomorrow";
@@ -15,13 +11,6 @@ import { useCopyToClipboard } from "@uidotdev/usehooks";
 
 SyntaxHighlighter.registerLanguage("bash", bash);
 
-/**
- * Data-driven configuration:
- * - packageManagers: drives the install tab triggers + contents
- * - steps: drives the rest of the cards (Add Provider, Usage, etc.)
- *
- * Edit these arrays to change what's rendered.
- */
 const packageManagers = [
   {
     id: "npm",

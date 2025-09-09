@@ -5,8 +5,9 @@ import { FC, useMemo } from "react";
 import { useSelector } from "react-redux";
 import { ReduxRootState } from "@/redux";
 import { selectController } from "@/redux/slices/utils";
-import { AnimationKeys, MotionControllerProps } from "@/motion/types";
+import { MotionControllerProps } from "@/motion/types";
 import getMotionKey from "@/utils/getMotionKey";
+import { AnimationKeys } from "@/motion/constants/animations";
 
 const Image: FC = () => {
   const { settings } = useSelector((state: ReduxRootState) => state.metadata);

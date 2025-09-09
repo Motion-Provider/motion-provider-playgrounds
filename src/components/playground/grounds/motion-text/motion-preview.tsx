@@ -12,7 +12,8 @@ import { selectController } from "@/redux/slices/utils";
 import { getFontSizeClass } from "@/utils/fontSizeRange";
 import { ResizablePanel } from "@/components/ui/resizable";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-import { AnimationKeys, MotionAnimationProps } from "@/motion/types";
+import { MotionAnimationProps } from "@/motion/types";
+import { AnimationKeys } from "@/motion/constants/animations";
 
 const HeaderBlock: FC<{
   header: string;

@@ -3,9 +3,9 @@ import { FC, useMemo } from "react";
 import { useSelector } from "react-redux";
 import { ReduxRootState } from "@/redux";
 import { selectController } from "@/redux/slices/utils";
-import { AnimationKeys } from "@/motion/types";
 import getMotionKey from "@/utils/getMotionKey";
 import MotionMovie from "@/motion/motion-movie";
+import { AnimationKeys } from "@/motion/constants/animations";
 
 const Movie: FC = () => {
   const { settings } = useSelector((state: ReduxRootState) => state.metadata);

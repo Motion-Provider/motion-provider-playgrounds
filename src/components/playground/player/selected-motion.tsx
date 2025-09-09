@@ -4,10 +4,10 @@ import { Button } from "@/components/ui/button";
 import MotionChain from "@/motion/motion-chain";
 import { MotionChainProps } from "@/motion/types";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-import { AnimationKeys } from "@/motion/types";
 import { useDispatch, useSelector } from "react-redux";
 import { ReduxRootState, ReduxStoreDispatchType } from "@/redux";
 import { setMotion } from "@/redux/slices/motion";
+import { AnimationKeys } from "@/motion/constants/animations";
 
 export const SelectedMotion = () => {
   const dispatch = useDispatch<ReduxStoreDispatchType>();
@@ -25,7 +25,7 @@ export const SelectedMotion = () => {
     () =>
       Array.from({ length: currentModes.length }).map(() => ({
         mode: ["filterBlurIn", "fadeUp"],
-        transition: "slowElastic",
+        transition: "elasticSoft",
         duration: 1,
       })) as MotionChainProps["animations"],
     [currentModes.length]

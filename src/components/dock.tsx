@@ -1,4 +1,3 @@
-import { DockContext } from "@/contexts/dock-context";
 import { useDock } from "@/hooks/useDock";
 import { DockItem, DockTooltip } from "@/interfaces/@types-components";
 import { cn } from "@/lib/utils";

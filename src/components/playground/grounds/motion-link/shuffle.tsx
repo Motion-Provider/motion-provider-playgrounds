@@ -93,7 +93,7 @@ const PageOutComponent: FC<{ route: string }> = ({ route }) => {
         <MotionContainer
           animation={{
             mode: ["fadeIn", "scaleZoomIn"],
-            transition: "delayedCubic",
+            transition: "cubicBounce",
             delay: 0.5,
             duration: 1,
           }}
@@ -108,7 +108,7 @@ const PageOutComponent: FC<{ route: string }> = ({ route }) => {
             <MotionText
               animation={{
                 mode: ["fadeDown", "filterBlurIn"],
-                transition: "delayedCubic",
+                transition: "cubicBounce",
                 duration: 1,
               }}
               config={{
@@ -133,7 +133,7 @@ const PageOutComponent: FC<{ route: string }> = ({ route }) => {
             <MotionText
               animation={{
                 mode: ["fadeRight", "scaleZoomIn", "filterBlurIn"],
-                transition: "delayedCubic",
+                transition: "cubicBounce",
                 duration: 1,
               }}
               controller={{
@@ -171,7 +171,7 @@ const BlurContainers: FC = () => {
       <MotionContainer
         animation={{
           mode: ["fadeIn", "scaleZoomIn"],
-          transition: "delayedCubic",
+          transition: "cubicBounce",
           delay: 0.5,
           duration: 1,
         }}
@@ -184,7 +184,7 @@ const BlurContainers: FC = () => {
       <MotionContainer
         animation={{
           mode: ["fadeIn", "scaleZoomIn"],
-          transition: "delayedCubic",
+          transition: "cubicElastic",
           delay: 1.5,
           duration: 1,
         }}
@@ -197,7 +197,7 @@ const BlurContainers: FC = () => {
       <MotionContainer
         animation={{
           mode: ["fadeIn", "scaleZoomIn"],
-          transition: "delayedCubic",
+          transition: "cubicElastic",
           delay: 2.5,
           duration: 1,
         }}

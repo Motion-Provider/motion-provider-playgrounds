@@ -22,7 +22,7 @@ const PlaygroundLayout: FC<LayoutProps> = ({ children, className }) => (
     <MotionContainer
       animation={{
         mode: ["fadeIn", "typingEffect"],
-        transition: "delayedCubic",
+        transition: "cubicBounce",
         delay: 0.5,
         duration: 1,
       }}
