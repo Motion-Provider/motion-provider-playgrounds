@@ -1,31 +1,70 @@
-import { cn } from "../lib/utils";
-import logError from "./utils/getErrorLogs";
+import { cn } from "./lib/utils";
 import { MotionImageProps } from "./types";
-import { calculateDelay } from "./utils/calculateDelay";
+import defaults from "./constants/defaults";
+import logError from "./utils/getErrorLogs";
 import MotionContainer from "./motion-container";
+import { calculateDelay } from "./utils/calculateDelay";
 import { FC, useCallback, useEffect, useMemo, useRef, useState } from "react";
 
+/**
+ * @description
+ * MotionImage slices an image into a grid of `pieces` and wraps each
+ * slice with a `MotionContainer`, enabling per-piece animation and
+ * interactive motion (hover / click).
+ *
+ * Key behaviours:
+ * - Preloads `config.img` and returns `null` with an error logged if missing.
+ * - Validates `pieces` must be a perfect square (e.g. 16, 25, 36...). Logs an error and returns `null` if invalid.
+ * - Computes `columns` / `rows` from `pieces` and maps each grid cell to a MotionContainer.
+ * - Supports interaction modes via `config.fn`:
+ *   - `"hover"`: mouse movement triggers a 3x3 neighborhood around the pointer.
+ *   - `"click"`: clicking triggers the neighborhood for the clicked cell.
+ * - Per-piece delay is calculated via your `calculateDelay` util using `config.delayLogic`, `config.customLogic`, and base `duration`.
+ * - If `animation.delay` is provided it will be merged with calculated per-piece delay.
+ *
+ * @example
+ *  <MotionImage
+ *    animation={{
+ *      mode: ["translate3dZigZag"],
+ *      transition: "smooth",
+ *      duration: 1,
+ *    }}
+ *    config={{
+ *      duration: 0.88,
+ *      // example image from unsplash
+ *      img: PATH_TO_IMAGE,
+ *      delayLogic: "sinusoidal",
+ *      pieces: 64,
+ *    }}
+ *    wrapperClassName="size-[500px] rounded-lg overflow-hidden"
+ *    fallback={<div className="size-96 animate-pulse bg-stone-800 rounded-lg" />}
+ *  />
+ *
+ * @param {MotionImageProps} props The component props.
+ * @param {MotionAnimationProps} props.animation - Base animation applied to each grid piece (supports `mode`, `transition`, optional `delay`, optional `duration`).
+ * @param {MotionImageConfigProps} [props.config] - Image-specific config (required fields: `img`, `pieces`; optional: `fn`, `duration`, `customLogic`, `delayLogic`).
+ * @param {MotionControllerProps} [props.controller] - Centralized controller (see `MotionControllerProps` for `trigger`, `reverse`, `isAnimationStopped`, `configView`).
+ * @param {string} [props.className] - Classname forwarded to each MotionContainer (applied to each piece).
+ * @param {React.ReactNode} [props.fallback] - Node shown while the image preload is in progress (defaults from defaults.MotionImage.fallback).
+ * @param {string} [props.wrapperClassName] - Classname applied to the outer wrapper that holds the grid.
+ * @param {...React.HTMLAttributes<HTMLElement>} [props] - Additional HTML attributes forwarded to each MotionContainer element.
+ *
+ * @returns {React.ReactElement | null} A wrapper element containing the motion-sliced image grid, or `null` on invalid input (missing `img`, invalid `pieces`, etc.).
+ */
 const MotionImage: FC<MotionImageProps> = ({
-  animation = {
-    mode: ["opacity"],
-    transition: "smooth",
-    delay: 0,
-    duration: 0.5,
-  },
-  config = {
-    duration: 3,
-    pieces: 121,
-    img: undefined,
-    customLogic: undefined,
-    delayByElement: undefined,
-    delayLogic: undefined,
-    fn: undefined,
-  },
+  animation,
+  config = defaults.MotionImage.config,
   controller,
   className,
-  fallback = <div className="size-full absolute animate-pulse bg-stone-800" />,
+  fallback = defaults.MotionImage.fallback,
   wrapperClassName,
+  ...props
 }) => {
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
+  const [triggers, setTriggers] = useState<Record<number, boolean>>({});
+  const gridRef = useRef<HTMLDivElement | null>(null);
+  const rafRef = useRef<number>(0);
+
   const {
     img: imageUrl,
     pieces,
@@ -33,40 +72,18 @@ const MotionImage: FC<MotionImageProps> = ({
     duration,
     customLogic,
     delayLogic = "sinusoidal",
-    delayByElement,
   } = config;
-  const [isImageLoaded, setIsImageLoaded] = useState(false);
-  const [triggers, setTriggers] = useState<Record<number, boolean>>({});
-  const gridRef = useRef<HTMLDivElement | null>(null);
-  const rafRef = useRef<number>(0);
-
-  if (!imageUrl) {
-    logError({
-      error: "No image url provided, returning null.",
-      mod: "error",
-      src: "MotionImage",
-    });
-
-    return null;
-  }
-  if (pieces <= 0 || Math.sqrt(pieces) % 1 !== 0) {
-    logError({
-      error:
-        "Non-squared number of pieces or less/equal than/to 0 provided, returning null.",
-      mod: "error",
-      src: "MotionImage",
-    });
-    return null;
-  }
-  if (typeof animation.mode === "undefined" || animation.mode.length === 0) {
-    logError({
-      error: "No animation mode provided, returning default animation.",
-      mod: "warn",
-      src: "MotionImage",
-    });
-  }
 
   useEffect(() => {
+    if (!imageUrl) {
+      logError({
+        msg: "No image url provided, returning null.",
+        mod: "error",
+        src: "MotionImage",
+      });
+
+      return;
+    }
     const img = new Image();
     img.src = imageUrl;
     img.onload = () => setIsImageLoaded(true);
@@ -77,8 +94,8 @@ const MotionImage: FC<MotionImageProps> = ({
     };
   }, [imageUrl]);
 
-  const columns = useMemo(() => Math.ceil(Math.sqrt(pieces)), [pieces]);
-  const rows = useMemo(() => Math.ceil(pieces / columns), [pieces, columns]);
+  const columns = useMemo(() => Math.sqrt(pieces), [pieces]);
+  const rows = useMemo(() => pieces / columns, [pieces, columns]);
 
   const handleGridInteraction = useCallback(
     (e: React.MouseEvent) => {
@@ -143,41 +160,82 @@ const MotionImage: FC<MotionImageProps> = ({
     [pieces, columns, rows, imageUrl]
   );
 
-  const childrenWithControllers = useMemo(
-    () =>
-      gridPieces.map((piece, index) => {
-        const pieceDelay =
-          delayByElement ??
-          calculateDelay({
-            delayLogic: delayLogic,
-            index,
-            baseDuration: duration,
-            customLogic: customLogic,
-          });
+  const childrenWithControllers = useMemo(() => {
+    const checkRegisteredDelay =
+      typeof animation.delay !== "undefined" &&
+      animation.delay &&
+      typeof animation.delay === "number";
 
-        return (
-          <MotionContainer
-            key={index}
-            animation={{
-              ...animation,
-              delay: pieceDelay,
-              duration,
-            }}
-            controller={{
-              ...controller,
-              trigger: motionFn
-                ? !!triggers[index]
-                : controller?.trigger ?? true,
-            }}
-            elementType="div"
-            className={cn(className)}
-          >
-            {piece}
-          </MotionContainer>
-        );
-      }),
-    [gridPieces, animation, config, controller, duration, motionFn, triggers]
-  );
+    return gridPieces.map((piece, index) => {
+      const pieceDelay = calculateDelay({
+        delayLogic: delayLogic,
+        index,
+        baseDuration: duration,
+        customLogic: customLogic,
+      });
+
+      const delayTotal = checkRegisteredDelay
+        ? Number(animation.delay! + pieceDelay)
+        : pieceDelay;
+
+      return (
+        <MotionContainer
+          key={index}
+          animation={{
+            ...animation,
+            delay: delayTotal,
+            duration,
+          }}
+          controller={{
+            ...controller,
+            trigger: motionFn ? !!triggers[index] : controller?.trigger ?? true,
+          }}
+          elementType="div"
+          className={cn(className)}
+          {...props}
+        >
+          {piece}
+        </MotionContainer>
+      );
+    });
+  }, [
+    gridPieces,
+    animation,
+    controller,
+    duration,
+    motionFn,
+    triggers,
+    className,
+    delayLogic,
+    customLogic,
+    props,
+  ]);
+
+  if (!imageUrl) {
+    logError({
+      msg: "No image url provided, returning null.",
+      mod: "error",
+      src: "MotionImage",
+    });
+    return null;
+  }
+
+  if (pieces <= 0 || Math.sqrt(pieces) % 1 !== 0) {
+    logError({
+      msg: "Non-squared number of pieces or less/equal than/to 0 provided, returning null.",
+      mod: "error",
+      src: "MotionImage",
+    });
+    return null;
+  }
+
+  if (!animation.mode || animation.mode.length === 0) {
+    logError({
+      msg: "No animation mode provided, returning default animation.",
+      mod: "warn",
+      src: "MotionImage",
+    });
+  }
 
   return (
     <div
