@@ -79,7 +79,7 @@ export const Background: FC<HomepageBgProps> = ({
     <MotionContainer
       className={cn("absolute top-0 left-0 w-full h-full", className)}
       animation={{
-        mode: ["fadeIn", "filterBlurIn", "hoverEffect"],
+        mode: ["fadeIn", "filterBlurIn", "hover"],
         transition: "smooth",
         delay: 0.25,
         duration: 0.75,
