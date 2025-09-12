@@ -1,8 +1,5 @@
-﻿import {
-  DelayLogic,
-  ImageMotionPieces,
-  MotionAnimationProps,
-} from "@/motion/types";
+﻿import { DelayLogic } from "@/motion/constants/delays";
+import { ImageMotionPieces, MotionAnimationProps } from "@/motion/types";
 
 export interface MotionAnimation {
   animation: Omit<MotionAnimationProps, "delay">;
