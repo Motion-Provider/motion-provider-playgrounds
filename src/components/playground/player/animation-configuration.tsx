@@ -5,7 +5,7 @@ import {
   SelectTrigger,
 } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
-import { DelayLogic } from "@/motion/types";
+import { DelayLogic } from "@/motion/constants/delays";
 import { Slider } from "@/components/ui/slider";
 import { Card, CardContent } from "@/components/ui/card";
 import { useDispatch, useSelector } from "react-redux";
