@@ -39,9 +39,11 @@ const PlaygroundsSheet = () => {
         </SheetHeader>
         <ScrollArea className="w-full h-3/4">
           {motionCardsLib.map((item) => (
-            <Link href={item.title.toLowerCase().replace(" ", "-")}>
+            <Link
+              href={item.title.toLowerCase().replace(" ", "-")}
+              key={item.id}
+            >
               <Card
-                key={item.id}
                 style={{
                   backgroundImage: `url(${item.img})`,
                 }}

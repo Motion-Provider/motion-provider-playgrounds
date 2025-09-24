@@ -152,4 +152,5 @@ const IconContainer = memo(
   }
 );
 
+IconContainer.displayName = "IconContainer";
 export default Dock;

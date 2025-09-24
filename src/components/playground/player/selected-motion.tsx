@@ -58,11 +58,12 @@ export const SelectedMotion = () => {
         key={currentModes.length}
         className="size-full items-center justify-center flex flex-col gap-2"
       >
-        {(currentModes as AnimationKeys[]).map((item) => (
+        {(currentModes as AnimationKeys[]).map((item, idx) => (
           <Button
             variant={"outline"}
             onClick={() => handleRemoveItem(item)}
             className="w-full my-1 hover:text-rose-500"
+            key={idx}
           >
             <pre>{item}</pre>
             <Trash className="size-4" />

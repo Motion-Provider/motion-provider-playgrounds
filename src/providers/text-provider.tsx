@@ -50,15 +50,14 @@ const TextProvider: FC<{ children: ReactNode }> = ({ children }) => {
       getHeader: () => fieldsRef.current.header,
       getDesc: () => fieldsRef.current.desc,
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []); // stable
+  }, []);
+
   const configDispatch = useMemo<TextConfigDispatch>(() => {
     return {
       setDuration: (v: number) => setDuration(v),
       getDuration: () => durationRef.current,
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []); // stable
+  }, []);
 
   return (
     <TextFieldsDispatchContext.Provider value={fieldsDispatch}>

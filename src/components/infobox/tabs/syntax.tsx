@@ -35,7 +35,7 @@ const Syntax = () => {
         comment: motionChainComment,
         commentIncluded: true,
       }),
-    [metadata, motion]
+    [metadata, motion, currentCodeID]
   );
 
   return (

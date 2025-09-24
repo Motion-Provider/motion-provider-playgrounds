@@ -17,7 +17,7 @@ const Container: FC = () => {
     <MotionContainer
       elementType="div"
       className={cn(
-        "size-60 items-center flex justify-center rounded-full relative z-50 overflow-hidden",
+        "size-60 items-center flex justify-center rounded-full z-50 overflow-hidden relative",
         backgroundColor
       )}
       animation={animation}
@@ -30,9 +30,9 @@ const Container: FC = () => {
       <Image
         alt="Motion Provider Logo"
         src="/motion-provider-logo.png"
-        width={120}
-        height={120}
-        className="invert-100"
+        className="rounded-full object-cover absolute"
+        width={220}
+        height={220}
       />
     </MotionContainer>
   );

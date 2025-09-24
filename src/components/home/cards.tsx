@@ -23,7 +23,7 @@ const Cards: FC<HomeCardsProps> = ({
   onHover,
   controller,
 }) => {
-  const { onEnter, onLeave } = useDelayedHover(onHover, 500);
+  const { onEnter, onLeave } = useDelayedHover(onHover, 120);
 
   return (
     <div
@@ -44,22 +44,35 @@ const Cards: FC<HomeCardsProps> = ({
           delayLogic: "linear",
         }}
         controller={controller}
-        elementType={"div"}
+        elementType="div"
       >
         {items.map((item) => (
-          <CardWrapper
-            id={item.id}
+          <div
             key={item.id}
-            onHoverEnter={onEnter}
-            onHoverLeave={onLeave}
+            onPointerEnter={() => {
+              window.dispatchEvent(
+                new CustomEvent("video:prefetch", { detail: item.id })
+              );
+              onEnter(item.id);
+            }}
+            onPointerLeave={() => {
+              onLeave();
+              window.dispatchEvent(new CustomEvent("video:prefetch-cancel"));
+            }}
+            className="h-full"
           >
-            <CardItem
-              {...item}
-              onClick={onClick}
-              isHovered={item.id === hoveredItemID}
-              key={item.id}
-            />
-          </CardWrapper>
+            <CardWrapper
+              id={item.id}
+              onHoverEnter={onEnter}
+              onHoverLeave={onLeave}
+            >
+              <CardItem
+                {...item}
+                onClick={onClick}
+                isHovered={item.id === hoveredItemID}
+              />
+            </CardWrapper>
+          </div>
         ))}
       </MotionChain>
     </div>
@@ -147,5 +160,8 @@ const CardItem: FC<MotionCardItemProps> = memo((props) => {
     </div>
   );
 });
+
+CardItem.displayName = "CardItem";
+Cards.displayName = "Cards";
 
 export default Cards;

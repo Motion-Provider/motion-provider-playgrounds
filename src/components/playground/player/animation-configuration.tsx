@@ -13,26 +13,7 @@ import { ReduxRootState, ReduxStoreDispatchType } from "@/redux";
 import { setDelayLogic, setMotion } from "@/redux/slices/motion";
 import transitions from "@/motion/constants/transitions";
 import { TransitionKeys } from "@/motion/constants/transitions";
-
-const delayItems = [
-  "linear",
-  "exponential",
-  "sinusoidal",
-  "custom",
-  "square",
-  "triangle",
-  "sawtooth",
-  "cosine",
-  "fibonacci",
-  "chaos",
-  "pendulum",
-  "perlin",
-  "chaotic",
-  "cumulative",
-  "bounce",
-  "spiral",
-  "quantum",
-] as DelayLogic[];
+import delays from "@/motion/constants/delays";
 
 export const AnimationConfiguration = () => {
   const dispatch = useDispatch<ReduxStoreDispatchType>();
@@ -65,7 +46,7 @@ export const AnimationConfiguration = () => {
               Change sequence{`(${delayLogic})`}
             </SelectTrigger>
             <SelectContent className="w-full relative h-60 p-2 ">
-              {delayItems.map((item) => (
+              {delays.map((item) => (
                 <SelectItem
                   value={item}
                   title="Add an animation"

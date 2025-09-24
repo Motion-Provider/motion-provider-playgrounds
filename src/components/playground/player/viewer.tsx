@@ -23,7 +23,7 @@ export const PlayerViewer = () => {
   const debouncedAnimations = useDebounce(motion.animation.mode, 2000);
 
   const animationKey = useMemo(
-    () => Object.keys(motion.animation.mode).join("-").concat(key.toString()),
+    () => Object.keys(debouncedAnimations).join("-").concat(key.toString()),
     [key, debouncedAnimations]
   );
 

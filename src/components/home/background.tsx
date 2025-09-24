@@ -4,73 +4,85 @@ import { FC, useEffect, useRef } from "react";
 import MotionContainer from "@/motion/motion-container";
 import { HomepageBgProps } from "@/interfaces/@types-components";
 
-const cache = new Map<number, string>();
-
 export const Background: FC<HomepageBgProps> = ({
   selectedItemID,
   className,
 }) => {
   const video = useRef<HTMLVideoElement | null>(null);
+  const prefetchedID = useRef<number | null>(null);
 
   useEffect(() => {
-    let cancelled = false;
-    const v = video.current;
+    const controller = new AbortController();
 
+    const v = video.current;
     if (!v) return;
 
-    async function setVideoFromCache(id: number) {
-      if (cache.has(id) && v) {
-        const url = cache.get(id)!;
+    function handlePrefetch(e: Event) {
+      if (!v) return;
 
-        if (v?.currentSrc && v?.currentSrc.includes(url)) return;
+      const id = (e as CustomEvent<number>).detail;
+      const href = `/assets/videos/${id}.mp4`;
 
-        v.pause();
-        v.src = url;
+      if (v.currentSrc && v.currentSrc.includes(href)) return;
 
-        v.play()?.catch((e) => {
-          console.error(e);
-        });
+      if (typeof selectedItemID !== "undefined" && selectedItemID !== id) {
+        prefetchedID.current = id;
         return;
       }
 
       try {
-        const res = await fetch(`/assets/videos/${id}.mp4`);
-        const blob = await res.blob();
-
-        if (cancelled || !v) return;
-
-        const objectUrl = URL.createObjectURL(blob);
-        cache.set(id, objectUrl);
+        console.log("prefetching", href);
 
         v.pause();
-        v.src = objectUrl;
+        v.src = href;
+        v.preload = "auto";
 
-        v.play()?.catch(() => {});
-      } catch (err) {
-        console.error("Video fetch error:", err);
+        v.load();
+        v.play().catch((e) =>
+          console.error(`prefetching ${href} error — during play action:`, e)
+        );
+      } catch (error) {
+        console.error(`prefetching ${href} error:`, error);
+      } finally {
+        console.log("prefetching processed");
       }
     }
 
-    if (typeof selectedItemID !== "undefined") {
-      setVideoFromCache(selectedItemID);
-    } else {
-      v.pause();
-    }
+    window.addEventListener("video:prefetch", handlePrefetch, {
+      signal: controller.signal,
+    });
+    window.addEventListener("video:prefetch-cancel", handlePrefetch, {
+      signal: controller.signal,
+    });
 
-    return () => {
-      cancelled = true;
-      if (video.current) video.current.pause();
-    };
+    return () => controller.abort();
   }, [selectedItemID]);
 
   useEffect(() => {
-    return () => {
-      for (const url of cache.values()) {
-        URL.revokeObjectURL(url);
-      }
-      cache.clear();
-    };
-  }, []);
+    const v = video.current;
+    if (!v) return;
+
+    if (typeof selectedItemID === "undefined") {
+      v.pause();
+      return;
+    }
+
+    const href = `/assets/videos/${selectedItemID}.mp4`;
+    if (v.currentSrc && v.currentSrc.includes(href)) {
+      v.play().catch(() => {});
+      return;
+    }
+
+    try {
+      v.pause();
+      v.src = href;
+      v.preload = "auto";
+      v.load();
+      v.play().catch(() => {});
+    } catch (err) {
+      console.error("Selection playback error:", err);
+    }
+  }, [selectedItemID]);
 
   if (typeof selectedItemID === "undefined")
     return <GridBg className={className} />;
