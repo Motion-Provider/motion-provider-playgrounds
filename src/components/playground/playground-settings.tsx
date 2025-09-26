@@ -88,6 +88,7 @@ const PlaygroundSettings = () => {
                       max={field.max}
                       value={val}
                       onChange={(e) =>
+                        e.target.valueAsNumber <= field.max &&
                         dispatch(
                           updateSettings({
                             key: field.key,
@@ -263,22 +264,26 @@ const PlaygroundSettings = () => {
             }
           })}
           <div className="flex justify-between flex-row ">
-            <Label htmlFor="complexity" className="text-sm ">
+            <Label htmlFor="complexity" className="text-sm">
               Complexity
             </Label>
             <Input
               id="complexity"
               type="number"
               min={1}
-              max={20}
+              max={5}
               value={complexity}
-              onChange={(e) => dispatch(setComplexity(Number(e.target.value)))}
+              onChange={(e) =>
+                e.target.valueAsNumber <= 5 &&
+                dispatch(setComplexity(Number(e.target.value)))
+              }
               className="w-2/3"
             />
           </div>
         </div>
         <p className="text-muted-foreground text-xs tracking-tight pt-3 w-full">
           *Complexity increases the next random animation's array size by one.
+          Fixed up to 5 for stable performance.
         </p>
       </PopoverContent>
     </Popover>
