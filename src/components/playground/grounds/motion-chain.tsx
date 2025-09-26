@@ -19,11 +19,6 @@ export default function Chain() {
     (_, i) => 184 + i * 32
   );
 
-  const animations = useMemo(
-    () => circles.map((_) => animation),
-    [circles, animation]
-  );
-
   const key = useMemo(
     () =>
       getMotionKey(
@@ -35,7 +30,7 @@ export default function Chain() {
   );
   return (
     <MotionChain
-      animations={animations}
+      animations={circles.map((_) => animation)}
       config={{
         duration: 0.15,
         delayLogic,
