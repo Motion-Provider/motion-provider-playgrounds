@@ -5,6 +5,9 @@ import { FC, memo, useState } from "react";
 import { cn } from "@/lib/utils";
 import { Skeleton } from "../ui/skeleton";
 import { toast } from "sonner";
+import clientService from "@/utils/supabase/clientService";
+
+const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
 const Waitlist: FC<{
   isDescriptionOpen?: boolean;
@@ -18,35 +21,55 @@ const Waitlist: FC<{
     setLoading(true);
 
     try {
-      const res = await fetch("/api/subscribe", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
-      });
-      const data = await res.json();
+      if (!emailRegex.test(email))
+        throw new Error("Please enter a valid email address.|400");
 
-      if (data.ok && data.message.includes("checklist")) {
-        toast.success(data.message, {
-          duration: 5000,
-          position: "top-center",
-          richColors: true,
-        });
-        return;
+      const { error } = await clientService()
+        .from("users")
+        .insert({ email: email.toLowerCase() })
+        .single();
+
+      if (error) {
+        throw new Error(`${error.message}|${error.code}`);
       }
 
-      if (data.ok) {
-        toast.warning(data.message, {
-          duration: 5000,
+      setEmail("");
+      return toast.success(
+        `You have been successfully added to the waitlist 🎉`,
+        {
           position: "top-center",
           richColors: true,
-        });
-      }
+        }
+      );
     } catch (err) {
-      toast.error("Unexpected error — please try again later.");
+      const [msg, code] = (err as Error).message.split("|");
+
+      if (code.includes("23505")) {
+        return toast.warning("You are already in man, take it easy..", {
+          position: "top-center",
+          richColors: true,
+        });
+      }
+
+      if (code.includes("400")) {
+        return toast.warning(msg, {
+          position: "top-center",
+          richColors: true,
+        });
+      }
+
+      return toast.warning(
+        "Operation failed due to internal server error — contact to support for your hello@burakdev.com",
+        {
+          position: "top-center",
+          richColors: true,
+        }
+      );
     } finally {
       setLoading(false);
     }
   }
+
   return (
     <>
       <form
