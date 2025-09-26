@@ -35,13 +35,13 @@ const Cards: FC<HomeCardsProps> = ({
       <MotionChain
         className="relative"
         animations={items.map(() => ({
-          mode: ["fadeRight"],
+          mode: ["fadeLeft"],
           transition: "gentle",
-          duration: 1,
+          duration: 1.5,
         }))}
         config={{
-          duration: 0.33,
-          delayLogic: "linear",
+          duration: 1,
+          delayLogic: "spiral",
         }}
         controller={controller}
         elementType="div"
@@ -153,7 +153,7 @@ const CardItem: FC<MotionCardItemProps> = memo((props) => {
             timer={3000}
             className="flex flex-row gap-2 size-full items-center justify-center"
           >
-            Create {btnTitle} animation <ArrowRight className="size-4" />
+            Create {btnTitle[1]} animations <ArrowRight className="size-4" />
           </MotionLink>
         </Button>
       </div>
