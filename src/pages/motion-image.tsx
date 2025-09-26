@@ -1,9 +1,9 @@
-import { GroundLabel } from "@/components/playground/ground-label";
-import Image from "@/components/playground/grounds/motion-image";
-import PlaygroundConfiguration from "@/components/playground/playground-configuration";
-import PlaygroundController from "@/components/playground/playground-controller";
-import PlaygroundLayout from "@/layouts/playground-layout";
 import Head from "next/head";
+import PlaygroundLayout from "@/layouts/playground-layout";
+import { GroundLabel } from "@/components/playground/ground-label";
+import MotionPlaygroundImage from "@/components/playground/grounds/motion-image";
+import PlaygroundController from "@/components/playground/playground-controller";
+import PlaygroundConfiguration from "@/components/playground/playground-configuration";
 
 export default function MotionImagePage() {
   return (
@@ -11,7 +11,7 @@ export default function MotionImagePage() {
       <Head>
         <title>Playgrounds | Motion Image</title>
       </Head>
-      <Image />
+      <MotionPlaygroundImage />
       <PlaygroundController />
       <GroundLabel className="text-7xl">Motion Image</GroundLabel>
       <PlaygroundConfiguration />
