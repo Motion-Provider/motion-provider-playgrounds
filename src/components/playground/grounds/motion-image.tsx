@@ -9,7 +9,7 @@ import { MotionControllerProps } from "@/motion/types";
 import getMotionKey from "@/utils/getMotionKey";
 import { AnimationKeys } from "@/motion/constants/animations";
 
-const Image: FC = () => {
+const MotionPlaygroundImage: FC = () => {
   const { settings } = useSelector((state: ReduxRootState) => state.metadata);
   const { animation, delayLogic } = useSelector(
     (state: ReduxRootState) => state.motion
@@ -66,4 +66,4 @@ const Image: FC = () => {
   );
 };
 
-export default Image;
+export default MotionPlaygroundImage;
