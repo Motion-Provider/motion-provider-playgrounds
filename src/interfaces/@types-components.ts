@@ -123,13 +123,10 @@ export interface SquareBackgroundPatternProps extends ClassNameProps {
   backgroundColor?: string;
   patternId?: string;
 }
-
 export interface SafariMockProps extends ClassNameProps {
   width?: number;
   height?: number;
 }
-
-export interface LinkNavbarProps extends ClassNameProps {}
 
 export interface LinkNavItemProps extends ClassNameProps {
   id: number;
@@ -158,6 +155,9 @@ export interface LinkNavItemComponentProps {
   onClick?: () => void;
 }
 
+export type AnalyticsProps = {
+  gaId?: string | undefined;
+};
 /******** Grounds Props *********/
 
 /** Motion Text */
