@@ -13,12 +13,15 @@ export default function Home() {
   const [selectedItem, setSelectedItem] = useState<MotionCardItem | undefined>(
     undefined
   );
+
   const { control, onReverse } = useAnimationControl();
   const controller = useAnimation(control);
 
-  const handleHover = useCallback((id?: number) => {
-    setSelectedItem(motionCardsLib.find((item) => item.id === id));
-  }, []);
+  const handleHover = useCallback(
+    (id?: number) =>
+      setSelectedItem(motionCardsLib.find((item) => item.id === id)),
+    []
+  );
 
   const isItemHovered = typeof selectedItem !== "undefined";
 

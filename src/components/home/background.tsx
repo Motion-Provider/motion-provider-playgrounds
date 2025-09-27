@@ -1,6 +1,6 @@
 import GridBg from "../grid-bg";
 import { cn } from "@/lib/utils";
-import { FC, useEffect, useRef } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import MotionContainer from "@/motion/motion-container";
 import { HomepageBgProps } from "@/interfaces/@types-components";
 
@@ -10,6 +10,8 @@ export const Background: FC<HomepageBgProps> = ({
 }) => {
   const video = useRef<HTMLVideoElement | null>(null);
   const prefetchedID = useRef<number | null>(null);
+
+  const [loaded, setLoaded] = useState<boolean>(false);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -34,6 +36,7 @@ export const Background: FC<HomepageBgProps> = ({
         console.log("prefetching", href);
 
         v.pause();
+
         v.src = href;
         v.preload = "auto";
 
@@ -48,6 +51,16 @@ export const Background: FC<HomepageBgProps> = ({
       }
     }
 
+    v.addEventListener(
+      "loadeddata",
+      () => {
+        setLoaded(true);
+      },
+      {
+        signal: controller.signal,
+      }
+    );
+
     window.addEventListener("video:prefetch", handlePrefetch, {
       signal: controller.signal,
     });
@@ -55,7 +68,10 @@ export const Background: FC<HomepageBgProps> = ({
       signal: controller.signal,
     });
 
-    return () => controller.abort();
+    return () => {
+      controller.abort();
+      setLoaded(false);
+    };
   }, [selectedItemID]);
 
   useEffect(() => {
@@ -96,7 +112,10 @@ export const Background: FC<HomepageBgProps> = ({
         delay: 0.25,
         duration: 0.75,
       }}
-      elementType={"div"}
+      controller={{
+        trigger: loaded,
+      }}
+      elementType="div"
       key={selectedItemID}
     >
       <video

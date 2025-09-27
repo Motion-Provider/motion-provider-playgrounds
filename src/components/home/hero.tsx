@@ -52,6 +52,7 @@ const Hero: FC<HomepageTransitionSectionProps> = ({ controller }) => (
           Dig through countless repos hunting for that perfect copy‑paste
           “desired” animation—god knows who wrote it or why. Or just grab this
           one, and watch how quick your imagination actually show up on screen.
+          Entire playground has built at the top of Motion Provider.
         </MotionText>
         <Waitlist />
       </div>

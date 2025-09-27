@@ -13,15 +13,15 @@ export const MotionProviderLogo = () => (
       elementType="div"
       className="blur-3xl size-24 bg-gradient-to-br from-blue-500 via-blue-600 to-40% to-blue-400 absolute -z-20"
     />
-    <div className="flex items-center rounded-md backdrop-blur-sm">
+    <div className="flex items-center rounded-md ">
       <Image
         priority
         fetchPriority="high"
-        width={240}
-        height={240}
-        src="/motion-provider-logo-transparent.png"
+        width={192}
+        height={192}
+        src="/android-chrome-192x192.png"
         alt="Motion Provider Logo"
-        className="size-10 rounded-md rotate-[13deg]"
+        className="size-10 rounded-md"
       />
     </div>
   </div>
