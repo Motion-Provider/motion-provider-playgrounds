@@ -8,7 +8,7 @@ export default function AppProvider({
   children: React.ReactNode;
 }) {
   return (
-    <main className={cn("w-full h-screen dark", interFont.className)}>
+    <main className={cn("w-full min-h-screen dark", interFont.className)}>
       {children}
       <Toaster position="bottom-right" />
     </main>
