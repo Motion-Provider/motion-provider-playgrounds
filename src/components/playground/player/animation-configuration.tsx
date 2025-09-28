@@ -15,6 +15,14 @@ import transitions from "@/motion/constants/transitions";
 import { TransitionKeys } from "@/motion/constants/transitions";
 import delays from "@/motion/constants/delays";
 
+const filteredTransitions = Object.keys(transitions).filter(
+  (item) => (item as TransitionKeys) !== "default"
+);
+
+const filteredDelays = delays.filter(
+  (item) => (item as DelayLogic) !== "custom"
+);
+
 export const AnimationConfiguration = () => {
   const dispatch = useDispatch<ReduxStoreDispatchType>();
   const { animation, delayLogic } = useSelector(
@@ -32,7 +40,7 @@ export const AnimationConfiguration = () => {
 
   const handleDelayChange = (log: DelayLogic) => dispatch(setDelayLogic(log));
   return (
-    <Card className={" relative bg-transparent size-full h-1/3 w-full"}>
+    <Card className="relative bg-transparent size-full h-1/3 w-full">
       <CardContent className="flex flex-col gap-2 absolute size-full top-0 rounded-2xl p-4">
         <div className="w-full flex flex-row  px-2">
           <Badge
@@ -46,7 +54,7 @@ export const AnimationConfiguration = () => {
               Change sequence{`(${delayLogic})`}
             </SelectTrigger>
             <SelectContent className="w-full relative h-60 p-2 ">
-              {delays.map((item) => (
+              {filteredDelays.map((item) => (
                 <SelectItem
                   value={item}
                   title="Add an animation"
@@ -74,7 +82,7 @@ export const AnimationConfiguration = () => {
               Change transition{`(${animation.transition})`}
             </SelectTrigger>
             <SelectContent className="w-full relative h-60 p-2 ">
-              {(Object.keys(transitions) as TransitionKeys[]).map((item) => (
+              {filteredTransitions.map((item) => (
                 <SelectItem
                   value={item}
                   title="Add an animation"
