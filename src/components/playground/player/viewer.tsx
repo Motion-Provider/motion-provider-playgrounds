@@ -7,24 +7,23 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import MotionContainer from "@/motion/motion-container";
 import { RefreshCcw } from "lucide-react";
 import { useMemo, useState } from "react";
 import { CopyCode } from "../../copy-code";
-import { useCopyToClipboard, useDebounce } from "@uidotdev/usehooks";
 import { useSelector } from "react-redux";
 import { ReduxRootState } from "@/redux";
+import MotionContainer from "@/motion/motion-container";
+import { useCopyToClipboard } from "@uidotdev/usehooks";
 
 export const PlayerViewer = () => {
   const [key, setKey] = useState<number>(0);
   const [_, copyToClipboard] = useCopyToClipboard();
 
   const motion = useSelector((state: ReduxRootState) => state.motion);
-  const debouncedAnimations = useDebounce(motion.animation.mode, 2000);
 
   const animationKey = useMemo(
-    () => Object.keys(debouncedAnimations).join("-").concat(key.toString()),
-    [key, debouncedAnimations]
+    () => Object.keys(motion.animation.mode).join("-").concat(key.toString()),
+    [key, motion.animation.mode]
   );
 
   const handleRestart = () => setKey((prev) => prev + 1);
@@ -41,7 +40,6 @@ export const PlayerViewer = () => {
         elementType="div"
         className="absolute top-12 left-12 -z-10 size-24 rounded-full bg-blue-600 blur-3xl"
       />
-
       <CardHeader>
         <CardTitle>View Current Animation</CardTitle>
         <CardDescription>
@@ -49,28 +47,27 @@ export const PlayerViewer = () => {
           trigger to view.
         </CardDescription>
       </CardHeader>
-      <CardContent className="z-50 h-auto w-full items-center-safe justify-center flex ">
+      <CardContent className="z-50 h-auto w-full items-center-safe justify-center flex">
         <MotionContainer
-          animation={{
-            ...motion.animation,
-            delay: 0,
-          }}
+          animation={motion.animation}
           elementType="div"
+          controller={{
+            trigger: true,
+          }}
           key={animationKey}
-          className="size-28 rounded-2xl bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500"
+          className="size-28 rounded-2xl bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 "
         />
       </CardContent>
-      <CardFooter className="justify-end  flex w-full ">
+      <CardFooter className="justify-end flex w-full">
         <div className="flex ">
           <Button variant="ghost" onClick={handleRestart}>
             <MotionContainer
               animation={{
-                mode: ["spin"],
+                mode: "spin",
                 transition: "cubicElastic",
-                delay: 0,
                 duration: 1,
               }}
-              elementType={"div"}
+              elementType="div"
               controller={{
                 configView: {
                   once: false,
