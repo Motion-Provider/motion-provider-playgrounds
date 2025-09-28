@@ -27,7 +27,11 @@ import { Label } from "@/components/ui/label";
 import { useIsClient } from "@uidotdev/usehooks";
 import { Separator } from "@/components/ui/separator";
 import { useDispatch, useSelector } from "react-redux";
-import { setComplexity, updateSettings } from "@/redux/slices/metadata";
+import {
+  setComplexity,
+  setDelay,
+  updateSettings,
+} from "@/redux/slices/metadata";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "../ui/button";
 
@@ -39,7 +43,7 @@ const PlaygroundSettings = () => {
   const settings = useSelector(
     (s: ReduxRootState) => s.metadata.settings[motion]
   );
-  const complexity = useSelector((s: ReduxRootState) => s.metadata.complexity);
+  const { complexity, delay } = useSelector((s: ReduxRootState) => s.metadata);
 
   if (typeof motion === "undefined" || !isClient)
     return <Settings className="size-5 blur-sm" />;
@@ -263,7 +267,7 @@ const PlaygroundSettings = () => {
                 );
             }
           })}
-          <div className="flex justify-between flex-row ">
+          <div className="flex justify-between flex-row">
             <Label htmlFor="complexity" className="text-sm">
               Complexity
             </Label>
@@ -280,10 +284,29 @@ const PlaygroundSettings = () => {
               className="w-2/3"
             />
           </div>
+          <div className="flex justify-between flex-row">
+            <Label htmlFor="delay" className="text-sm">
+              delay{"(sec)"}
+            </Label>
+            <Input
+              id="delay"
+              type="number"
+              min={0}
+              max={100}
+              value={delay}
+              onChange={(e) => dispatch(setDelay(Number(e.target.value)))}
+              className="w-2/3"
+            />
+          </div>
         </div>
         <p className="text-muted-foreground text-xs tracking-tight pt-3 w-full">
           *Complexity increases the next random animation's array size by one.
-          Fixed up to 5 for stable performance.
+          Fixed up to 5 for to avoid performance issues.
+        </p>
+        <p className="text-muted-foreground text-xs tracking-tight pt-1 w-full">
+          *To avoid boring you I've detached the delay prop from any of MP
+          components but it's still saving the input value you set in the syntax
+          viewer.
         </p>
       </PopoverContent>
     </Popover>
