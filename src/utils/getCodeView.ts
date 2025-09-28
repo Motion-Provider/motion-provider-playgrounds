@@ -22,6 +22,7 @@ const animations = items.map(() => ({
   mode: ${JSON.stringify(animation.mode)},
   transition: ${JSON.stringify(animation.transition)},
   duration: ${JSON.stringify(animation.duration)},
+  delay: ${metadata.delay}
 })) as MotionAnimationProps[]
 
 export function ${currentMotion}_${id}() {
@@ -51,6 +52,7 @@ export function ${currentMotion}_${id}() {
         mode: ${JSON.stringify(animation.mode)},
         transition: ${JSON.stringify(animation.transition)},
         duration: ${JSON.stringify(animation.duration)},
+        delay: ${metadata.delay}
       }}
       className="size-24 rounded-lg bg-lime-400"
     />
@@ -69,9 +71,10 @@ export function ${currentMotion}_${id}() {
         mode: ${JSON.stringify(animation.mode)},
         transition: ${JSON.stringify(animation.transition)},
         duration: ${JSON.stringify(animation.duration)},
+        delay: ${metadata.delay}
       }}
       config={{
-        duration: 0.12,
+        duration: ${JSON.stringify(metadata.configDuration)},
         mode: "chars",
         delayLogic: ${JSON.stringify(delayLogic)},
       }}
@@ -92,6 +95,7 @@ export function ${currentMotion}_${id}() {
         mode: ${JSON.stringify(animation.mode)},
         transition: ${JSON.stringify(animation.transition)},
         duration: ${JSON.stringify(animation.duration)},
+        delay: ${metadata.delay}
       }}
       config={{
         duration: 0.88,

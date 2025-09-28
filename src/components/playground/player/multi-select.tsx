@@ -20,9 +20,9 @@ import { setMotion } from "@/redux/slices/motion";
 import animations from "@/motion/constants/animations";
 import { AnimationKeys } from "@/motion/constants/animations";
 
-const items = Object.keys(animations).sort((a, b) =>
-  a.localeCompare(b)
-) as AnimationKeys[];
+const items = Object.keys(animations)
+  .filter((val) => val !== "default")
+  .sort((a, b) => a.localeCompare(b)) as AnimationKeys[];
 
 export const MultiSelect = () => {
   const dispatch = useDispatch<ReduxStoreDispatchType>();

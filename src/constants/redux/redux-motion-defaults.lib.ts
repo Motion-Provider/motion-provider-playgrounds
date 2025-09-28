@@ -92,6 +92,8 @@ const MetadataInitialState: MetadataProps = {
   currentMotion: undefined,
   settings: MotionsInitialState,
   complexity: 1,
+  delay: 0,
+  configDuration: 0.12,
 };
 
 const UtilsInitialState: ReduxUtilsProps = {

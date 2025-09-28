@@ -50,6 +50,8 @@ export interface MetadataProps {
   currentMotion: Motions | undefined;
   settings: SettingsByProvider;
   complexity: Complexity;
+  delay: number;
+  configDuration: number;
 }
 
 export type SettingsByProvider = {
