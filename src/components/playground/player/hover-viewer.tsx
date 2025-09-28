@@ -15,7 +15,10 @@ export const HoverViewer: FC<PlaygroundMiniViewerProps> = ({
         duration: 1,
         delay: 0.25,
       }}
-      elementType={"div"}
+      controller={{
+        trigger: true,
+      }}
+      elementType="div"
       className={cn(
         "size-full rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500",
         className
