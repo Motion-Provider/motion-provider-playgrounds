@@ -7,10 +7,13 @@ import { FieldWrapper } from "./field-wrapper";
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
 import { Slider } from "@/components/ui/slider";
+import { useDispatch } from "react-redux";
+import { setConfigDuration } from "@/redux/slices/metadata";
 
 export const DurationControl: FC = memo(() => {
   const { setDuration } = useContext(TextConfigDispatchContext);
   const { duration } = useContext(TextConfigValueContext);
+  const dispatch = useDispatch();
 
   return (
     <FieldWrapper>
@@ -27,7 +30,10 @@ export const DurationControl: FC = memo(() => {
           min={0.005}
           step={0.005}
           value={[duration]}
-          onValueChange={(value) => setDuration(value[0])}
+          onValueChange={(value) => {
+            setDuration(value[0]);
+            dispatch(setConfigDuration(value[0]));
+          }}
           className=" border  rounded-l-md border-r-0 p-2 "
         />
       </div>
