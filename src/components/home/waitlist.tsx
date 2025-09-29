@@ -9,7 +9,7 @@ import clientService from "@/utils/supabase/clientService";
 import { useCounter, useLocalStorage } from "@uidotdev/usehooks";
 
 const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-const RATE_LIMIT_IN_SECONDS: number = 10;
+const RATE_LIMIT_IN_SECONDS: number = 59;
 const RATE_LIMIT_ENDLINE: number = 0;
 
 const Waitlist: FC<{
