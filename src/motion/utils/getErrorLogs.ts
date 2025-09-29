@@ -1,5 +1,3 @@
-// @ts-ignore
-// eslint-disable-next-line no-console
 import { GetErrorLogsProps } from "../types";
 
 /**

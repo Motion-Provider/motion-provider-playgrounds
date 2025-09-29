@@ -40,7 +40,7 @@ const Waitlist: FC<{
         clearInterval(timeoutRef.current);
       }
     };
-  }, [attempt]);
+  }, [attempt, count, decrement]);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
