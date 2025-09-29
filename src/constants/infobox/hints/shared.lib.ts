@@ -1,8 +1,9 @@
 ﻿import { InfoboxHintLibProps } from "@/interfaces/@types-constants";
 
 export default [
-  "Use controllers below inside the nav to control the current playground. Each Motion Provider component leverages controlling mechanism from the power of 'useAnimationControl' hook.",
-  "Whenever you roll a dice, you're simply adding a random animation(s) to the current component among 75+ predefined animations. Complexity adjusts the next random animation array size.",
+  "Use controllers below inside the dock nav in order to control the playground. Each MP component leverages controlling mechanism from the power of 'useAnimationControl' hook.",
+  "Whenever you roll a dice, you're simply adding a random animation(s) to the current component among 69+ predefined animations.",
+  "Complexity adjusts the next random animation array size.",
   "Each animation you have added will add a new animation instance into the 'mode' prop array and meanwhile you run all-in-once.",
   "You can configure the entire animation set such as duration, delay, config... etc.",
   "You can literally configure your dream animation in seconds using the controller dock below.",

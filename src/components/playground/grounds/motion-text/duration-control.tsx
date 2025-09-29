@@ -8,7 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
 import { Slider } from "@/components/ui/slider";
 import { useDispatch } from "react-redux";
-import { setConfigDuration } from "@/redux/slices/metadata";
+import { updateSettings } from "@/redux/slices/metadata";
 
 export const DurationControl: FC = memo(() => {
   const { setDuration } = useContext(TextConfigDispatchContext);
@@ -26,19 +26,24 @@ export const DurationControl: FC = memo(() => {
         <Slider
           id="duration"
           defaultValue={[duration]}
-          max={0.5}
-          min={0.005}
+          max={0.05}
+          min={0.001}
           step={0.005}
           value={[duration]}
           onValueChange={(value) => {
             setDuration(value[0]);
-            dispatch(setConfigDuration(value[0]));
+            dispatch(
+              updateSettings({
+                key: "duration",
+                value: value[0],
+              })
+            );
           }}
           className=" border  rounded-l-md border-r-0 p-2 "
         />
       </div>
       <p className="text-muted-foreground text-xs">
-        *Will apply after next play click.
+        *Total roundup animation duration.
       </p>
     </FieldWrapper>
   );

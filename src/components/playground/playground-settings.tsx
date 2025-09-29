@@ -150,7 +150,7 @@ const PlaygroundSettings = () => {
                       }
                     >
                       <SelectTrigger className="w-2/3">
-                        <SelectValue />
+                        <SelectValue placeholder={field.defaultValue} />
                       </SelectTrigger>
                       <SelectContent id={field.key}>
                         {field.options.map((o: (typeof field.options)[0]) => (
@@ -186,7 +186,7 @@ const PlaygroundSettings = () => {
                       }
                     >
                       <SelectTrigger className="w-2/3">
-                        <SelectValue />
+                        <SelectValue placeholder={field.label} />
                       </SelectTrigger>
                       <SelectContent id={field.key}>
                         {field.options.map((o: (typeof field.options)[0]) => (

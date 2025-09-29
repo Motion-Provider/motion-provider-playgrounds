@@ -30,7 +30,9 @@ export function ${currentMotion}_${id}() {
       <MotionChain 
         animations={animations}
         config={{
-          duration: 0.15,
+          duration: ${JSON.stringify(
+            metadata.settings["MotionChain"].duration
+          )},
           delayLogic: ${JSON.stringify(delayLogic)},
         }}
         elementType="div"
@@ -74,7 +76,7 @@ export function ${currentMotion}_${id}() {
         delay: ${metadata.delay}
       }}
       config={{
-        duration: ${JSON.stringify(metadata.configDuration)},
+        duration: ${JSON.stringify(metadata.settings["MotionText"].duration)},
         mode: "chars",
         delayLogic: ${JSON.stringify(delayLogic)},
       }}
@@ -98,7 +100,7 @@ export function ${currentMotion}_${id}() {
         delay: ${metadata.delay}
       }}
       config={{
-        duration: 0.88,
+        duration: ${metadata.settings["MotionImage"].duration},
         // example image from unsplash
         img: "https://images.unsplash.com/photo-1486848538113-ce1a4923fbc5?q=80&w=749&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         delayLogic: ${JSON.stringify(delayLogic)},
@@ -112,15 +114,21 @@ export function ${currentMotion}_${id}() {
 `;
     case "MotionLink":
       return `/*
-Here the things are different since we 
-are not creating a new motion animation 
-component but rather creating a brand new 
-redirector to trigger 'reverse' effect for 
-the motioned components by controlling them. 
-Notice that this component only works on 
-Next.js environments since we are using 
-'useRouter' from 'next/router'.
+It is worth to notice that this 
+MP component is still in EXPERIMENTAL 
+PHASE. 
+
+Basically, it's a custom link
+component that uses Next.js router 
+while navigating to another page 
+and returns a callback function 
+that connects with the 'onReverse' 
+prop of 'useAnimationControl' hook 
+in order to create a recursive 
+animation for creating a smooth 
+page-out transition effect.
 */
+
 import MotionLink from "@/motion/motion-link";
 import MotionContainer from "@/motion/motion-container";
 

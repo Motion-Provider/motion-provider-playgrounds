@@ -16,7 +16,7 @@ const MotionPlaygroundImage: FC = () => {
   );
   const reduxController = useSelector(selectController);
 
-  const { fn, img, pieces } = settings["MotionImage"];
+  const { fn, img, pieces, duration } = settings["MotionImage"];
 
   useMemo(() => {
     if (typeof fn !== "undefined") {
@@ -52,9 +52,9 @@ const MotionPlaygroundImage: FC = () => {
     <MotionImage
       animation={animation}
       config={{
-        pieces: pieces,
-        img: img,
-        duration: 0.88,
+        pieces,
+        img,
+        duration,
         delayLogic,
         fn: fn || undefined,
       }}

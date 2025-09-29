@@ -143,19 +143,20 @@ const CardItem: FC<MotionCardItemProps> = memo((props) => {
             {desc}
           </p>
         </div>
-        <Button
-          variant={isHovered ? "default" : "outline"}
-          className="mb-4 w-full shrink-0 z-50 border-none text-xs relative"
+        <MotionLink
+          onReverse={onClick}
+          href={`/${btnLink}`}
+          timer={3000}
+          className="absolute w-full shrink-0 z-50 border-none grid place-items-center"
         >
-          <MotionLink
-            onReverse={onClick}
-            href={`/${btnLink}`}
-            timer={3000}
-            className="flex flex-row gap-2 size-full items-center justify-center"
+          <Button
+            variant={isHovered ? "default" : "outline"}
+            className="flex flex-row gap-2 items-center justify-center text-xs"
           >
             Create {btnTitle[1]} animations <ArrowRight className="size-4" />
-          </MotionLink>
-        </Button>
+          </Button>
+        </MotionLink>
+        <div className="w-full h-1 bg-transparent " />
       </div>
     </div>
   );

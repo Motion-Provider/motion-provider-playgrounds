@@ -2,7 +2,7 @@ import MotionContainer from "@/motion/motion-container";
 import Image from "next/image";
 
 export const MotionProviderLogo = () => (
-  <div className="absolute md:top-[6rem] md:left-30 left-20 top-10 flex items-center justify-center-safe gap-2">
+  <div className="absolute md:top-[6rem] md:left-30 left-20 top-12 flex items-center justify-center-safe gap-2">
     <MotionContainer
       animation={{
         mode: ["fadeIn"],
@@ -19,7 +19,7 @@ export const MotionProviderLogo = () => (
         fetchPriority="high"
         width={192}
         height={192}
-        src="/android-chrome-192x192.png"
+        src="/motion-provider-logo.png"
         alt="Motion Provider Logo"
         className="size-10 rounded-md"
       />

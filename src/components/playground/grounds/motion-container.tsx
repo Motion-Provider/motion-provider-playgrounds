@@ -1,9 +1,11 @@
 ﻿import { cn } from "@/lib/utils";
+import { AnimationKeys } from "@/motion/constants/animations";
 import MotionContainer from "@/motion/motion-container";
 import { ReduxRootState } from "@/redux";
 import { selectController } from "@/redux/slices/utils";
+import getMotionKey from "@/utils/getMotionKey";
 import Image from "next/image";
-import { FC } from "react";
+import { FC, useMemo } from "react";
 import { useSelector } from "react-redux";
 
 const Container: FC = () => {
@@ -13,6 +15,15 @@ const Container: FC = () => {
 
   const { backgroundColor } = settings["MotionContainer"];
 
+  const key = useMemo(
+    () =>
+      getMotionKey(
+        (animation.mode as AnimationKeys[]).join(" "),
+        "container",
+        `${animation.transition}-${animation.duration}`
+      ),
+    [animation]
+  );
   return (
     <MotionContainer
       elementType="div"
@@ -22,10 +33,15 @@ const Container: FC = () => {
       )}
       animation={animation}
       controller={{
+        configView: {
+          amount: 0.5,
+          once: false,
+        },
         isAnimationStopped,
         reverse,
+        trigger: true,
       }}
-      key={Object.keys(animation.mode).join("-")}
+      key={key}
     >
       <Image
         alt="Motion Provider Logo"

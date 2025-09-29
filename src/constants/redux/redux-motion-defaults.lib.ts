@@ -64,6 +64,7 @@ const MotionsInitialState: SettingsByProvider = {
     borderBlur: "blur-none",
     borderColor: "border-rose-500",
     circleCount: 30,
+    duration: 0.15,
   },
   MotionContainer: {
     backgroundColor: "bg-rose-500",
@@ -72,6 +73,7 @@ const MotionsInitialState: SettingsByProvider = {
     fn: undefined,
     img: "/assets/motion-image.webp",
     pieces: 81,
+    duration: 0.88,
   },
   MotionLink: {
     route: "motionsocials.dev/home",
@@ -86,6 +88,7 @@ const MotionsInitialState: SettingsByProvider = {
     fontSize: 16,
     mode: "chars",
     space: 0,
+    duration: 0.01,
   },
 };
 const MetadataInitialState: MetadataProps = {
@@ -93,7 +96,6 @@ const MetadataInitialState: MetadataProps = {
   settings: MotionsInitialState,
   complexity: 1,
   delay: 0,
-  configDuration: 0.12,
 };
 
 const UtilsInitialState: ReduxUtilsProps = {

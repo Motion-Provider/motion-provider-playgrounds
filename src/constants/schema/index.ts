@@ -74,6 +74,14 @@ export default {
         label: string;
       }[],
     },
+    {
+      type: "number",
+      min: 0.01,
+      max: 50,
+      label: "Total Duration",
+      defaultValue: 0.15,
+      key: "duration",
+    },
   ],
   MotionContainer: [
     {
@@ -141,6 +149,14 @@ export default {
           value: "click",
         },
       ] as { label: string; value: MotionImageConfigProps["fn"] }[],
+    },
+    {
+      type: "number",
+      min: 0.1,
+      max: 50,
+      label: "Total Duration",
+      defaultValue: 1,
+      key: "duration",
     },
   ],
   MotionMovie: [
@@ -225,4 +241,4 @@ export default {
       key: "space",
     },
   ],
-} satisfies Record<Motions, SettingsFieldsProps[]>;
+} as const satisfies Record<Motions, SettingsFieldsProps[]>;

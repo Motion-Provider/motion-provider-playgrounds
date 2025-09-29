@@ -1,20 +1,38 @@
 import { FC, memo } from "react";
 import Link from "next/link";
-import { MotionLogo } from "../motion-logo";
 import { Badge } from "../ui/badge";
-import Waitlist from "./waitlist";
 import MotionText from "@/motion/motion-text";
 import { HomepageTransitionSectionProps } from "@/interfaces/@types-components";
 import { MotionProviderLogo } from "../motion-provider-logo";
+import dynamic from "next/dynamic";
+import { Skeleton } from "../ui/skeleton";
+
+const Waitlist = dynamic(() => import("@/components/home/waitlist"), {
+  ssr: false,
+  loading: () => (
+    <div className="flex flex-col gap-1">
+      <Skeleton className="h-9 w-full" />
+      <Skeleton className="h-4 w-1/2 rounded-sm" />
+    </div>
+  ),
+});
+
+const MotionLogo = dynamic(() => import("@/components/motion-logo"), {
+  ssr: false,
+  loading: () => <Skeleton className="size-8" />,
+});
+
+const DesktopAlert = dynamic(() => import("@/components/home/desktop-alert"), {
+  ssr: false,
+  loading: () => <Skeleton className="size-8" />,
+});
 
 const Hero: FC<HomepageTransitionSectionProps> = ({ controller }) => (
-  <div className="relative size-full flex md:p-24 p-12 items-center-safe">
+  <div className="relative size-full flex md:p-24 py-12 px-8 items-center-safe">
     <div className="flex gap-4 flex-col ">
-      <div>
-        <Badge variant="outline">
-          Now <b>BETA</b> with <i>playgrounds</i>
-        </Badge>
-      </div>
+      <Badge variant="outline">
+        Now <b>BETA</b> with <i>playgrounds</i>
+      </Badge>
       <div className="flex gap-4 flex-col ">
         <MotionText
           elementType="h1"
@@ -30,7 +48,7 @@ const Hero: FC<HomepageTransitionSectionProps> = ({ controller }) => (
             delayLogic: "linear",
           }}
           controller={controller}
-          wrapperClassName="text-5xl md:text-7xl max-w-lg tracking-tighter text-left font-regular"
+          wrapperClassName="text-[2.6rem] md:text-7xl max-w-lg tracking-tighter text-left font-regular inline-flex"
         >
           Motion Provider
         </MotionText>
@@ -40,7 +58,7 @@ const Hero: FC<HomepageTransitionSectionProps> = ({ controller }) => (
             transition: "smooth",
             duration: 0.75,
           }}
-          wrapperClassName="text-base leading-relaxed tracking-tight text-muted-foreground max-w-md text-left"
+          wrapperClassName="md:text-base leading-relaxed tracking-tight text-muted-foreground max-w-md text-left"
           elementType={"p"}
           controller={controller}
           config={{
@@ -52,8 +70,9 @@ const Hero: FC<HomepageTransitionSectionProps> = ({ controller }) => (
           Dig through countless repos hunting for that perfect copy‑paste
           “desired” animation—god knows who wrote it or why. Or just grab this
           one, and watch how quick your imagination actually show up on screen.
-          Entire playground has built at the top of Motion Provider.
         </MotionText>
+        <DesktopAlert />
+
         <Waitlist />
       </div>
     </div>

@@ -16,7 +16,7 @@ export default [
   {
     id: 3,
     title: "Motion Image",
-    desc: "Integrate algorithmic image motion animations to your brand new project.",
+    desc: "Integrate algorithmic piecewise motion animations to your brand new images.",
     img: "/assets/motion-image.webp",
   },
   {
@@ -28,7 +28,7 @@ export default [
   {
     id: 5,
     title: "Motion Movie",
-    desc: "A dynamic image queuing system with built-in animations. It automatically transitions between images using predefined enter and exit animations and supports custom configurations for delays, transitions, and piecewise animations.",
+    desc: "Image slideshow. Transitions between images using enter and exit piecewise animations.",
     img: "/assets/motion-movie.webp",
   },
   {

@@ -1,8 +1,10 @@
 ﻿/** interfaces */
 
 import {
+  MotionChainProps,
   MotionControllerProps,
   MotionImageConfigProps,
+  MotionTextConfigProps,
   SplittedTextModes,
 } from "@/motion/types";
 import { MotionAnimation } from "./@types-constants";
@@ -13,11 +15,13 @@ export interface ReduxChainSettingsProps {
   borderColor: BorderColors;
   borderBlur: BorderBlur;
   circleCount: number;
+  duration: MotionChainProps["config"]["duration"];
 }
 export interface ReduxTextSettingsProps {
   fontSize: number;
   mode: SplittedTextModes;
   space: number;
+  duration: MotionTextConfigProps["duration"];
 }
 export interface ReduxLinkSettingsProps {
   route: string;
@@ -27,12 +31,13 @@ export interface ReduxImageSettingsProps {
   img: string;
   fn: MotionImageConfigProps["fn"];
   pieces: MotionImageConfigProps["pieces"];
+  duration: MotionImageConfigProps["duration"];
 }
 export interface ReduxContainerSettingsProps {
   backgroundColor: BackgroundColors;
 }
 export interface ReduxMovieSettingsProps
-  extends Omit<ReduxImageSettingsProps, "img" | "fn"> {
+  extends Omit<ReduxImageSettingsProps, "img" | "fn" | "duration"> {
   images: string[];
   animationDuration: number;
 }
@@ -51,7 +56,6 @@ export interface MetadataProps {
   settings: SettingsByProvider;
   complexity: Complexity;
   delay: number;
-  configDuration: number;
 }
 
 export type SettingsByProvider = {

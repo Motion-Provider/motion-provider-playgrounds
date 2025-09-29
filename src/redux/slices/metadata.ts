@@ -29,17 +29,9 @@ const metadataSlice = createSlice({
     setDelay: (state, action: PayloadAction<number>) => {
       state.delay = action.payload;
     },
-    setConfigDuration: (state, action: PayloadAction<number>) => {
-      state.configDuration = action.payload;
-    },
   },
 });
 
-export const {
-  setCurrentMotion,
-  updateSettings,
-  setComplexity,
-  setDelay,
-  setConfigDuration,
-} = metadataSlice.actions;
+export const { setCurrentMotion, updateSettings, setComplexity, setDelay } =
+  metadataSlice.actions;
 export default metadataSlice.reducer;

@@ -9,7 +9,8 @@ import { AnimationKeys } from "@/motion/constants/animations";
 
 export default function Chain() {
   const { settings } = useSelector((state: ReduxRootState) => state.metadata);
-  const { borderBlur, borderColor, circleCount } = settings["MotionChain"];
+  const { borderBlur, borderColor, circleCount, duration } =
+    settings["MotionChain"];
   const { animation, delayLogic } = useSelector(
     (state: ReduxRootState) => state.motion
   );
@@ -32,7 +33,7 @@ export default function Chain() {
     <MotionChain
       animations={circles.map((_) => animation)}
       config={{
-        duration: 0.15,
+        duration,
         delayLogic,
       }}
       elementType="div"
