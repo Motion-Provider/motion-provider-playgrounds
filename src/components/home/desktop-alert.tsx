@@ -10,7 +10,7 @@ const DesktopAlert = () => {
   }
 
   return (
-    <Alert variant="default" className="animate-pulse">
+    <Alert variant="default">
       <AlertTitle className="inline-flex gap-2">
         <MessageCircleWarning className="size-5" />
         <span>You are currently using a mobile device.</span>
