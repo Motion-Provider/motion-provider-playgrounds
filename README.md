@@ -1,4 +1,4 @@
-<h1 align="center"> <img width="50" height="50" alt="Motion logo" src="./public/logo.webp" /><br />Motion Provider (Beta)</h1>
+<h1 align="center"> <img width="50" height="50" alt="Motion logo" src="https://raw.githubusercontent.com/Motion-Provider/motion-provider/refs/heads/main/public/logo.webp" /><br />Motion Provider (Beta)</h1>
 <h3 align="center">
   An open-source React animation library<br />for rapid development.
 </h3>
