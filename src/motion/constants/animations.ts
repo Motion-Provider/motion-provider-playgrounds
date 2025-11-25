@@ -1,4 +1,4 @@
-﻿import { AnimationLibraryProps } from "../types";
+﻿import type { AnimationLibraryProps } from "../types";
 
 const animations = {
   default: {
@@ -519,6 +519,58 @@ const animations = {
   microWobble: {
     initial: { rotate: 0, scale: 0.995 },
     animate: { rotate: 2, scale: 1.005 },
+  },
+  /**
+   * Here is the landing page animation entries starts.
+   * if you're reading this please DO NOT follow this pattern.
+   * It's entirely BAD practice. In the future version of
+   * Motion Provider, I'm planning to add a flag logic to modify
+   * props in programatic way. The current implementation is just
+   * non-sense.
+   * */
+  heartbeatHard1: {
+    initial: { scale: 1 },
+    animate: {
+      scale: [1, 5, 1],
+    },
+  },
+  heartbeatHard2: {
+    initial: { scale: 1 },
+    animate: {
+      scale: [1, 6, 1],
+    },
+  },
+  heartbeatHard3: {
+    initial: { scale: 1 },
+    animate: {
+      scale: [1, 7, 1],
+    },
+  },
+  heartbeatHard4: {
+    initial: { scale: 1 },
+    animate: {
+      scale: [1, 8, 1],
+    },
+  },
+  heartbeatHard5: {
+    initial: { scale: 1 },
+    animate: {
+      scale: [1, 10, 1],
+    },
+  },
+  line: {
+    initial: {
+      x1: 8,
+      y1: 4,
+      x2: 8,
+      y2: 20,
+    },
+    animate: {
+      x1: 11,
+      y1: 4,
+      x2: 11,
+      y2: 20,
+    },
   },
 } as const satisfies AnimationLibraryProps;
 

@@ -1,13 +1,14 @@
-import { CalculateDelayProps } from "../types";
+import type { CalculateDelayProps } from "../types";
 
-function mulberry32(seed: number) {
-  return function () {
-    let t = (seed += 0x6d2b79f5);
+const mulberry32 = (seed: number) => {
+  return () => {
+    seed += 0x6d2b79f5;
+    let t = seed;
     t = Math.imul(t ^ (t >>> 15), t | 1);
     t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
     return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
   };
-}
+};
 
 function fibonacci(n: number): number {
   if (n <= 0) return 0;
@@ -32,7 +33,7 @@ function logisticMap(index: number, r = 3.99, seed = 0.5) {
 
 function pseudoNoise(index: number) {
   const rnd = mulberry32(index + 1)();
-  return rnd * 2 - 1; // [-1,1]
+  return rnd * 2 - 1;
 }
 
 function seededRank(index: number, total = 100) {
@@ -57,7 +58,7 @@ export const calculateDelay = ({
       return i * bd;
 
     case "exponential":
-      return Math.pow(2, i) * bd;
+      return 2 ** i * bd;
 
     case "sinusoidal":
       return Math.sin(i) * bd;
@@ -103,7 +104,7 @@ export const calculateDelay = ({
     case "bounce": {
       const gravity = 0.8;
 
-      return Math.pow(gravity, i % 5) * bd;
+      return gravity ** (i % 5) * bd;
     }
 
     case "spiral": {

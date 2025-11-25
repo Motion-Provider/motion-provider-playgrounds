@@ -1,9 +1,9 @@
-import {
-  AnimationObjProps,
+import { useMemo } from "react";
+import { merge } from "../lib/mergeAnimation";
+import type {
   UseAnimationMixerProps,
   UseOutputAnimationMixerProps,
 } from "../types";
-import { useMemo } from "react";
 
 export const useAnimationMixer = ({
   animations: a,
@@ -16,14 +16,8 @@ export const useAnimationMixer = ({
         : { initial: a.initial, animate: a.animate };
     }
 
-    const mergedInitial = a.reduce(
-      (acc, anim) => ({ ...acc, ...anim.initial }),
-      {} as AnimationObjProps
-    );
-    const mergedAnimate = a.reduce(
-      (acc, anim) => ({ ...acc, ...anim.animate }),
-      {} as AnimationObjProps
-    );
+    const mergedInitial = merge("initial", a);
+    const mergedAnimate = merge("animate", a);
 
     return reverse
       ? { initial: mergedAnimate, animate: mergedInitial }

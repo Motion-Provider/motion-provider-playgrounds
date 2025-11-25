@@ -1,8 +1,8 @@
-import { EasingDefinition, UseInViewOptions } from "motion/react";
-import { HTMLAttributes } from "react";
-import { AnimationKeys } from "../constants/animations";
-import { TransitionKeys } from "../constants/transitions";
-import { DelayLogic } from "../constants/delays";
+import type { EasingDefinition, UseInViewOptions } from "motion/react";
+import type { HTMLAttributes } from "react";
+import type { AnimationKeys } from "../constants/animations";
+import type { DelayLogic } from "../constants/delays";
+import type { TransitionKeys } from "../constants/transitions";
 
 export interface MotionControllerProps {
   /**

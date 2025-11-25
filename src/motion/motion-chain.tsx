@@ -1,10 +1,11 @@
-import { cn } from "./lib/utils";
-import { MotionChainProps } from "./types";
+import { cn } from "@/lib/utils";
+import type { FC } from "react";
+import { Children, useMemo } from "react";
 import defaults from "./constants/defaults";
-import logError from "./utils/getErrorLogs";
-import { Children, FC, useMemo } from "react";
 import MotionContainer from "./motion-container";
+import type { MotionChainProps } from "./types";
 import { calculateDelay } from "./utils/calculateDelay";
+import logError from "./utils/getErrorLogs";
 
 /**
  * @description
@@ -45,7 +46,6 @@ import { calculateDelay } from "./utils/calculateDelay";
  *
  * @returns {React.ReactElement | null} Rendered sequence of motion-wrapped children or `null` when `animations.length !== children.length`.
  */
-
 const MotionChain: FC<MotionChainProps> = ({
   animations,
   config = defaults.MotionChain.config,
@@ -73,7 +73,6 @@ const MotionChain: FC<MotionChainProps> = ({
           delayLogic,
           index,
           baseDuration: duration,
-          customLogic,
         });
         const delayTotal = !checkRegisteredDelay
           ? (animations[index].delay || 0) + calculatedDelay
@@ -97,7 +96,7 @@ const MotionChain: FC<MotionChainProps> = ({
       return {
         ...animation,
         delay: !checkRegisteredDelay
-          ? calculatedDelay + animation.delay!
+          ? calculatedDelay + (animation.delay || 0)
           : calculatedDelay,
       };
     });

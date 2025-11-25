@@ -1,4 +1,4 @@
-import { GetErrorLogsProps } from "../types";
+import type { GetErrorLogsProps } from "../types";
 
 /**
  * In order to create a better debugging experience, we're normally
@@ -12,14 +12,13 @@ import { GetErrorLogsProps } from "../types";
  * non-sense. So I decided to disable it as a workaround. Cheers!
  */
 export default function logError({ msg, mod, src }: GetErrorLogsProps): void {
-  return;
-  // if (!msg || !mod || !src) {
-  //   console.error("MotionDebugger: Missing error, mod, or src in logError.");
-  //   return;
-  // }
+  if (!msg || !mod || !src) {
+    console.error("MotionDebugger: Missing error, mod, or src in logError.");
+    return;
+  }
 
-  // const log = `MotionDebugger: ${
-  //   mod === "error" ? "Error" : "Warning"
-  // } occurred on ${src} — (${msg})`;
-  // console[mod](log);
+  const log = `MotionDebugger: ${
+    mod === "error" ? "Error" : "Warning"
+  } occurred on ${src} — (${msg})`;
+  console[mod](log);
 }

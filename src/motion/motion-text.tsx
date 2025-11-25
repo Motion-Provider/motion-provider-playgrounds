@@ -1,10 +1,11 @@
+import { cn } from "@/lib/utils";
+import type React from "react";
+import { createElement, type FC, useMemo } from "react";
 import defaults from "./constants/defaults";
-import { cn } from "./lib/utils";
 import MotionChain from "./motion-chain";
-import { MotionTextProps } from "./types";
+import type { MotionTextProps } from "./types";
 import logError from "./utils/getErrorLogs";
 import getSplittedText from "./utils/getSplittedText";
-import React, { createElement, FC, useMemo } from "react";
 
 /**
  * @description

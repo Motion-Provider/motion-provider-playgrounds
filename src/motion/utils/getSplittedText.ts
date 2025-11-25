@@ -1,4 +1,7 @@
-import { GetSplittedTextOutputProps, GetSplittedTextProps } from "../types";
+import type {
+  GetSplittedTextOutputProps,
+  GetSplittedTextProps,
+} from "../types";
 import getErrorLogs from "./getErrorLogs";
 
 export default function getSplittedText(

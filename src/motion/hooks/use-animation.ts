@@ -1,9 +1,9 @@
-import { useReducer, useEffect } from "react";
-import {
+import type {
+  UseAnimationActionTypes,
   UseAnimationProps,
   UseAnimationStateProps,
-  UseAnimationActionTypes,
 } from "../types";
+import { useEffect, useReducer } from "react";
 
 const initialState: UseAnimationStateProps = {
   isAnimationStopped: false,

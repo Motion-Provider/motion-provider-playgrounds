@@ -1,5 +1,5 @@
 ﻿import { createElement } from "react";
-import { MotionChainProps, MotionDefaultsProps } from "../types";
+import type { MotionChainProps, MotionDefaultsProps } from "../types";
 
 export default {
   MotionContainer: {

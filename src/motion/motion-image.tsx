@@ -1,10 +1,17 @@
-import { cn } from "./lib/utils";
-import { MotionImageProps } from "./types";
+import { cn } from "@/lib/utils";
+import {
+  type FC,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import defaults from "./constants/defaults";
-import logError from "./utils/getErrorLogs";
 import MotionContainer from "./motion-container";
+import type { MotionImageProps } from "./types";
 import { calculateDelay } from "./utils/calculateDelay";
-import { FC, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import logError from "./utils/getErrorLogs";
 
 /**
  * @description
@@ -245,6 +252,8 @@ const MotionImage: FC<MotionImageProps> = ({
         wrapperClassName
       )}
     >
+      {/** biome-ignore lint/a11y/noStaticElementInteractions: exclusive declaration */}
+      {/** biome-ignore lint/a11y/useKeyWithClickEvents: exclusive declaration */}
       <div
         ref={gridRef}
         className="grid h-full w-full gap-0"
@@ -252,7 +261,7 @@ const MotionImage: FC<MotionImageProps> = ({
         onClick={motionFn === "click" ? handleGridInteraction : undefined}
         onMouseMove={motionFn === "hover" ? handleGridInteraction : undefined}
       >
-        {!isImageLoaded ? <>{fallback}</> : childrenWithControllers}
+        {!isImageLoaded ? fallback : childrenWithControllers}
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-﻿import { TransitionsLib } from "../types";
+﻿import type { TransitionsLib } from "../types";
 
 const transitions = {
   default: { duration: 1, ease: "easeInOut" }, // never remove or you die!

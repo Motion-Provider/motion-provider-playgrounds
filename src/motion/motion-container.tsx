@@ -1,14 +1,16 @@
-import defaults from "./constants/defaults";
-import logError from "./utils/getErrorLogs";
-import { AnimationModule, MotionContainerProps } from "./types";
+import { cn } from "@/lib/utils";
 import { motion, useInView } from "motion/react";
-import React, { FC, useMemo, useRef } from "react";
-import { TransitionConfig } from "./types";
-import { useAnimationMixer } from "./hooks/use-animation-mixer";
+import React, { type FC, useMemo, useRef } from "react";
+import animations, { type AnimationKeys } from "./constants/animations";
+import defaults from "./constants/defaults";
 import transitions from "./constants/transitions";
-import animations from "./constants/animations";
-import { AnimationKeys } from "./constants/animations";
-import { cn } from "./lib/utils";
+import { useAnimationMixer } from "./hooks/use-animation-mixer";
+import type {
+  AnimationModule,
+  MotionContainerProps,
+  TransitionConfig,
+} from "./types";
+import logError from "./utils/getErrorLogs";
 
 /**
  * @description
@@ -153,7 +155,7 @@ function getAnimationsToMix(
       msg: "Mode prop cannot be either 'null', 'undefined' or an empty array!",
       src: "CoreMotion",
     });
-    return animations["default"];
+    return animations.default;
   }
 
   const allModes = Object.keys(animations);
@@ -170,7 +172,7 @@ ${allModes.map((k) => `${k}\n`).join("- ")}
         src: "CoreMotion",
       });
 
-      return animations["default"];
+      return animations.default;
     }
 
     const extractedModes = mode.map((key) => animations[key]);
@@ -203,7 +205,7 @@ ${allModes.map((k) => `${k}\n`).join("- ")}
       src: "CoreMotion",
     });
 
-    return animations["default"];
+    return animations.default;
   }
 }
 
